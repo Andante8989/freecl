@@ -6,16 +6,18 @@
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 11버전과 18버전 차이를 없애기 위해 오라클 정보는 파일 불러오는 방식으로 처리 -->
+	<context:property-placeholder location="classpath:db.properties"/>
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName"
-				value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+				value="${db.driverClassName}"></property>
 		<property name="jdbcUrl"
-				value="jdbc:log4jdbc:oracle:thin:@localhost:1521/XEPDB1" />
-		<property name="username" value="mytest" />
-		<property name="password" value="mytest" />
+				value="${db.jdbcUrl}"></property>
+		<property name="username" value="${db.username}"></property>
+		<property name="password" value="${db.password}"></property>
 	</bean>
 	
 	<bean id="dataSource"

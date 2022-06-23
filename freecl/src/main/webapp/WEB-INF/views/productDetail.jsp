@@ -23,9 +23,21 @@
 </head>
 <body>
 <h2>디테일페이지입니다</h2>
+
 <div class="header">
-header
-<img id="logo" src="/resources/image/freecl.jpg">
+	
+	<div class="row">
+		<div class="col-md-9">
+		
+		</div>
+		<div class="col-md-3">
+			<button>회원가입</button>
+			<a href="/board/customerCenter"><button>고객센터</button></a>
+			<button>로그인</button>
+		</div>
+	</div>
+<hr/>
+header <img id="logo" src="/resources/image/freecl.jpg">
 </div>
 <div class="container">
 	<div class="row">
