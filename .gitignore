@@ -9,3 +9,6 @@ Servers2/
 
 db.properties
 
+.settings/
+target/
+
