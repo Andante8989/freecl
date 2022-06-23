@@ -12,45 +12,62 @@
     
 
 		   header{
-		   background: lightgray;
+		   background: white;
 		   height: 215px;
+		   padding:50px;
+		   margin:0px;
 		   }
 		   main{
-		   background: #f2f4f7;
+		   background: white;
 		   min-height:700px;
 		   }
 		   footer{
-		     background: darkgray;
+		     background: white;
 		     height: 310px;
 		   }
 		
 			.dropdown{
 			  position : relative;
 			  display : inline-block;
+			  backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
 			}
 			
 			.dropbtn_icon{
 			  font-family : 'Material Icons';
+			  backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
 			}
 			.dropbtn{
 			  border : none;
-			  border-radius : 4px;
-			  background-color: #f5f5f5;
+			  
+			  background-color: #white;
 			  font-weight: 400;
 			  color : rgb(37, 37, 37);
 			  padding : 12px;
-			  width :200px;
+			  width :300px;
 			  text-align: left;
 			  cursor : pointer;
-			  font-size : 12px;
+			  font-size : 15px;
+			  backdrop-filter: blur( 13.5px );
+              -webkit-backdrop-filter: blur( 13.5px );
+            
 			}
+			.dropbtn:hover{
+			  background-color : #dda0dd
+            
+			}
+			
+			
 			.dropdown-content{
 			  display : none;
 			  position : absolute;
 			  z-index : 1; /*다른 요소들보다 앞에 배치*/
 			  font-weight: 400;
-			  background-color: #f9f9f9;
+			  background-color: #dda0dd;
 			  min-width : 200px;
+			  backdrop-filter: blur( 13.5px );
+              -webkit-backdrop-filter: blur( 13.5px );
 			}
 			
 			.dropdown-content a{
@@ -59,10 +76,12 @@
 			  color : rgb(37, 37, 37);
 			  font-size: 12px;
 			  padding : 12px 20px;
+			  backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
 			}
 			
 			.dropdown-content a:hover{
-			  background-color : #ececec
+			  background-color : #F5BFF9
 			}
 			
 			.dropdown:hover .dropdown-content {
@@ -87,19 +106,21 @@
             -webkit-backdrop-filter: blur(1.5px);
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.18);
+            
         }
         #modal .modal-window {
-            background: rgba( 69, 139, 197, 0.70 );
-            box-shadow: 0 px 0px 0 rgba( 31, 38, 135, 0.37 );
-            backdrop-filter: blur( 13.5px );
-            -webkit-backdrop-filter: blur( 13.5px );
-            border-radius: 10px;
+            border-radius: 5px;
             border: 1px solid rgba( 255, 255, 255, 0.18 );
             width: 1000px;
             height: 10000px;
             position: relative;
-            top: 10px;
+            top: 100px;
             padding: 10px;
+            background-color:pink;
+            box-shadow: 0 px 0px 0 rgba( 31, 38, 135, 0.37 );
+            background: rgba( 205, 136, 175, 0.70 );
+            backdrop-filter: blur( 13.5px );
+            -webkit-backdrop-filter: blur( 13.5px );
         }
        
         #modal .close-area {
@@ -110,6 +131,15 @@
             text-shadow: 1px 1px 2px gray;
             color: white;
         }
+        
+        #logo {
+		margin : 0px;
+		width : 250px;
+	}
+     
+     
+     
+        
 </style>
 </head>
 		
@@ -117,19 +147,21 @@
 
 		<title>Freecl</title>
 		<header>
-		   <h1>Freecl</h1>
+		   
+		   <img id="logo" src="/resources/image/freecl2.jpg"><br/>
+		   <br/>
 		   <button type="button" class="btn btn-light" id='btn-modal'>〓</button>
-		    <div id="modal" class="modal-overlay">
-    
-        <div class="modal-window">
-         <div class="close-area">X</div>
-            <div class="content">
-                <p>커뮤니티</p>
-                <p>마이페이지</p>
-                <p>고객센터</p>
-              </div>
-            </div>
-         </div>
+		   
+			    <div id="modal" class="modal-overlay">
+			        <div class="modal-window">
+			         <div class="close-area">X</div>
+			            <div class="content">
+			                <p>커뮤니티</p>
+			                <p>마이페이지</p>
+			                <p>고객센터</p>
+			              </div>
+			            </div>
+			      </div>
 		
 		    <div class="dropdown">
 		      <span class="dropbtn">베스트</span>
@@ -226,8 +258,8 @@
 		      </div>
 		    </div>
 		  </header>
-		  <main>메인
-		  <img src="images/cloths/jpg"/>
+		  <main>
+		  <img src="/resources/image/main.png" >
 		  </main>
 		     
 		  <footer>하단</footer>
