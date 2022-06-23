@@ -6,7 +6,10 @@ Servers/
 /.Servers/
 /.Servers2/
 Servers2/
-
+/.settings/
+/.target/
+settings/
+target/
 
 ## 오라클 버전차이로 인한 각 버전의 오라클 정보
 db.properties
