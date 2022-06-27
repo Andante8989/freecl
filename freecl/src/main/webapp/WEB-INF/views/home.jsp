@@ -4,6 +4,7 @@
 
 <html>
 <head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -155,12 +156,22 @@
 	
 	}
 	
-     i{
-     left:100;
-     }
-     
-     
-        
+    
+    #calendar{
+    margin-left: 50px;
+	width : 45px;
+    }
+    
+     #heart{
+    margin: 0px;
+	width : 45px;
+    }
+    
+    #shopping{
+    margin-bottom: 3px;
+	width : 45px;
+    }
+    
 </style>
 </head>
 		
@@ -171,15 +182,17 @@
 		<div class="inform">
 			   <input type="hidden" name="searchOrder" value>
 			   <input type="text" title="검색어를 입력하세요" id="keyword" name="keyword" value autocomplete="off" class="ui-autocomplete-input">
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-</svg>
- <i class="bi bi-heart-fill"></i>
+		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+		  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+		</svg>
+        <img id="calendar" src="/resources/image/calendar.png">
+        <img id="heart" src="/resources/image/heart.png">
+        <img id="shopping" src="/resources/image/shopping.png">
+		
 		   </div>
-		   
-		   
 		   <img id="logo" src="/resources/image/freecl2.jpg">
-		  
+		   <span class="material-symbols-outlined"></span>
+		   
 		   <br>
 		   <br/>
 		   <button type="button" class="btn btn-light" id='btn-modal'>〓</button>
@@ -291,7 +304,7 @@
 		    </div>
 		  </header>
 		  <main>
-		  <img src="/resources/image/main.png" >
+		  <a href="/detail"><img src="/resources/image/main.png" ></a>
 		  </main>
 		     
 		  <footer>하단</footer>

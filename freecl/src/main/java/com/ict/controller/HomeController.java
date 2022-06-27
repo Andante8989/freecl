@@ -36,10 +36,6 @@ public class HomeController {
 		
 		return "home";
 	}
-	@GetMapping("/modal")
-	public void modal() {
-		
-	}
 	
 	
 }

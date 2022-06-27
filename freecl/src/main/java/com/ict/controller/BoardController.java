@@ -12,13 +12,13 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping(value="/board")
+@RequestMapping(value="/")
 public class BoardController {
 	
 
 	@GetMapping(value="/detail")
 	public String getProductDetail() {
-		return "/productDetail";
+		return "board/productDetail";
 	}
 	
 	@GetMapping(value="/customerCenter")
