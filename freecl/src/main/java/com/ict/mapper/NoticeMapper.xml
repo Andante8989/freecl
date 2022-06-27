@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.rg/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ict.mapper.NoticeMapper">
+
+	<select id="getList" resultType="com.ict.persistent.NoticeVO">
+		<![CDATA[
+			SELECT * FROM noticeTbl ORDER BY nt_num desc
+		]]>
+	</select>
+	
+	<select id="getListDetail" resultType="com.ict.persistent.NoticeVO">
+		SELECT * FROM noticeTbl WHERE nt_num=#{nt_num}
+	</select>
+	
+</mapper>
