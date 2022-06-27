@@ -14,6 +14,16 @@
 	.footer {
 		background-color : black;
 		color : white;
+
+	}
+	li::before {content: " | "}
+	li {
+		list-style : none;	
+		display : inline;
+		font-size : 13px;
+		text-align : center;
+		font-family : inherit;
+		color : #d6d6d6;
 	}
 </style>
 <head>
@@ -61,7 +71,21 @@
 </div>
 <hr/>
 <div class="footer">
-상호 :  프리클(freecl)
+<p>ABOUT FREECL</p>		
+	<ul>
+		<li> &nbsp;&nbsp;상호 :  프리클(freecl)&nbsp;&nbsp;</li>
+		<li> &nbsp;&nbsp;사업장 소재지 : 서울시 마포구 신촌 ict 인재개발원&nbsp;&nbsp;</li>
+		<li> &nbsp;&nbsp;안내전화 1111-2222&nbsp;&nbsp; </li> 
+		<li> &nbsp;&nbsp;대표이사:프리클팀&nbsp;&nbsp;</li>
+		<li> &nbsp;&nbsp;개인정보관리책임자:홍길동&nbsp;&nbsp;</li>
+	</ul>
+	<ul>
+		<li>&nbsp;&nbsp;사업자등록번호 : 000-00-00000&nbsp;&nbsp;</li>
+		<li>&nbsp;&nbsp;통신판매업 신고번호 : 0000-신촌-0000&nbsp;&nbsp;</li>
+	</ul>
+	<ul>
+		<li>COPYRIGHT (C) 2022 FREECL ALL RIGHTS RESERVED.</li>
+	</ul>
 </div>
 
 
