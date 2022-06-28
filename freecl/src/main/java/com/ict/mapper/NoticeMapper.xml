@@ -14,4 +14,15 @@
 		SELECT * FROM noticeTbl WHERE nt_num=#{nt_num}
 	</select>
 	
+	<insert id="insert">
+		INSERT INTO noticeTbl (nt_num, nt_title, nt_content, nt_writer) VALUES (nt_num.nextval, #{nt_title}, #{nt_content}, #{nt_writer})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM noticeTbl WHERE nt_num=#{nt_num}
+	</delete>
+	
+	<update id="update">
+		UPDATE noticeTbl SET nt_title=#{nt_title}, nt_content=#{nt_content}, nt_writer=#{nt_writer}, nt_date=SYSDATE WHERE nt_num=#{nt_num}
+	</update>
 </mapper>

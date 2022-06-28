@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
 <head>
 <style>
+	.return {
+		margin-left : 1100px;}
+	nav { display: inline-block;}
+	form { display: inline-block;}
 	.notice {
 		text-align : center;
 	}
@@ -23,6 +28,10 @@
 		text-align : center;
 		font-family : inherit;
 		color : #d6d6d6;
+	}
+	.col-md-5 { 
+		font-size : 15px;
+		color : grey;
 	}
 	.col-md-5 { 
 		font-size : 15px;
@@ -63,10 +72,21 @@ ${notice }
 			</div>
 			<div class="col-md-1">
 			</div>
+			<nav>
+				<a class="return" href="/board/notice"><button>돌아가기</button></a>
+				<form action="/board/noticeUpdateForm" method="post">
+					<input type="hidden" name="nt_num" value="${notice.nt_num }">
+					<input type="submit" value="수정하기">
+				</form>
+				<form id="deleteSub" action="/board/noticeDelete" method="post">
+					<input type="hidden" value="${notice.nt_num }" name="nt_num">	
+					<button type="submit" id="del" onclick="test()">삭제하기</button>
+				</form>
+			</nav>
 		</div>
 	</div>
 </div>
-<a href="/board/notice"><button>돌아가기</button></a>
+
 
 <!-- 여기서부터 화면 하단 기본 셋팅 -->
 <hr/>
@@ -104,6 +124,7 @@ ${notice }
 			<div class="col-md-5">
 				<p><strong>ABOUT US</strong></p>
 				멤버쉽 안내<br/>
+				<a href="/board/notice">공지사항</a>
 			</div>
 			<div class="col-md-5">
 				<p><strong>GUIDE</strong></p>
@@ -138,5 +159,18 @@ ${notice }
 		<li>COPYRIGHT (C) 2022 FREECL ALL RIGHTS RESERVED.</li>
 	</ul>
 </div>
+
+
+
+
+	<script type="text/javascript">
+		$( "#del" ).click(function( event ) {
+			event.preventDefault();
+			var dialog = confirm("글을 삭제하시겠습니까?");
+			if(dialog) {
+				$("#deleteSub").submit()
+			}
+		});
+	</script>
 </body>
 </html>
