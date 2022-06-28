@@ -304,7 +304,7 @@
 		    </div>
 		  </header>
 		  <main>
-		  <a href="/detail"><img src="/resources/image/main.png" ></a>
+		  <a href="/board/detail"><img src="/resources/image/main.png" ></a>
 		  </main>
 		     
 		  <footer>하단</footer>

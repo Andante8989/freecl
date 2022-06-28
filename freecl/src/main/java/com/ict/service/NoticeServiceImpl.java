@@ -24,4 +24,19 @@ public class NoticeServiceImpl implements NoticeService {
 		return mapper.getListDetail(nt_num);
 	}
 
+	@Override
+	public void noticeInsert(NoticeVO vo) {
+		mapper.insert(vo);
+	}
+
+	@Override
+	public void noticeDelete(Long nt_num) {
+		mapper.delete(nt_num);
+	}
+
+	@Override
+	public void noticeUpdate(NoticeVO vo) {
+		mapper.update(vo);
+	}
+
 }

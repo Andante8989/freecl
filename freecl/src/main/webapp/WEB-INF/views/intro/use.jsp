@@ -30,6 +30,11 @@
 		font-family : inherit;
 		color : #d6d6d6;
 	}
+	.col-md-5 { 
+		font-size : 15px;
+		color : grey;
+	}
+	strong { color : black;}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -185,6 +190,7 @@
 			<div class="col-md-5">
 				<p><strong>ABOUT US</strong></p>
 				멤버쉽 안내<br/>
+				<a href="/board/notice">공지사항</a>
 			</div>
 			<div class="col-md-5">
 				<p><strong>GUIDE</strong></p>
