@@ -32,12 +32,16 @@
 			  display : inline-block;
 			  backdrop-filter: blur( 13.5px );
             -webkit-backdrop-filter: blur( 13.5px );
+            top:-76px;
+            left:10px;
 			}
 			
 			.dropbtn_icon{
 			  font-family : 'Material Icons';
 			  backdrop-filter: blur( 13.5px );
             -webkit-backdrop-filter: blur( 13.5px );
+
+            
 			}
 			.dropbtn{
 			  border : none;
@@ -51,6 +55,7 @@
 			  font-size : 15px;
 			  backdrop-filter: blur( 13.5px );
               -webkit-backdrop-filter: blur( 13.5px );
+              
             
 			}
 			.dropbtn:hover{
@@ -135,8 +140,11 @@
         
         #logo {
 		margin : 0px;
-		width : 300px;
-	}
+		width : 150px;
+		position: relative;
+		top:-75px;
+		left:115px;
+	  }
 	
 	.inform{
 	   position: absolute;
@@ -172,6 +180,13 @@
 	width : 45px;
     }
     
+    .top{
+    left:70%;
+    position:relative;
+    top:-30px;
+    }
+    
+
 </style>
 </head>
 		
@@ -179,6 +194,11 @@
 
 		<title>Freecl</title>
 		<header>
+         <ul class="top">
+            <button type="button" class="btn btn-light">회원가입</button>
+            <button type="button" class="btn btn-light">고객센터</button>
+            <button type="button" class="btn btn-light">로그인</button>
+         </ul>
 		<div class="inform">
 			   <input type="hidden" name="searchOrder" value>
 			   <input type="text" title="검색어를 입력하세요" id="keyword" name="keyword" value autocomplete="off" class="ui-autocomplete-input">
@@ -190,13 +210,10 @@
         <img id="shopping" src="/resources/image/shopping.png">
 		
 		   </div>
-		   <img id="logo" src="/resources/image/freecl2.jpg">
+		   <img id="logo" src="/resources/image/Freecl.png">
 		   <span class="material-symbols-outlined"></span>
-		   
-		   <br>
-		   <br/>
-		   <button type="button" class="btn btn-light" id='btn-modal'>〓</button>
-		   
+<br>
+           <button type="button" class="btn btn-light" id='btn-modal'>〓</button>
 			    <div id="modal" class="modal-overlay">
 			        <div class="modal-window">
 			         <div class="close-area">X</div>
@@ -304,7 +321,7 @@
 		    </div>
 		  </header>
 		  <main>
-		  <a href="/detail"><img src="/resources/image/main.png" ></a>
+		  <a href="/detail"><img src="/resources/image/main.png"></a>
 		  </main>
 		     
 		  <footer>하단</footer>
