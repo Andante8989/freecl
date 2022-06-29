@@ -54,6 +54,7 @@
 	}
 	.detail {
 		height : 800px;
+		color : black;
 	}
 </style>
 <meta charset="UTF-8">
@@ -75,7 +76,7 @@
 		</div>
 	</div>
 <hr/>
-header <img id="logo" src="/resources/image/freecl.jpg">
+header <img id="logo" src="/resources/image/Freecl.png">
 </div>
 <div class="container">
 	<div class="row">
@@ -91,22 +92,31 @@ header <img id="logo" src="/resources/image/freecl.jpg">
 			<div class="row">
 				price
 			</div>
+			<hr/>
 			<div class="row">
 			    배송정보
 			</div>
+			<form action="/board/basket" id="form" method="post">
 			<div class="row">
-				color
+				<p>color</p>
+					<label><input type="radio" name="color" value="black" id="Sc"> Black</label>
+      				<label><input type="radio" name="color" value="white" id="Sc"> White</label>
 			</div>
 			<div class="row">
-				size
+				<p>size</p>
+					<label><input type="radio" name="size" value="s" id="Ss"> s</label>
+      				<label><input type="radio" name="size" value="m" id="Ss"> m</label>
+      				<label><input type="radio" name="size" value="L" id="Ss"> L</label>
 			</div>
+			<hr/>
 			<div class="row">
 				total price
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<button class="basket">장바구니</button>
+					<button type="submit" id="basket" class="basket" onclick="test()">장바구니</button>
 				</div>
+				</form>
 				<div class="col-md-6">
 					<button class="payment">결제하기</button>
 				</div>
@@ -190,6 +200,32 @@ header <img id="logo" src="/resources/image/freecl.jpg">
 		<li>COPYRIGHT (C) 2022 FREECL ALL RIGHTS RESERVED.</li>
 	</ul>
 </div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+	//색상, 사이즈 선택하지 않으면 장바구니 담을 수 없게 하는 기능
+	$( "#basket" ).click(function( event ) {
+	event.preventDefault();
+	if($(':radio[name="color"]:checked').length < 1) {
+		alert("색상을 정해주세요");
+	} else {
+		if($(':radio[name="size"]:checked').length < 1) {
+			alert("사이즈를 정해주세요");
+		} else {
+			$("#form").submit();
+		}
+		
+	}
+	
+	
+	});
+
+</script>
+
+
 
 </body>
 </html>
