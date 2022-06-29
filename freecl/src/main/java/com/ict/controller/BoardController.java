@@ -8,10 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ict.persistent.NoticeVO;
 import com.ict.service.NoticeService;
 
+import lombok.experimental.var;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -80,4 +82,15 @@ public class BoardController {
 		return "redirect:/board/noticeDetail?nt_num=" + notice.getNt_num();
 	}
 	/////////////////////////////////////////////////////////////////////////////////
+	
+	// 장바구니페이지로 이동
+	@PostMapping(value="basket")
+	public String basket(@RequestParam("color")String color, String size, Model model) {
+		log.info("---------------");
+		log.info(color);
+		log.info(size);
+		model.addAttribute("color", color);
+		model.addAttribute("size", size);
+		return "/board/basket";
+	}
 }

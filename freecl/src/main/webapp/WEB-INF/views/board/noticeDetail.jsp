@@ -14,7 +14,7 @@
 		text-align : center;
 	}
 	.date { text-align : right;}
-	p { width : 350px;}
+	
 	.footer {
 		background-color : black;
 		color : white;
@@ -65,7 +65,7 @@ ${notice }
 					</thead>
 					<tbody>
 						<tr>
-							<td><p>${notice.nt_content }</p></td>
+							<td>${notice.nt_content }</td>
 						</tr>
 					</tbody>
 				</table>

@@ -13,11 +13,11 @@
 	    font-size : 12px;
 	}
 	
-	p { width : 350px;}
+	
 	.footer {
 		background-color : black;
 		color : white;
-
+	
 	}
 	li::before {content: " | "}
 	li {
