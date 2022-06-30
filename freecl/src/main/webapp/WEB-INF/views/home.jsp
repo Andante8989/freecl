@@ -4,7 +4,7 @@
 
 <html>
 <head>
-
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -35,6 +35,7 @@
             -webkit-backdrop-filter: blur( 13.5px );
             top:-25px;
             left:10px;
+            z-index:10;
 			}
 			
 			.dropbtn_icon{
@@ -113,6 +114,7 @@
             -webkit-backdrop-filter: blur(1.5px);
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.18);
+            z-index:10;
             
         }
         #modal .modal-window {
@@ -121,13 +123,14 @@
             width: 1000px;
             height: 10000px;
             position: relative;
-            top: 100px;
+            top: 0px;
             padding: 10px;
             background-color:pink;
             box-shadow: 0 px 0px 0 rgba( 31, 38, 135, 0.37 );
             background: rgba( 205, 136, 175, 0.70 );
             backdrop-filter: blur( 13.5px );
             -webkit-backdrop-filter: blur( 13.5px );
+            z-index:10;
         }
        
         #modal .close-area {
@@ -137,6 +140,7 @@
             cursor: pointer;
             text-shadow: 1px 1px 2px gray;
             color: white;
+            z-index:10;
         }
         
         #logo {
@@ -144,14 +148,14 @@
 		width : 130px;
 		position: relative;
 		top:-15px;
-		left:150px;
+		left:100px;
 
 	  }
 	
 	.inform{
 	   position: absolute;
 	   left:30%;
-	   top:15%;
+	   top:20%;
 	   
 	   
 	}
@@ -267,6 +271,58 @@
 		    color: #868E96;
 		    font-size: 0.8em;
 		}
+		
+		.section input[id*="slide"]{
+		    display:none;
+		}
+		.section .slidewrap {
+		   max-width:1200px;
+		   margin:0 auto;
+		   overflow:hidden;
+		}
+		.section .slidelist {
+		   white-space:nowrap;
+		   font-size:0;
+		}
+		.section .slidelist > li {
+		   display:inline-block;
+		   vertical-align:middle;
+		   width:100%;
+		   transition:all .5s;
+		}
+		
+		.section .slidelist > li > a {
+		  display:block;
+		  position:relative;
+		}
+		.section .slidelist > li > a img {
+		   width:100%;
+		}
+		
+		.section .slidelist label {
+		  position:absolute;
+		  z-index:2;
+		  top:50%;
+		  transform:translateY(-50%);
+		  padding:50px;
+		  cursor:pointer;
+		}
+		
+		.section .slidelist .left {
+		   top:350px;
+		   left:30px;
+		   background:url('/resources/image/left-arrow.png')center center / 100% no-repeat;
+		}
+		.section .slidelist .right{
+		   right:30px;
+		   background:url('/resources/image/right-arrow.png')center center / 100% no-repeat;
+		}
+		
+		.section [id="slide01"]:checked ~ .slidewrap .slidelist > li {transform:translateX(0%);}
+		.section [id="slide02"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-100%);}
+		.section [id="slide03"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-200%);}
+		
+		
 </style>
 </head>
 		
@@ -279,12 +335,15 @@
 	         <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
 		        회원가입
 		     </button>
-	         <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+		     
+	         <a href="/board/customerCenter"><button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
 		        고객센터
-		     </button>
+		     </button></a>
+		     
 		     <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
 		        로그인
 		     </button>
+		     
 	         </ul>
 	         <hr>
 		<div class="inform">
@@ -409,9 +468,38 @@
 		    </div>
 		  </header>
 		  <main>
-
-		  <a href="/board/detail"><img src="/resources/image/main.png" ></a>
-
+		  
+		  <div class="section">
+		         <input type="radio" name="slide" id="slide01" checked>
+		         <input type="radio" name="slide" id="slide02">
+		         <input type="radio" name="slide" id="slide03">
+		         
+		      <div class="slidewrap">
+		          <ul class="slidelist">
+		            <li>
+		               <a>
+		                  <label for="slide03" class="left"></label>
+		                  <a href="/board/detail"><img src="/resources/image/main3.png"></a>
+		                  <label for="slide02" class="right"></label>
+		               </a>
+		            </li>
+		            <li>
+		               <a>
+		                  <label for="slide01" class="left"></label>
+		                  <a href="/board/detail"><img src="/resources/image/main2.png"></a>
+		                  <label for="slide03" class="right"></label>
+		               </a>
+		            </li>
+		            <li>
+		               <a>
+		                  <label for="slide02" class="left"></label>
+		                  <a href="/board/detail"><img src="/resources/image/main.png"></a>
+		                  <label for="slide01" class="right"></label>
+		               </a>
+		            </li>
+		          </ul>
+		      </div>
+          </div>
 		  </main>
 		     
 		  <footer>
@@ -433,7 +521,7 @@
 						점심 13:00 ~ 14:00<br/>
 					</div>
 				</div>
-				<hr/>
+				<hr id="hh">
 				<div class="row">
 					<div class="col-md-5">
 						<strong>게시판 상담</strong><br/>
@@ -542,6 +630,8 @@
             modalOff()
         }
     })
+    
+
     </script>
 
 </body>
