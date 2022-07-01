@@ -28,23 +28,15 @@
 		     height: 310px;
 		   }
 		
+		/* 상단의 베스트 신상 등등 버튼들 */
 			.dropdown{
-			  position : relative;
 			  display : inline-block;
-			  backdrop-filter: blur( 13.5px );
-            -webkit-backdrop-filter: blur( 13.5px );
-            top:-25px;
-            left:10px;
-            z-index:10;
+	            top:-15px;
+	            left:50px;
+	            z-index:10;
 			}
 			
-			.dropbtn_icon{
-			  font-family : 'Material Icons';
-			  backdrop-filter: blur( 13.5px );
-            -webkit-backdrop-filter: blur( 13.5px );
-
-            
-			}
+	    /* 상단의 베스트 신상 등등 버튼 */
 			.dropbtn{
 			  border : none;
 			  background-color: #white;
@@ -55,17 +47,15 @@
 			  text-align: left;
 			  cursor : pointer;
 			  font-size : 15px;
-			  backdrop-filter: blur( 13.5px );
-              -webkit-backdrop-filter: blur( 13.5px );
-              
-            
 			}
+			
+			/* 상단의 버튼 위에 마우스 올렸을때 배경색*/
 			.dropbtn:hover{
 			  background-color : #dda0dd
             
 			}
 			
-			
+			/* 버튼 위에 마우스 올렸을때 나오는 내용들 ex)자켓 패딩 등*/
 			.dropdown-content{
 			  display : none;
 			  position : absolute;
@@ -73,9 +63,9 @@
 			  font-weight: 400;
 			  background-color: #dda0dd;
 			  min-width : 200px;
-			  backdrop-filter: blur( 13.5px );
-              -webkit-backdrop-filter: blur( 13.5px );
+			 
 			}
+			
 			
 			.dropdown-content a{
 			  display : block;
@@ -83,22 +73,24 @@
 			  color : rgb(37, 37, 37);
 			  font-size: 12px;
 			  padding : 12px 20px;
-			  backdrop-filter: blur( 13.5px );
-            -webkit-backdrop-filter: blur( 13.5px );
 			}
 			
+			/* 내용위에 올렸을때 배경색*/
 			.dropdown-content a:hover{
 			  background-color : #F5BFF9
 		
 			}
 			
+			/* 버튼위에 올렸을때 내용이 나오게끔 해주는*/
 			.dropdown:hover .dropdown-content {
 			  display: block;
 			}
+			
 			h1{
 			  bold:10px;
 			}
 			
+			/* =모달창 안의 투명창*/
 			#modal.modal-overlay {
             width: 100%;
             height: 100%;
@@ -117,6 +109,8 @@
             z-index:10;
             
         }
+        
+        /* 모달창 안의 핑크색 창*/
         #modal .modal-window {
             border-radius: 5px;
             border: 1px solid rgba( 255, 255, 255, 0.18 );
@@ -133,6 +127,7 @@
             z-index:10;
         }
        
+       /* 모달창안의 닫기 버튼*/
         #modal .close-area {
             display: inline;
             float: right;
@@ -142,7 +137,9 @@
             color: white;
             z-index:10;
         }
+       
         
+        /* freecl 로고*/
         #logo {
 		margin : 0px;
 		width : 130px;
@@ -151,7 +148,7 @@
 		left:100px;
 
 	  }
-	
+	/* 검색창*/
 	.inform{
 	   position: absolute;
 	   left:30%;
@@ -160,7 +157,7 @@
 	   
 	}
 	
-	
+	/* 검색창 */
 	.ui-autocomplete-input{
 	
 	border-radius: 15px;
@@ -170,28 +167,32 @@
 	
 	}
 	
-    
+    /* 캘린더 아이콘 */
     #calendar{
     margin-left: 50px;
 	width : 45px;
     }
     
+    /* 하트 아이콘 */
      #heart{
     margin: 0px;
 	width : 45px;
     }
     
+    /* 쇼핑 아이콘 */
     #shopping{
     margin-bottom: 3px;
 	width : 45px;
     }
     
+    /* 회원가입 고객센터 로그인 버튼 위치 */
     .top{
     left:70%;
     position:relative;
     top:-30px;
     }
     
+    /* 충현님이 한거*/
     .insert {margin-left : 1100px;}
 	.notice {
 		text-align : center;
@@ -220,39 +221,17 @@
 	strong { color : black;}
 	
 	
-
-	      .w-btn-pink {
-	    background-color: #f199bc;
-	    color: #d4dfe6;
-	}
-
+       
+       /* 회원가입 고객센터 등 버튼 이벤트 */
 		.w-btn-pink-outline:hover {
 		    background-color: #f199bc;
 		    color: #d4dfe6;
 		}
 		
-				.w-btn:hover {
-		    letter-spacing: 2px;
-		    transform: scale(1.2);
-		    cursor: pointer;
-		}
 		
-		.w-btn-outline:hover {
-		    letter-spacing: 2px;
-		    transform: scale(1.2);
-		    cursor: pointer;
-		}
 		
-		.w-btn:active {
-		    transform: scale(1.5);
-		}
-		
-		.w-btn-outline:active {
-		    transform: scale(1.5);
-		}
-		
-
-		hr {
+      /* 상단 hr 태그 부분 */
+		.welcome {
 		    border: none;
 		    border-top: 1px solid #E3E7EB;
 		    overflow: visible;
@@ -262,7 +241,7 @@
 		    z-index : 3;
 		}
 		
-		hr:after {
+		.welcome:after {
 		    content: "Welcome";
 		    position: relative;
 		    top: -15px;
@@ -272,6 +251,8 @@
 		    font-size: 0.8em;
 		}
 		
+		
+		/* 메인 슬라이드 로직*/
 		.section input[id*="slide"]{
 		    display:none;
 		}
@@ -322,7 +303,8 @@
 		.section [id="slide02"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-100%);}
 		.section [id="slide03"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-200%);}
 		
-		
+
+
 </style>
 </head>
 		
@@ -345,7 +327,7 @@
 		     </button>
 		     
 	         </ul>
-	         <hr>
+	         <hr class="welcome">
 		<div class="inform">
 			   <input type="hidden" name="searchOrder" value>
 			   <input type="text" title="검색어를 입력하세요" id="keyword" name="keyword" value autocomplete="off" class="ui-autocomplete-input">
@@ -357,19 +339,20 @@
         <img id="shopping" src="/resources/image/shopping.png">
 		
 		   </div>
-		   <img id="logo" src="/resources/image/Freecl.png">
+		   <a href="/"><img id="logo" src="/resources/image/Freecl.png"></a>
 		   <span class="material-symbols-outlined"></span>
-<br>
-           <button type="button" class="btn btn-light" id='btn-modal'>〓</button>
+<br>  
+           <button type="button" class="btn btn-right" id="btn-modal">〓</button>
+
 			    <div id="modal" class="modal-overlay">
 			        <div class="modal-window">
 			         <div class="close-area">X</div>
 			            <div class="content">
-			                <p>커뮤니티</p>
-			                <p>마이페이지</p>
-			                <p>고객센터</p>
+			                <button type="button" style="background-color:rgba(0,0,0,0); border:0; outline:0;"><p>커뮤니티</p></button>
+			                <button type="button" style="background-color:rgba(0,0,0,0); border:0; outline:0;"><p>마이페이지</p></button>
+			                <button type="button" style="background-color:rgba(0,0,0,0); border:0; outline:0;"><p>고객센터</p></button>
 			              </div>
-			            </div>
+			         </div>
 			      </div>
 		
 		    <div class="dropdown">
@@ -493,7 +476,7 @@
 		            <li>
 		               <a>
 		                  <label for="slide02" class="left"></label>
-		                  <a href="/board/detail"><img src="/resources/image/main.png"></a>
+		                  <a href="/board/detail"><img src="/resources/image/main01.png"></a>
 		                  <label for="slide01" class="right"></label>
 		               </a>
 		            </li>
