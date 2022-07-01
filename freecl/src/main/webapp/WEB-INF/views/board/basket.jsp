@@ -5,31 +5,84 @@
 <html>
 <head>
 <style>
-	.top {
+/* -------상단 hr 태그 부분 ----------- */
+		.welcome {
+		    border: none;
+		    border-top: 1px solid #E3E7EB;
+		    overflow: visible;
+		    text-align: center;
+		    height: 17px;
+		    z-index : 3;
+		}
+		
+		.welcome:after {
+		    content: "Welcome";
+		    position: relative;
+		    top: -10px;
+		    background: #F1F3F5; 
+		    padding: 0 10px;
+		    color: #868E96;
+		    font-size: 0.8em;
+		}
+	  /* ----------------------------- */
+	  
+	  
+	  /* -------상단 버튼 색상, 위치 부분 ----------- */
+		.top{
+		    left:70%;
+		    position:relative;
+		    top:10px;
+   		 }
+  		.w-btn-pink-outline:hover {
+			background-color: #f199bc;
+		    color: #d4dfe6;
+		 }
+	  /* ----------------------------- */
+	.sub {
 		margin: 0 0 22px 0;
  	  	padding: 40px 44px 48px 44px;
    		background: #f6f6f6;
 	}
 	#pri {
 		color : #ff7d9e;
-		pont-size : 28px;}
+		font-size : 28px;
+		}
+		
 	ul {
 		padding-left : 0px;	
 		list-style : none;
 		}
-	.top li { position : relative;}
-	.top li span.t2 { position : absolute; right:0;}
+	.sub li { position : relative;}
+	.sub li span.t2 { position : absolute; right:0;}
+	.tit {font-size : 13px;}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>장바구니 페이지입니다.</h1>
+<div class="header">
+
+
+ 	 <!-- 상단의 버튼 부분 -->
+	 
+			 <ul class="top">
+			        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        회원가입
+				    </button>
+			         <a href="/board/customerCenter"><button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        고객센터
+				     </button></a>
+				     <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        로그인
+				 </button>
+			  </ul>
+		
+	  <!-- 여기까지 상단의 버튼 부분 --> 
+	  <hr class="welcome">
+	  <h1>장바구니 페이지입니다.</h1>
 ${size }
 ${color }
-
-
-<div class="header">
+	  
 </div>
 <div class="container">
 	<div class="row">
@@ -43,16 +96,23 @@ ${color }
 						<th>가격</th>
 					</tr>
 				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 		<div class="col-md-4">
-			<div class="top">
+			<div class="sub">
 				<div class="tit">
-				결제금액
+				<strong>결제금액</strong>
 				</div>
 				<div class="price">
+					<br/>
 					<strong id="pri">15,000원</strong>
 				</div>
+				<br/>
 				<ul class="info">
 					<li>
 						<span class="t1">총 상품금액</span>
@@ -68,9 +128,8 @@ ${color }
 					</li>
 				</ul>
 			</div>
-			<div class="row">
-				<button>전체상품 주문하기</button>	
-			</div>
+			<button>전체상품 주문하기</button>	
+		
 			<div class="row">
 				<button>선택상품 주문하기</button>	
 			</div>

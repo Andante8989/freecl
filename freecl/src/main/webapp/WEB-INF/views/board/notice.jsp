@@ -7,6 +7,12 @@
 <html>
 <head>
 <style>
+
+	.w-btn-pink-outline:hover {
+		    background-color: #f199bc;
+		    color: #d4dfe6;
+			}
+	
 	
 	.insert {margin-left : 1100px;}
 	.notice {
@@ -35,14 +41,64 @@
 	}
 	strong { color : black;}
 	.bi-coin > p{ margin: 20px;}
-
+	
+	  /* -------상단 hr 태그 부분 ----------- */
+		.welcome {
+		    border: none;
+		    border-top: 1px solid #E3E7EB;
+		    overflow: visible;
+		    text-align: center;
+		    height: 17px;
+		    z-index : 3;
+		}
+		
+		.welcome:after {
+		    content: "Welcome";
+		    position: relative;
+		    top: -10px;
+		    background: #F1F3F5; 
+		    padding: 0 10px;
+		    color: #868E96;
+		    font-size: 0.8em;
+		}
+	  /* ----------------------------- */
+	
+	 /* -------상단 버튼 색상, 위치 부분 ----------- */
+		.top{
+		    left:70%;
+		    position:relative;
+		    top:10px;
+   		 }
+  		.w-btn-pink-outline:hover {
+			background-color: #f199bc;
+		    color: #d4dfe6;
+		 }
+	  /* ----------------------------- */
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <div class="header">
-	<h2>header자리</h2>
+	
+	 <!-- 상단의 버튼 부분 -->
+	 
+			 <ul class="top">
+			        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        회원가입
+				    </button>
+			         <a href="/board/customerCenter"><button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        고객센터
+				     </button></a>
+				     <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        로그인
+				 </button>
+			  </ul>
+		
+	  <!-- 여기까지 상단의 버튼 부분 --> 
+	  
+
+	<hr class="welcome">
 </div>
 <div class="contianer">
 	<div class="row">

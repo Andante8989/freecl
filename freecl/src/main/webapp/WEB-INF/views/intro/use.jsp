@@ -35,13 +35,64 @@
 		color : grey;
 	}
 	strong { color : black;}
+	
+	/* -------상단 hr 태그 부분 ----------- */
+		.welcome {
+		    border: none;
+		    border-top: 1px solid #E3E7EB;
+		    overflow: visible;
+		    text-align: center;
+		    height: 17px;
+		    z-index : 3;
+		}
+		
+		.welcome:after {
+		    content: "Welcome";
+		    position: relative;
+		    top: -10px;
+		    background: #F1F3F5; 
+		    padding: 0 10px;
+		    color: #868E96;
+		    font-size: 0.8em;
+		}
+	  /* ----------------------------- */
+	  
+	  
+	  /* -------상단 버튼 색상, 위치 부분 ----------- */
+		.top{
+		    left:70%;
+		    position:relative;
+		    top:10px;
+   		 }
+  		.w-btn-pink-outline:hover {
+			background-color: #f199bc;
+		    color: #d4dfe6;
+		 }
+	  /* ----------------------------- */
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>이용약관 페이지입니다.</h1>
+
+ 	 <!-- 상단의 버튼 부분 -->
+	 
+			 <ul class="top">
+			        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        회원가입
+				    </button>
+			         <a href="/board/customerCenter"><button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        고객센터
+				     </button></a>
+				     <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        로그인
+				 </button>
+			  </ul>
+		
+	  <!-- 여기까지 상단의 버튼 부분 --> 
+	  <hr class="welcome">
 <div class="header">
+<h1>이용약관 페이지입니다.</h1>
 <pre>
 전자상거래(인터넷사이버몰) 표준약관 - 표준약관 제10023호
 
