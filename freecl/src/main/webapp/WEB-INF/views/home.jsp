@@ -340,9 +340,7 @@
 		
 		   </div>
 		   <a href="/"><img id="logo" src="/resources/image/Freecl.png"></a>
-		   <span class="material-symbols-outlined"></span>
-<br>  
-           <button type="button" class="btn btn-right" id="btn-modal">〓</button>
+		   <span class="material-symbols-outlined"></span> 
 
 			    <div id="modal" class="modal-overlay">
 			        <div class="modal-window">
@@ -355,6 +353,7 @@
 			         </div>
 			      </div>
 		
+		<button type="button" class="btn btn-right" id="btn-modal">〓</button>
 		    <div class="dropdown">
 		      <span class="dropbtn">베스트</span>
 		    </div> 
