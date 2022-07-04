@@ -86,21 +86,25 @@ header <img id="logo" src="/resources/image/Freecl.png">
 		</div>
 		<div class="col-md-5 detail offset-md-1">
 		상품 상세 정보 자리
+		${board }
 			<div class="row">
-				product name
+				${board.name }
 			</div>
 			<div class="row">
-				price
+				${board.price }
 			</div>
 			<hr/>
 			<div class="row">
 			    배송정보
 			</div>
 			<form action="/board/basket" id="form" method="post">
+				<input type="hidden" name="price" value="${board.price }">
+				<input type="hidden" name="amount" value="${board.amount }">
+				<input type="hidden" name="boardNum" value="${board.boardNum }">
 			<div class="row">
 				<p>color</p>
-					<label><input type="radio" name="color" value="black" id="Sc"> Black</label>
-      				<label><input type="radio" name="color" value="white" id="Sc"> White</label>
+					<label><input type="radio" name="color" value="black" id="black"></label>
+      				<label><input type="radio" name="color" value="white" id="white"></label>
 			</div>
 			<div class="row">
 				<p>size</p>

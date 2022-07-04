@@ -7,4 +7,6 @@ import com.ict.persistent.BoardVO;
 public interface BoardService {
 	
 	public List<BoardVO> getList();
+	
+	public BoardVO getListDetail(Long boardNum);
 }

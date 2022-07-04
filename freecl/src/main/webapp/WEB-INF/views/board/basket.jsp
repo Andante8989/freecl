@@ -98,7 +98,10 @@ ${color }
 				</thead>
 				<tbody>
 					<tr>
+						<td>${boardNum }</td>
 						<td></td>
+						<td>${amount }</td>
+						<td>${price }</td>
 					</tr>
 				</tbody>
 			</table>

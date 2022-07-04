@@ -17,9 +17,7 @@ public class BoardVO {
 	private Date bdate;
 	private int price;
 	private int amount;
-	private String color;
-	private String product_size;
-	
+
 	
 	/*
 	 CREATE table boardTbl (
@@ -34,6 +32,7 @@ public class BoardVO {
 	    price NUMBER(10,0) not null,
 	    amount NUMBER(5,0) not null,
 	    color varchar2(10) not null,
+	    color2 varchar2(10) not null,
 	    product_size varchar2(5) not null -- size는 예약어 이므로 사용불가
 	);
 	 */

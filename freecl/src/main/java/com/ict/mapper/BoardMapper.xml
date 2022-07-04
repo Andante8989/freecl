@@ -10,7 +10,9 @@
 		]]>
 	</select>
 	
-	
+	<select id="getListDetail" resultType="com.ict.persistent.BoardVO">
+		SELECT * FROM boardTbl WHERE boardNum=#{boardNum}
+	</select>
 	
 	
 </mapper>

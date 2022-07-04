@@ -7,5 +7,7 @@ import com.ict.persistent.BoardVO;
 public interface BoardMapper {
 	
 	public List<BoardVO> getList();
+	
+	public BoardVO getListDetail(Long boardNum);
 
 }

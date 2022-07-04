@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ict.persistent.BasketVO;
+import com.ict.persistent.BoardVO;
 import com.ict.persistent.NoticeVO;
+import com.ict.service.BasketService;
+import com.ict.service.BoardService;
 import com.ict.service.NoticeService;
 
 import lombok.experimental.var;
@@ -24,14 +28,21 @@ public class BoardController {
 	@Autowired
 	private NoticeService service;
 	
+	@Autowired
+	private BoardService service1;
 	
+	@Autowired
+	private BasketService service2;
 	
-
+	// 상품 디테일 화면 연결
 	@GetMapping(value="/detail")
-	public String getProductDetail() {
+	public String getProductDetail(Long boardNum, Model model) {
+		BoardVO board = service1.getListDetail(boardNum);
+		model.addAttribute("board", board);
 		return "board/productDetail";
 	}
 	
+	// 고객센터 페이지 연결
 	@GetMapping(value="/customerCenter")
 	public String customerCenter() {
 		
@@ -85,12 +96,10 @@ public class BoardController {
 	
 	// 장바구니페이지로 이동
 	@PostMapping(value="basket")
-	public String basket(@RequestParam("color")String color, String size, Model model) {
-		log.info("---------------");
-		log.info(color);
-		log.info(size);
-		model.addAttribute("color", color);
-		model.addAttribute("size", size);
+	public String basket(BasketVO vo, Model model) {
+		service2.insertBasket(vo);
+		log.info(vo);
+		log.info("장바구니 접속 시도!");
 		return "/board/basket";
 	}
 }
