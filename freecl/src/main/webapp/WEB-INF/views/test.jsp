@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/resources/resttest/modal.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -96,6 +97,23 @@
     	 
       });// 글 등록로직 종료
       
+      // 이벤트 위임 댓글수정하기
+      
+      $("#replies").on("click",".replyLi button", function(){
+    	  let reply = $(this).parent();
+    	  
+    	  let rno = reply.attr("data-rno");
+    	  let replytext=reply.text();
+    	  
+    	  $(".modal-title").html(rno);
+    	  $("#replytext").val(replytext);
+    	  $("#modDib").show("slow");
+      });
+      
+      
 </script>
+
+      <script src="/resources/resttest/delete.js"></script>
+      <script src="/resources/resttest/modify.js"></script>
 </body>
 </html>

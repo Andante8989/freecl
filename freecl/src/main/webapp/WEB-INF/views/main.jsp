@@ -340,7 +340,7 @@
         <img id="shopping" src="/resources/image/shopping.png">
 		
 		   </div>
-		   <a href="/"><img id="logo" src="/resources/image/Freecl.png"></a>
+		   <a href="/main"><img id="logo" src="/resources/image/Freecl.png"></a>
 		   <span class="material-symbols-outlined"></span>
 <br>  
 			    <div id="modal" class="modal-overlay">

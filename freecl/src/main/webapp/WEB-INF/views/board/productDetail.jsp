@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/resources/resttest/modal.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>		
 	a {
 		text-decoration-line: none;
@@ -56,6 +58,35 @@
 		height : 800px;
 		color : black;
 	}
+	#replies{
+	margin:50px;
+	}
+	.form-control{
+	width:800px;
+	
+	}
+	
+	.box-body{
+	margin-left:50px;
+	}
+	.box-footer{
+	margin-left:50px;
+	}
+	
+	
+#modDiv{
+    width: 500px;
+    height: 100px;
+    background-color: black;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-top: 10px;
+    margin-left: -150px;
+    padding: 10px;
+    z-index: 1000;
+}
+	
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -131,6 +162,42 @@ header <img id="logo" src="/resources/image/Freecl.png">
 	 상품정보    관련상품  리뷰 qna 쇼핑가이드
 	</div>
 </div>
+<!-- 댓글 시작-->
+<div class="row">
+	    <div id="replies">
+	    
+	        <!-- 댓글 위치 -->
+	    </div> 
+ </div><!-- row -->
+     
+     
+    <!-- 댓글쓰기 -->
+<div class="row">
+     <div class="box-body">
+         <strong>글쓴이</strong>
+         <input type="text" id="newReplyer" class="form-control">
+         <strong>댓글</strong>
+         <input type="text" id="newReplyText" class="form-control"><br>
+     </div><!-- body -->
+     <div class="box-footer">
+         <button type="button" class="btn btn-primary" id="replyAddBtn">댓글 작성</button>
+     </div><!-- footer -->
+</div><!-- row -->
+   
+   
+   <!-- 모달창 -->
+   <div id="modDiv" style="display:none;">
+       <div class="modal-title"></div>
+       <div>
+          <input type="text" id="replytext">
+       </div>
+       <div>
+           <button type="button" id="replyModBtn">수정하기</button>
+           <button type="button" id="replyDelBtn">삭제하기</button>
+           <button type="button" id="closeBtn">닫기</button>
+       </div>
+   </div>	
+
 <!-- 여기서부터 화면 하단 기본 셋팅 -->
 <hr/>
 
@@ -226,10 +293,88 @@ header <img id="logo" src="/resources/image/Freecl.png">
 	
 	
 	});
+	
+	 // 댓글 등록
+	 function getAllList(){
+		    let bno = ${board.boardNum};
+			let str = "";
+			$.getJSON("/replies/all/" + bno, function(data){
+				$(data).each(
+					function(){
+						console.log(this);
+						let timestamp = this.updateDate;
+						
+						let date = new Date(timestamp);
+						
+						let formattedTime = `게시일 : \${date.getFullYear()}년
+						                            \${(date.getMonth()+1)}월
+						                            \${date.getDate()}일`;
+	str += 
+		`<div class='replyLi' data-rno='\${this.rno}'>
+	        <strong>\${this.replyer}</strong>-\${formattedTime}<br/>
+	        <div class='replytext'>\${this.reply}</div>
+	        <button type='button' class='btn btn-info'>수정/삭제</button>
+	        </div>`;
+				});
+				console.log(str);
+				$("#replies").html(str);
+			});			
+		}
+		getAllList();
+		
+		
+		$("#replyAddBtn").on("click", function(){
+	    	 let replyer = $("#newReplyer").val();  
+	    	 let reply = $("#newReplyText").val();  
+	    	 
+	    	 $.ajax({
+	    		 type : 'post',
+	    		 url : '/replies',
+	    		 headers : {
+	    			 "Content-Type" : "application/json",
+	    			 "X-HTTP-Method-Override" : "POST"
+	    		 },
+	    		 dataType : 'text',
+	    		 data : JSON.stringify({
+	    			 bno : ${board.boardNum},
+	    			 replyer : replyer,
+	    			 reply : reply
+	    		 }),
+	    		 success : function(result){
+	    			 if(result == 'SUCCESS'){
+	    				 
+	    				 alert("등록 되었습니다.");
+	    				 getAllList();
+	    				 $("#newReplyer").val(''); 
+	    				 $("#newReplyText").val(''); 
+	    			 }
+	    		 }
+	    		 
+	    	 });
+	    	 
+	      });// 글 등록로직 종료
+		
+		// 이벤트 위임
+		$("#replies").on("click", ".replyLi button", function(){
+			 
+				let reply = $(this).parent();
+		        
+				let rno = reply.attr("data-rno");
+				let replytext = $(this).prev().html()
+				
+				$(".modat-title").html(rno);
+				$("#replytext").val(replytext);
+				$("#modDiv").show("slow");
+		 });// 댓글 삽입
+		 
+		 
 
+	
+	
 </script>
-
-
+	  <script src="/resources/resttest/delete.js"></script>
+      <script src="/resources/resttest/modify.js"></script>
+      <script src="/resources/resttest/modalclose.js"></script>
 
 </body>
 </html>
