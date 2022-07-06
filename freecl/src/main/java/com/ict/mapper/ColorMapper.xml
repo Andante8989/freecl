@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.rg/dtd/mybatis-3-mapper.dtd">
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ict.mapper.ColorMapper">
 
@@ -8,6 +8,10 @@
 		<![CDATA[
 			SELECT * FROM colorTbl
 		]]>
+	</select>
+	
+	<select id="getListDetail" resultType="com.ict.persistent.ColorVO">
+		SELECT * FROM colorTbl WHERE colorNum=#{boardNum}
 	</select>
 	
 </mapper>

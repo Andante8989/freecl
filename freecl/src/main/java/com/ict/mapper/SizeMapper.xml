@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ict.mapper.SizeMapper">
+	
+	<select id="getListDetail" resultType="com.ict.persistent.SizeVO">
+		SELECT * FROM sizeTbl WHERE sizeNum=#{boardNum}
+	</select>
+	
+</mapper>
