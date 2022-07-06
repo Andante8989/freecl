@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
@@ -82,7 +83,8 @@
 	  <h1>장바구니 페이지입니다.</h1>
 ${size }
 ${color }
-	  
+${cartList }
+${board }
 </div>
 <div class="container">
 	<div class="row">
@@ -94,15 +96,19 @@ ${color }
 						<th>주문정보</th>
 						<th>수량</th>
 						<th>가격</th>
+						<th>취소</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="cartLi">
+					<c:forEach var="cart" items="${cartList }">
 					<tr>
-						<td>${boardNum }</td>
-						<td></td>
-						<td>${amount }</td>
-						<td>${price }</td>
+						<td class="ca" data-cnum="${cart.cartNum }"><input type="checkbox" name="check" checked>${cart.cartNum }</td>
+						<td>${cart.cart_proNum }</td>
+						<td>${cart.cart_amount }</td>
+						<td class="pp">${cart.cart_price }원</td>
+						<td><button class="cartDelete" type="button">삭제</button></td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -113,7 +119,7 @@ ${color }
 				</div>
 				<div class="price">
 					<br/>
-					<strong id="pri">15,000원</strong>
+					<strong class="pri"></strong>
 				</div>
 				<br/>
 				<ul class="info">
@@ -139,8 +145,49 @@ ${color }
 		</div>
 	</div>
 </div>
+
+
+
 <div class="footer">
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript">
+	
+	
+		function refresh() {
+			var link = "http://localhost:52000/board/basket"
+			location.href(link);
+		};
+	
+	
+		// 버튼 이벤트 위임 및 삭제 버튼 클릭시 장바구니 db에서 비동기로 삭제처리
+		$("#cartLi").on("click","button", function() {
+			// 버튼 클릭시 해당열의 장바구니 고유번호 가져옴
+			var del = $(this).parent().siblings(".ca").attr("data-cnum");
+			console.log(del);
+			
+			$.ajax({
+				type : 'delete',
+				url : '/board/' + del,
+				header : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "DELETE"
+				},
+				dataType : 'text',
+				success : function(result) {
+					console.log("result: " + result);
+					if(result == 'SUCCESS') {
+						alert("삭제 되었습니다");
+					}
+				}
+			});
+			refresh();
+		});
+		
+
+		
+	
+</script>
 </body>
 </html>

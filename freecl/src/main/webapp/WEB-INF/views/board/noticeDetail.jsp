@@ -47,7 +47,7 @@ ${notice }
 <div class="header">
 	<h2>header자리</h2>
 </div>
-<div class="contianer">
+<div class="container">
 	<div class="row">
 		<div class="notice">
 			<h1>notice</h1>

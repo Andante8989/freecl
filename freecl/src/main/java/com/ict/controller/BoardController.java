@@ -1,21 +1,36 @@
 package com.ict.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.annotation.MultipartConfig;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ict.persistent.BasketVO;
 import com.ict.persistent.BoardVO;
+import com.ict.persistent.CartVO;
+import com.ict.persistent.ColorVO;
 import com.ict.persistent.NoticeVO;
-import com.ict.service.BasketService;
+import com.ict.persistent.SizeVO;
 import com.ict.service.BoardService;
+import com.ict.service.CartService;
+import com.ict.service.ColorService;
 import com.ict.service.NoticeService;
+import com.ict.service.SizeService;
 
 import lombok.experimental.var;
 import lombok.extern.log4j.Log4j;
@@ -32,13 +47,23 @@ public class BoardController {
 	private BoardService service1;
 	
 	@Autowired
-	private BasketService service2;
+	private ColorService service2;
+	
+	@Autowired
+	private SizeService service3;
+	
+	@Autowired
+	private CartService service4;
 	
 	// 상품 디테일 화면 연결
 	@GetMapping(value="/detail")
 	public String getProductDetail(Long boardNum, Model model) {
 		BoardVO board = service1.getListDetail(boardNum);
+		List<ColorVO> color = service2.getListDetail(boardNum);
+		List<SizeVO> size = service3.getListDetail(boardNum);
 		model.addAttribute("board", board);
+		model.addAttribute("color", color);
+		model.addAttribute("size", size);
 		return "board/productDetail";
 	}
 	
@@ -94,12 +119,72 @@ public class BoardController {
 	}
 	/////////////////////////////////////////////////////////////////////////////////
 	
-	// 장바구니페이지로 이동
-	@PostMapping(value="basket")
-	public String basket(BasketVO vo, Model model) {
-		service2.insertBasket(vo);
-		log.info(vo);
-		log.info("장바구니 접속 시도!");
+	@GetMapping(value="basket2")
+	public String basket(String color, String size, String price, CartVO cart, Long cart_proNum, Model model) {
+		
+
+		// 상품의 색상과 사이즈 데이터
+		model.addAttribute("color", color);
+		model.addAttribute("size", size);
+		
+		// 장바구니테이블에 insert 후 데이터 뿌리기
+		//service4.cartInsert(cart);
+		List<CartVO> cartList = service4.getList();
+		model.addAttribute("cartList", cartList);
+		
 		return "/board/basket";
 	}
+	
+	
+	@ResponseBody
+	@DeleteMapping(value="/{cartNum}",
+					produces = {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> remove(@PathVariable("cartNum") Long cartNum) {
+		
+		ResponseEntity<String> entity = null;
+		
+		try {
+			service4.cartDelete(cartNum);
+			entity = new ResponseEntity<String>(
+					"SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(
+					e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/all/{num}",
+					produces = {MediaType.APPLICATION_XML_VALUE,
+							    MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<CartVO>> list (@PathVariable("num") Long num) {
+		
+		ResponseEntity<List<CartVO>> entity = null;
+		
+		try {
+			entity = new ResponseEntity<>(service4.getList2(num), HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@ResponseBody
+	@PostMapping(value="", consumes="appincation/json",
+							produces= {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> register(@RequestBody CartVO vo) {
+		
+		ResponseEntity<String> entity = null;
+		
+		try {
+			service4.cartInsert(vo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
 }

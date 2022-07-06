@@ -1,10 +1,10 @@
-package com.ict.mapper;
+package com.ict.service;
 
 import java.util.List;
 
 import com.ict.persistent.ColorVO;
 
-public interface ColorMapper {
+public interface ColorService {
 
 	public List<ColorVO> getList();
 	

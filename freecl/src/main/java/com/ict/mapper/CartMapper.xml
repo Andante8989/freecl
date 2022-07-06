@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ict.mapper.CartMapper">
+
+	<select id="getList" resultType="com.ict.persistent.CartVO">
+		<![CDATA[
+			SELECT * FROM cartTbl ORDER BY cartNum desc
+		]]>
+	</select>
+	
+	<select id="selectCountInCart" resultType="com.ict.persistent.CartVO">
+		<![CDATA[
+			select decode(count(*),0,'false','true') from cartTbl where cart_proNum=#{cart_proNum}
+		]]>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO cartTbl (cartNum, cart_proNum, cart_amount, cart_price) values (cartNum.nextval, #{cart_proNum}, #{cart_amount}, #{cart_price})
+	</insert>
+	
+	<delete id="delete">
+		delete from cartTbl WHERE cartNum=#{cartNum}
+	</delete>
+	
+	<select id="getList2" resultType="com.ict.persistent.CartVO">
+		SELECT * FROM cartTbl WHERE cart_proNum=#{cart_proNum}
+	</select>
+	
+</mapper>

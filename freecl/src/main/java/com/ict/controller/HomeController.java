@@ -42,8 +42,8 @@ public class HomeController {
 	}
 	
 	@GetMapping("/test")
-	public void ajaxTest() {
-		
+	public String ajaxTest() {
+		return "/board/test";
 	}
 	
 	

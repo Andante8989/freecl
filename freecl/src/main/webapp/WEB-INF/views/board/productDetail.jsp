@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
@@ -7,6 +8,22 @@
 <link rel="stylesheet" href="/resources/resttest/modal.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>		
+
+	#cartMod {
+	width : 1000px;
+	height : 800px;
+	background-color : pink;
+	position : relactive;
+	top : 50%;
+	left : 50%;
+	margin-top : -50px;
+	margin-left: -150px;
+	padding : 10px;
+	z-index: 1000px;
+	}
+	
+	
+	
 	a {
 		text-decoration-line: none;
 	}
@@ -118,6 +135,7 @@ header <img id="logo" src="/resources/image/Freecl.png">
 		<div class="col-md-5 detail offset-md-1">
 		상품 상세 정보 자리
 		${board }
+		${color }
 			<div class="row">
 				${board.name }
 			</div>
@@ -128,20 +146,23 @@ header <img id="logo" src="/resources/image/Freecl.png">
 			<div class="row">
 			    배송정보
 			</div>
-			<form action="/board/basket" id="form" method="post">
-				<input type="hidden" name="price" value="${board.price }">
-				<input type="hidden" name="amount" value="${board.amount }">
-				<input type="hidden" name="boardNum" value="${board.boardNum }">
+			<hr/>
+			<form action="/board/basket" id="form" method="get">
+				<input type="hidden" name="title" value="${board.name }">
+				<input type="hidden" name="cart_proNum" value="${board.boardNum }">
+				<input type="hidden" name="cart_amount" value="${board.amount }">
+				<input type="hidden" name="cart_price" value="${board.price }">
 			<div class="row">
 				<p>color</p>
-					<label><input type="radio" name="color" value="black" id="black"></label>
-      				<label><input type="radio" name="color" value="white" id="white"></label>
+					<c:forEach var="item" items="${color }">
+					<label><input type="radio" name="color" value="${item.color }">${item.color }</label>
+      				</c:forEach>
 			</div>
 			<div class="row">
 				<p>size</p>
-					<label><input type="radio" name="size" value="s" id="Ss"> s</label>
-      				<label><input type="radio" name="size" value="m" id="Ss"> m</label>
-      				<label><input type="radio" name="size" value="L" id="Ss"> L</label>
+					<c:forEach var="size" items="${size }">
+					<label><input type="radio" name="size" value="${size.sizeName }">${size.sizeName }</label>
+					</c:forEach>
 			</div>
 			<hr/>
 			<div class="row">
@@ -149,10 +170,11 @@ header <img id="logo" src="/resources/image/Freecl.png">
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<button type="submit" id="basket" class="basket" onclick="test()">장바구니</button>
+					
 				</div>
 				</form>
 				<div class="col-md-6">
+				<button id="basket" class="basket" onclick="test()">장바구니</button>
 					<button class="payment">결제하기</button>
 				</div>
 			</div>	
@@ -272,12 +294,22 @@ header <img id="logo" src="/resources/image/Freecl.png">
 	</ul>
 </div>
 
-
+<div id="cartMod" style="display:none;">
+	<div class="cartTitle">장바구니 미리보기</div>
+	<div>
+		
+	</div>
+	<div>
+		<button type="button" id="replyModBtn">장바구니로 이동</button>
+		<button type="button" id="replyDelBtn">쇼핑 계속하기</button>
+	</div>
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 
 	//색상, 사이즈 선택하지 않으면 장바구니 담을 수 없게 하는 기능
+	/*
 	$( "#basket" ).click(function( event ) {
 	event.preventDefault();
 	if($(':radio[name="color"]:checked').length < 1) {
@@ -290,6 +322,7 @@ header <img id="logo" src="/resources/image/Freecl.png">
 		}
 		
 	}
+
 	
 	
 	});
@@ -369,7 +402,8 @@ header <img id="logo" src="/resources/image/Freecl.png">
 		 
 		 
 
-	
+
+
 	
 </script>
 	  <script src="/resources/resttest/delete.js"></script>

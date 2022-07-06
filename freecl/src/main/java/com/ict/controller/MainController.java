@@ -25,7 +25,6 @@ public class MainController {
 	public String main(Model model) {
 		List<BoardVO> boardList = service.getList();
 		model.addAttribute("boardList", boardList);
-		log.info(boardList);
 		return "/main";
 	}
 
