@@ -350,6 +350,7 @@ header <img id="logo" src="/resources/image/Freecl.png">
 		    let bno = ${board.boardNum};
 			let str = "";
 			$.getJSON("/replies/all/" + bno, function(data){
+				console.log(data.length);
 				$(data).each(
 					function(){
 						console.log(this);
