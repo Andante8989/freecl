@@ -153,6 +153,8 @@ ${board }
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
+		var csrfHeaderName = "${_csrf.headerName}";
+		var csrfTokenValue = "${_csrf.token}";
 	
 		var str = "";
 		// get json으로 현재 장바구니 데이터 모두 가져오기
@@ -196,6 +198,9 @@ ${board }
 			console.log(del);
 			
 			$.ajax({
+				beforeSend : function(xhr) { 
+					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+				},
 				type : 'delete',
 				url : '/board/' + del,
 				header : {
