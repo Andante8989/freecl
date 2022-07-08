@@ -1,6 +1,6 @@
 
 // 삭제버튼 이벤트
- $("#replyDelBtn").on("click", function(){
+/* $("#replyDelBtn").on("click", function(){
 	 let rno = $(".modal-title").html();
 
 	 $.ajax({
@@ -23,4 +23,4 @@
 		 }
 	 })
 	 
- });
+ });*/

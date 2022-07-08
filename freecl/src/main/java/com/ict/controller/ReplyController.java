@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ict.persistent.ReplyVO;
 import com.ict.service.ReplyService;
 
+import lombok.Data;
+
 @RestController
 @RequestMapping("/replies")
 public class ReplyController {

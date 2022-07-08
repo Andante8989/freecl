@@ -1,8 +1,8 @@
  // 수정버튼 작동
- $("#replyModBtn").on("click",function(){
+ /*$("#replyModBtn").on("click",function(){
 	 let rno = $(".modal-title").html();
 	 console.log(rno);
-	 /*let reply = $("#replytext").val();
+	 let reply = $("#replytext").val();
 	 
 	 $.ajax({
 		 type : 'put',
@@ -22,5 +22,5 @@
 				 getAllList();
 			 }
 		 }
-	 })*/
- })
+	 })
+ })*/

@@ -111,13 +111,17 @@
     width: 500px;
     height: 100px;
     background-color: black;
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: 10px;
+    margin-top: 1550px;
     margin-left: -150px;
     padding: 10px;
     z-index: 1000;
+}
+
+.modal-title{
+
 }
 	
 </style>
@@ -140,7 +144,7 @@
 		</div>
 	</div>
 <hr/>
-header <img id="logo" src="/resources/image/Freecl.png">
+ <img id="logo" src="/resources/image/Freecl.png">
 </div>
 <div class="container">
 	<div class="row">
@@ -327,20 +331,7 @@ header <img id="logo" src="/resources/image/Freecl.png">
 <script type="text/javascript">
 
 	//색상, 사이즈 선택하지 않으면 장바구니 담을 수 없게 하는 기능
-<<<<<<< HEAD
-	$( "#basket" ).click(function( event ) {
-	event.preventDefault();
-	if($(':radio[name="color"]:checked').length < 1) {
-		alert("색상을 정해주세요");
-	} else {
-		if($(':radio[name="size"]:checked').length < 1) {
-			alert("사이즈를 정해주세요");
-		} else {
-			$("#form").submit();
-		}
-=======
 	function bas( ) {
->>>>>>> d21eb6cf2225732fd9398a45eb4becdbc4232553
 		
 		if($(':radio[name="color"]:checked').length < 1) {
 			alert("색상을 정해주세요");
@@ -362,7 +353,9 @@ header <img id="logo" src="/resources/image/Freecl.png">
 	 function getAllList(){
 		    let bno = ${board.boardNum};
 			let str = "";
+			
 			$.getJSON("/replies/all/" + bno, function(data){
+				console.log(data.length);
 				$(data).each(
 					function(){
 						console.log(this);
@@ -426,17 +419,75 @@ header <img id="logo" src="/resources/image/Freecl.png">
 				let rno = reply.attr("data-rno");
 				let replytext = $(this).prev().html()
 				
-				$(".modat-title").html(rno);
+				$(".modal-title").html(rno);
 				$("#replytext").val(replytext);
 				$("#modDiv").show("slow");
 		 });// 댓글 삽입
 		 
 		 
-	
+		 $("#replyDelBtn").on("click", function(){
+			 let rno = $(".modal-title").html();
+
+			 $.ajax({
+				 type : 'delete',
+				 url : '/replies/' + rno,
+				 header : {
+					 "Content-Type" : "application/json",
+					 "X-HTTP-Method-Overide" : "DELETE"
+				 },
+				 dataType : "text",
+				 success : function(result){
+					 console.log("result: " + result);
+					 if(result == 'SUCCESS'){
+						 alert("삭제 되었습니다.");
+						 // 모달닫기
+						 $("#modDiv").hide("slow");
+						 // 삭제된 이후 목록 가져와서 갱신하기
+						 getAllList();
+					 }
+				 }
+			 })
+			 
+		 });
+		 
+		 
+		 $("#replyModBtn").on("click",function(){
+			 let rno = $(".modal-title").html();
+			 console.log(rno);
+			 let reply = $("#replytext").val();
+			 
+			 $.ajax({
+				 type : 'put',
+				 url : '/replies/' + rno,
+				 header : {
+					 "Content-Type" : "application/json",
+					 "X-HTTP-Method-Override" : "PUT"
+				 },
+				 contentType : "application/json",
+				 data: JSON.stringify({reply:reply}),
+				 dataType : 'text',
+				 success : function(result){
+					 console.log("result: " + result);
+					 if(result == 'SUCCESS'){
+						 alert("수정 되었습니다.");
+						 $("#modDiv").hide("slow");
+						 getAllList();
+					 }
+				 }
+			 })
+		 })
+		 
+		 
+		 $("#closeBtn").on("click",function(){
+					$("#modDiv").hide("slow");
+			 });// 댓글 창 닫기
+		
+		 
+
 </script>
-<!--   <script src="/resources/resttest/delete.js"></script>
+      <!-- <script src="/resources/resttest/delete.js"></script>
       <script src="/resources/resttest/modify.js"></script>
-      <script src="/resources/resttest/modalclose.js"></script>  -->	
+      <script src="/resources/resttest/modalclose.js"></script> -->
 
 </body>
 </html>
