@@ -309,7 +309,6 @@ header <img id="logo" src="/resources/image/Freecl.png">
 <script type="text/javascript">
 
 	//색상, 사이즈 선택하지 않으면 장바구니 담을 수 없게 하는 기능
-	/*
 	$( "#basket" ).click(function( event ) {
 	event.preventDefault();
 	if($(':radio[name="color"]:checked').length < 1) {
@@ -401,9 +400,6 @@ header <img id="logo" src="/resources/image/Freecl.png">
 		 });// 댓글 삽입
 		 
 		 
-
-
-
 	
 </script>
 	  <script src="/resources/resttest/delete.js"></script>
