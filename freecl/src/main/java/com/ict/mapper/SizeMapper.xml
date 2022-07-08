@@ -8,4 +8,7 @@
 		SELECT * FROM sizeTbl WHERE sizeNum=#{boardNum}
 	</select>
 	
+	<insert id="insertSize">
+		INSERT INTO sizeTbl(sizeNum, sizeName) VALUES (#{sizeNum}, #{sizeName})
+	</insert>
 </mapper>

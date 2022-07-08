@@ -19,4 +19,9 @@ public class SizeServiceImpl implements SizeService {
 		return mapper.getListDetail(boardNum);
 	}
 
+	@Override
+	public void insertSize(SizeVO vo) {
+		mapper.insertSize(vo);
+	}
+
 }

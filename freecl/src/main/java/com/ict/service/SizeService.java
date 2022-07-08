@@ -7,4 +7,6 @@ import com.ict.persistent.SizeVO;
 public interface SizeService {
 
 	public List<SizeVO> getListDetail(Long boardNum);
+	
+	public void insertSize(SizeVO vo);
 }

@@ -14,5 +14,10 @@
 		SELECT * FROM boardTbl WHERE boardNum=#{boardNum}
 	</select>
 	
+	<insert id="insertBoard">
+		INSERT INTO boardTbl (boardNum, name, content, image, kind, hit, price, amount)
+			VALUES (boardNum.nextval, #{name}, #{content}, null, #{kind}, 0, #{price}, #{amount})
+	</insert>
+	
 	
 </mapper>

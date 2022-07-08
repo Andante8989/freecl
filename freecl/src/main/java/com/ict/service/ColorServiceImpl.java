@@ -24,4 +24,9 @@ public class ColorServiceImpl implements ColorService {
 		return mapper.getListDetail(boardNum);
 	}
 
+	@Override
+	public void insertColor(ColorVO vo) {
+		mapper.insertColor(vo);
+	}
+
 }
