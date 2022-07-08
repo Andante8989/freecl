@@ -18,7 +18,7 @@ public class CartMapperTests {
 	@Autowired
 	private CartMapper mapper;
 	
-	//@Test
+	@Test
 	public void getListTest() {
 		log.info(mapper.getList());
 	}

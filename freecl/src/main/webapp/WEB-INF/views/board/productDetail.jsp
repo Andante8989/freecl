@@ -8,20 +8,36 @@
 <link rel="stylesheet" href="/resources/resttest/modal.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>		
-
-	#cartMod {
-	width : 1000px;
-	height : 800px;
-	background-color : pink;
-	position : relactive;
-	top : 50%;
-	left : 50%;
-	margin-top : -50px;
-	margin-left: -150px;
-	padding : 10px;
-	z-index: 1000px;
+	/* ------------장바구니 모달창 css ---------------*/
+	#popBox {
+		position: fixed;
+		top: 0; left: 0; bottom: 0; right: 0;
+		background: rgba(0, 0, 0, 0.8);
 	}
 	
+	.popUp {
+		position: absolute;
+		top: calc(50vh - 100px); left: calc(50vw - 200px);
+		background-color: white;
+		display : flex;
+		justify-content : center;
+		
+		border-radius: 10px;
+		width: 400px;
+		height: 200px;
+	}
+	
+	#continue {
+		background-color : white;
+		color : black;
+		border : 1px solid black;
+	}
+	#moveCart {
+		background-color : grey;
+		color : white;
+	}
+
+	/*-----------------------------------------*/
 	
 	
 	a {
@@ -147,11 +163,6 @@ header <img id="logo" src="/resources/image/Freecl.png">
 			    배송정보
 			</div>
 			<hr/>
-			<form action="/board/basket" id="form" method="get">
-				<input type="hidden" name="title" value="${board.name }">
-				<input type="hidden" name="cart_proNum" value="${board.boardNum }">
-				<input type="hidden" name="cart_amount" value="${board.amount }">
-				<input type="hidden" name="cart_price" value="${board.price }">
 			<div class="row">
 				<p>color</p>
 					<c:forEach var="item" items="${color }">
@@ -170,11 +181,9 @@ header <img id="logo" src="/resources/image/Freecl.png">
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					
+					<button type="button" id="basket" onclick="bas();" class="basket">장바구니담기</button>
 				</div>
-				</form>
 				<div class="col-md-6">
-				<button id="basket" class="basket" onclick="test()">장바구니</button>
 					<button class="payment">결제하기</button>
 				</div>
 			</div>	
@@ -294,21 +303,31 @@ header <img id="logo" src="/resources/image/Freecl.png">
 	</ul>
 </div>
 
-<div id="cartMod" style="display:none;">
+<!-- --------------장바구니 모달창 --------------- -->
+<div id="popBox" style="display:none;">
 	<div class="cartTitle">장바구니 미리보기</div>
-	<div>
-		
+		<div class="inner">
+			<div class="popUp">
+				<form action="/board/basket" id="form" method="get">
+					<input type="hidden" name="cart_proNum" value="${board.boardNum }">
+					<input type="hidden" name="cart_amount" value="${board.amount }">
+					<input type="hidden" name="cart_price" value="${board.price }">
+					<input type="hidden" name="cart_name" value="${board.name }">
+					<button type="submit" id="moveCart">장바구니로 이동</button>
+				</form>
+				<button type="button" id="continue" onclick="clo();">장바구니 취소</button>
+		</div>
 	</div>
-	<div>
-		<button type="button" id="replyModBtn">장바구니로 이동</button>
-		<button type="button" id="replyDelBtn">쇼핑 계속하기</button>
-	</div>
-</div>
+</div>	
+
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 
 	//색상, 사이즈 선택하지 않으면 장바구니 담을 수 없게 하는 기능
+<<<<<<< HEAD
 	$( "#basket" ).click(function( event ) {
 	event.preventDefault();
 	if($(':radio[name="color"]:checked').length < 1) {
@@ -319,12 +338,25 @@ header <img id="logo" src="/resources/image/Freecl.png">
 		} else {
 			$("#form").submit();
 		}
+=======
+	function bas( ) {
+>>>>>>> d21eb6cf2225732fd9398a45eb4becdbc4232553
 		
-	}
+		if($(':radio[name="color"]:checked').length < 1) {
+			alert("색상을 정해주세요");
+		} else {
+			if($(':radio[name="size"]:checked').length < 1) {
+				alert("사이즈를 정해주세요");
+			} else {
+				$("#popBox").show();
+	        	}
+			}
+		}
+	 function clo() {
+		 $("#popBox").hide();
+	 }
 
 	
-	
-	});
 	
 	 // 댓글 등록
 	 function getAllList(){
@@ -402,9 +434,9 @@ header <img id="logo" src="/resources/image/Freecl.png">
 		 
 	
 </script>
-	  <script src="/resources/resttest/delete.js"></script>
+<!--   <script src="/resources/resttest/delete.js"></script>
       <script src="/resources/resttest/modify.js"></script>
-      <script src="/resources/resttest/modalclose.js"></script>
+      <script src="/resources/resttest/modalclose.js"></script>  -->	
 
 </body>
 </html>

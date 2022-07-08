@@ -6,6 +6,20 @@
 <html>
 <head>
 <style>
+	.XX {
+		border : none;
+		background-color : white;
+		color : gray;
+	}
+	.up {
+		color: black;
+	}
+	
+	.menu {
+		vertical-align : center;
+		text-align : center;
+	}
+
 /* -------상단 hr 태그 부분 ----------- */
 		.welcome {
 		    border: none;
@@ -88,44 +102,31 @@ ${board }
 </div>
 <div class="container">
 	<div class="row">
-		<div class="col-md-8">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>ㅇ</th>
-						<th>주문정보</th>
-						<th>수량</th>
-						<th>가격</th>
-						<th>취소</th>
-					</tr>
-				</thead>
-				<tbody id="cartLi">
-					<c:forEach var="cart" items="${cartList }">
-					<tr>
-						<td class="ca" data-cnum="${cart.cartNum }"><input type="checkbox" name="check" checked>${cart.cartNum }</td>
-						<td>${cart.cart_proNum }</td>
-						<td>${cart.cart_amount }</td>
-						<td class="pp">${cart.cart_price }원</td>
-						<td><button class="cartDelete" type="button">삭제</button></td>
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+		<div class="col-md-7">
+			<hr class="up">
+			<div class="row menu">
+				<div class="col-md-2">고유번호</div>
+				<div class="col-md-4 offset-md-1">상품정보</div>
+				<div class="col-md-1 offset-md-1">수량</div>
+				<div class="col-md-1 offset-md-1">금액</div>
+				<div class="col-md-1">취소</div><hr/>
+				<ul id="cc"></ul>
+			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-4 offset-md-1">
 			<div class="sub">
 				<div class="tit">
 				<strong>결제금액</strong>
 				</div>
 				<div class="price">
 					<br/>
-					<strong class="pri"></strong>
+					<strong id="pri"></strong>
 				</div>
 				<br/>
 				<ul class="info">
 					<li>
 						<span class="t1">총 상품금액</span>
-						<span class="t2"><span id="total_price">19,000</span>원</span>
+						<span class="t2"><span id="total_price"></span>원</span>
 					</li>
 					<li>
 						<span class="t1">배송비</span>
@@ -147,24 +148,51 @@ ${board }
 </div>
 
 
-
 <div class="footer">
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
 	
-	
-		function refresh() {
-			var link = "http://localhost:52000/board/basket"
-			location.href(link);
-		};
-	
-	
-		// 버튼 이벤트 위임 및 삭제 버튼 클릭시 장바구니 db에서 비동기로 삭제처리
-		$("#cartLi").on("click","button", function() {
+		var str = "";
+		// get json으로 현재 장바구니 데이터 모두 가져오기
+	    function getAllList() {
+			$.getJSON("/board/all/", function(data) {
+				console.log(data.length);
+				str = "";
+				var sum = 0;
+				var delivery = 4000;
+				var total = 0;
+				
+				$(data).each(
+						function() {
+							str += `<div class='row' data-pnum='\${this.cartNum}' class='Li'>
+										<div class='col-md-2'>\${this.cartNum}</div>
+										<div class='col-md-4 offset-md-1'>\${this.cart_name}</div>
+										<div class='col-md-1 offset-md-1'>\${this.cart_amount}</div>
+										<div class='col-md-1 offset-md-1'>\${this.cart_price}</div>
+										<div class='col-md-1'><button type='button' class='btn-close' aria-label='close'></button></div>
+									</div><hr>`;
+								sum += this.cart_price;
+								total = delivery + sum;
+						});
+					var result = total.toLocaleString();
+					var sumResult = sum.toLocaleString();
+					$("#cc").html(str);
+					$("#pri").html(result + "원");
+					$("#total_price").html(sumResult);
+				}); 
+		    }
+		getAllList();
+		
+		
+		// 장바구니 삭제 기능
+		$("#cc").on("click",".col-md-1 button", function() {
+			console.log(this);
+			
 			// 버튼 클릭시 해당열의 장바구니 고유번호 가져옴
-			var del = $(this).parent().siblings(".ca").attr("data-cnum");
+			var ca = $(this).parent().parent();
+			var del = ca.attr("data-pnum");
 			console.log(del);
 			
 			$.ajax({
@@ -179,14 +207,12 @@ ${board }
 					console.log("result: " + result);
 					if(result == 'SUCCESS') {
 						alert("삭제 되었습니다");
+						// 장바구니 삭제 후 다시 전체 db 출력하기
+						getAllList();
 					}
 				}
 			});
-			refresh();
-		});
-		
-
-		
+		})
 	
 </script>
 </body>

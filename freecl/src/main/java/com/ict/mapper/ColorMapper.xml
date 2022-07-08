@@ -14,4 +14,8 @@
 		SELECT * FROM colorTbl WHERE colorNum=#{boardNum}
 	</select>
 	
+	<insert id="insertColor">
+		INSERT INTO colorTbl (colorNum, color) VALUES (#{colorNum}, #{color})
+	</insert>
+	
 </mapper>

@@ -66,7 +66,7 @@ public class BoardController {
 		model.addAttribute("size", size);
 		return "board/productDetail";
 	}
-	
+
 	// 고객센터 페이지 연결
 	@GetMapping(value="/customerCenter")
 	public String customerCenter() {
@@ -119,23 +119,24 @@ public class BoardController {
 	}
 	/////////////////////////////////////////////////////////////////////////////////
 	
-	@GetMapping(value="basket2")
-	public String basket(String color, String size, String price, CartVO cart, Long cart_proNum, Model model) {
-		
+	
+	// 장바구니로 이동
+	@GetMapping(value="basket")
+	public String basket(String size, String color, CartVO cart, Long cart_proNum, Model model) {
 
-		// 상품의 색상과 사이즈 데이터
+		//상품의 색상과 사이즈 데이터
 		model.addAttribute("color", color);
-		model.addAttribute("size", size);
+		model.addAttribute("size", size); 
 		
 		// 장바구니테이블에 insert 후 데이터 뿌리기
-		//service4.cartInsert(cart);
+		service4.cartInsert(cart);
 		List<CartVO> cartList = service4.getList();
 		model.addAttribute("cartList", cartList);
 		
 		return "/board/basket";
 	}
 	
-	
+	// 장바구니에서 삭제버튼 클릭시 비동기 처리
 	@ResponseBody
 	@DeleteMapping(value="/{cartNum}",
 					produces = {MediaType.TEXT_PLAIN_VALUE})
@@ -154,16 +155,17 @@ public class BoardController {
 		return entity;
 	}
 	
+	// 장바구니 화면에 장바구니 db 출력
 	@ResponseBody
-	@GetMapping(value="/all/{num}",
+	@GetMapping(value="/all",
 					produces = {MediaType.APPLICATION_XML_VALUE,
 							    MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<CartVO>> list (@PathVariable("num") Long num) {
+	public ResponseEntity<List<CartVO>> list () {
 		
 		ResponseEntity<List<CartVO>> entity = null;
 		
 		try {
-			entity = new ResponseEntity<>(service4.getList2(num), HttpStatus.OK);
+			entity = new ResponseEntity<>(service4.getList(), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
