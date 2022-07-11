@@ -3,6 +3,29 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ict.mapper.BoardMapper">
+	<resultMap type="com.ict.persistent.BoardVO" id="memberMap">
+	<id property="BoardNum" column="BoardNum" />
+	<result property="name" column="name" />
+	<result property="content" column="content" />
+	<result property="image" column="image" />
+	<result property="kind" column="kind" />
+	<result property="useyn" column="useyn" />
+	<result property="hit" column="hit" />
+	<result property="bdate" column="bdate" />
+	<result property="price" column="price" />
+	<result property="amount" column="amount" />
+	<collection property="colorList" resultMap="colorMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.ict.persistent.ColorVO" id="colorMap">
+		<result property="BoardNum" column="BoardNum" />
+		<result property="color" column="color" />
+	</resultMap>
+	
+	<resultMap type="com.ict.persistent.SizeVO" id="sizeMap">
+		<result property="BoardNum" column="BoardNum" />
+		<result property="sizeName" column="sizeName" />
+	</resultMap>
 
 	<select id="getList" resultType="com.ict.persistent.BoardVO">
 		<![CDATA[
@@ -13,11 +36,41 @@
 	<select id="getListDetail" resultType="com.ict.persistent.BoardVO">
 		SELECT * FROM boardTbl WHERE boardNum=#{boardNum}
 	</select>
+
 	
+	
+	<select id="read" resultMap="boardMap">
+		SELECT
+			m.boardNum, name, content, image, kind, useyn, hit, bdate, price, amount , a.color
+			 FROM
+			boardTbl m LEFT OUTER JOIN colorTbl a on m.boardNum = a.boardNum
+			WHERE m.boardNum = #{boardNum}
+	</select>
+	
+	
+	<insert id="insertUserTbl">
+		INSERT INTO userTBL(userId, upw, uname, email, p_num, addr)
+			VALUES
+		(#{userId}, #{upw}, #{uname}, #{email}, #{p_num}, #{addr})
+	</insert>
+	
+	<update id="insertUserAuth">
+		INSERT ALL
+		<foreach collection="authList" item="item" separator=" ">
+			INTO userAUTH(userId, auth)
+				VALUES
+			(#{item.userId}, #{item.auth})
+		</foreach>
+		SELECT * FROM DUAL	
+	</update>
+	
+		
 	<insert id="insertBoard">
 		INSERT INTO boardTbl (boardNum, name, content, image, kind, hit, price, amount)
 			VALUES (boardNum.nextval, #{name}, #{content}, null, #{kind}, 0, #{price}, #{amount})
 	</insert>
+	
+	
 	
 	
 </mapper>

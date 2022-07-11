@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ict.mapper.UserMapper">
+	<resultMap type="com.ict.persistent.UserVO" id="memberMap">
+	<id property="userId" column="userId" />
+	<result property="userId" column="userId" />
+	<result property="upw" column="upw" />
+	<result property="uname" column="uname" />
+	<result property="email" column="email" />
+	<result property="p_num" column="p_num" />
+	<result property="addr" column="addr" />
+	<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.ict.persistent.AuthVO" id="authMap">
+		<result property="userId" column="userId" />
+		<result property="auth" column="auth" />
+	</resultMap>
+	
+	
+	<select id="read" resultMap="memberMap">
+		SELECT
+			m.userid, upw, uname, email, p_num, addr, enabled, a.auth
+			 FROM
+			userTbl m LEFT OUTER JOIN userAuth a on m.userId = a.userId
+			WHERE m.userId = #{userId}
+	</select>
+	
+	
+	<insert id="insertUserTbl">
+		INSERT INTO userTBL(userId, upw, uname, email, p_num, addr)
+			VALUES
+		(#{userId}, #{upw}, #{uname}, #{email}, #{p_num}, #{addr})
+	</insert>
+	
+	<update id="insertUserAuth">
+		INSERT ALL
+		<foreach collection="authList" item="item" separator=" ">
+			INTO userAUTH(userId, auth)
+				VALUES
+			(#{item.userId}, #{item.auth})
+		</foreach>
+		SELECT * FROM DUAL	
+	</update>
+	
+	
+	
+</mapper>
+

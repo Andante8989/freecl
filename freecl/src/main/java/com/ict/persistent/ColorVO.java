@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ColorVO {
 
-	private Long colorNum;
+	private int boardNum;
 	private String color;
 	
 	/*

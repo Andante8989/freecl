@@ -1,16 +1,30 @@
 package com.ict.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.ict.persistent.AuthVO;
+import com.ict.persistent.UserVO;
+import com.ict.service.UserService;
 
 import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Controller
 public class CommonController {
+	
+	@Autowired
+	private UserService service;
+	
+	@Autowired
+	private PasswordEncoder pwen;
 	
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {
@@ -44,6 +58,28 @@ public class CommonController {
 	}
 	
 	
+	@GetMapping("/join")
+	public void insertUser() {
+		
+	}
+	
+	@PostMapping("/join")
+	public String insertUser(UserVO vo, String[] role) {
+		String beforeCrPw = vo.getUpw();
+		vo.setUpw(pwen.encode(beforeCrPw));
+		
+		vo.setAuthList(new ArrayList<AuthVO>());
+		
+		for(String roleItem : role) {
+			AuthVO authVO = new AuthVO();
+			authVO.setAuth(roleItem);
+			authVO.setUserId(vo.getUserId());
+			vo.getAuthList().add(authVO);
+		}
+		
+		service.insertUser(vo);
+		return "/main";
+	}
 	
 	
 	

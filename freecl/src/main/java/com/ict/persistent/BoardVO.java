@@ -1,6 +1,7 @@
 package com.ict.persistent;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -17,6 +18,8 @@ public class BoardVO {
 	private Date bdate;
 	private int price;
 	private int amount;
+	private List<ColorVO> color;
+	
 
 	
 	/*

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SizeVO {
 	
-	private Long sizeNum;
+	private int boardNum;
 	private String sizeName;
 }
 

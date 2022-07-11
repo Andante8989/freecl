@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
@@ -25,14 +26,73 @@
 		font-family : inherit;
 		color : #d6d6d6;
 	}
+	
+		  /* -------상단 hr 태그 부분 ----------- */
+		.welcome {
+		    border: none;
+		    border-top: 1px solid #E3E7EB;
+		    overflow: visible;
+		    text-align: center;
+		    height: 17px;
+		    z-index : 3;
+		}
+		
+		.welcome:after {
+		    content: "Welcome";
+		    position: relative;
+		    top: -10px;
+		    background: #F1F3F5; 
+		    padding: 0 10px;
+		    color: #868E96;
+		    font-size: 0.8em;
+		}
+	  /* ----------------------------- */
+	
+	 /* -------상단 버튼 색상, 위치 부분 ----------- */
+		.top{
+		    left:70%;
+		    position:relative;
+		    top:10px;
+   		 }
+  		.w-btn-pink-outline:hover {
+			background-color: #f199bc;
+		    color: #d4dfe6;
+		 }
+	  /* ----------------------------- */
 </style>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<h2>고객센터 페이지입니다.</h2>
-<hr/>
+		<!-- 상단의 버튼 부분 -->
+	 
+			 <ul class="top">
+			 		<a href="/join">
+			        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        회원가입
+				    </button>
+				    </a>
+			         <a href="/board/customerCenter"><button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				        고객센터
+				     </button></a>
+				    <sec:authorize access="isAnonymous()">
+				    	<a href="/customLogin">
+				     	<button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				     	로그인</button>
+				     	</a>
+				    </sec:authorize>
+				    <sec:authorize access="isAuthenticated()">
+				    	<a href="/customLogout" >
+				    	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+				    	<button class="btn btn-light w-btn-pink-outline" type="submit" style="background-color: white;">
+				     	로그아웃</button>
+				     	</a>
+				    </sec:authorize>
+			  </ul>
+		
+	  <!-- 여기까지 상단의 버튼 부분 --> 
+<hr class="welcome">
 <div class="header">
 <h1>고객센터</h1>
 </div>

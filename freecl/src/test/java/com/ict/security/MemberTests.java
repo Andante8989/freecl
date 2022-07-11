@@ -12,6 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ict.mapper.UserMapper;
+import com.ict.persistent.UserVO;
+
 import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,12 +26,15 @@ import lombok.extern.log4j.Log4j;
 public class MemberTests {
 	
 	@Autowired
+	private UserMapper mapper;
+	
+	@Autowired
 	private PasswordEncoder pwen;
 	
 	@Autowired
 	private DataSource ds;
 	
-	@Test
+	//@Test
 	public void testCryptDefaultDB() {
 		
 		String[] idList = {"user00", "member00", "admin00"};
@@ -47,6 +53,15 @@ public class MemberTests {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	@Test
+	public void testRead() {
+		
+		UserVO vo = mapper.read("admin00");
+		log.info(vo);
+		vo.getAuthList();
 	}
 	
 	

@@ -10,6 +10,7 @@
 	<bean id="customAccessDenied" class="com.ict.security.CustomAccessDeniedHandler" />
 	<bean id="customLoginSuccess" class="com.ict.security.CustomLoginSuccessHandler" />
 	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	<bean id="customUserDetailsService" class="com.ict.security.CustomUserDetailsService" />
 	
 	<security:http>
 	
@@ -20,14 +21,17 @@
 		
 		<security:access-denied-handler ref="customAccessDenied" />
 		
-		<security:logout logout-url="/customLogout" invalidate-session="true" />
+		<security:logout logout-url="/customLogout" invalidate-session="true" logout-success-url="/main"/>
+		
 	
 	</security:http>
 	
 	<security:authentication-manager>
-		<security:authentication-provider>
+		<security:authentication-provider user-service-ref="customUserDetailsService">
+		
 			
-			<security:jdbc-user-service data-source-ref="dataSource" />
+			
+			<!-- <security:jdbc-user-service data-source-ref="dataSource" />  -->
 			
 			<security:password-encoder ref="bcryptPasswordEncoder" />
 			

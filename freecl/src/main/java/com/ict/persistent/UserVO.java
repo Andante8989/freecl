@@ -1,5 +1,7 @@
 package com.ict.persistent;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -12,4 +14,5 @@ public class UserVO {
 	private String p_num;
 	private String addr;
 	private boolean enabled;
+	private List<AuthVO> authList;
 }

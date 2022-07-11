@@ -11,4 +11,10 @@ public interface BoardMapper {
 	public BoardVO getListDetail(Long boardNum);
 	
 	public void insertBoard(BoardVO vo);
+	
+	public void insertBoardColor(BoardVO vo);
+	
+	public void insertBoardSize(BoardVO vo);
+	
+	public BoardVO read(Long boardNum);
 }

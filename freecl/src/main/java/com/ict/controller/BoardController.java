@@ -3,7 +3,6 @@ package com.ict.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.annotation.MultipartConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ict.persistent.BasketVO;
 import com.ict.persistent.BoardVO;
 import com.ict.persistent.CartVO;
 import com.ict.persistent.ColorVO;
@@ -32,7 +30,7 @@ import com.ict.service.ColorService;
 import com.ict.service.NoticeService;
 import com.ict.service.SizeService;
 
-import lombok.experimental.var;
+
 import lombok.extern.log4j.Log4j;
 
 @Controller
