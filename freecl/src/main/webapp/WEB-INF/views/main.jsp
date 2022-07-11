@@ -521,6 +521,8 @@
 		  </table>
 		 ${boardList }
 		 <hr/>
+		 
+		 <a href="http://localhost:52000/chatting">채팅방 입장</a>
 	
 		  <footer>
 
