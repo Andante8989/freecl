@@ -330,6 +330,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
+
 	//색상, 사이즈 선택하지 않으면 장바구니 담을 수 없게 하는 기능
 	function bas( ) {
 		
@@ -385,6 +388,9 @@
 	    	 let reply = $("#newReplyText").val();  
 	    	 
 	    	 $.ajax({
+	    		 beforeSend : function(xhr) { 
+						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+					},
 	    		 type : 'post',
 	    		 url : '/replies',
 	    		 headers : {
@@ -429,6 +435,9 @@
 			 let rno = $(".modal-title").html();
 
 			 $.ajax({
+				 beforeSend : function(xhr) { 
+						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+					},
 				 type : 'delete',
 				 url : '/replies/' + rno,
 				 header : {
@@ -457,6 +466,9 @@
 			 let reply = $("#replytext").val();
 			 
 			 $.ajax({
+				 beforeSend : function(xhr) { 
+						xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+					},
 				 type : 'put',
 				 url : '/replies/' + rno,
 				 header : {
