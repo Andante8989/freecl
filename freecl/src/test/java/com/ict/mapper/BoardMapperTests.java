@@ -33,6 +33,6 @@ public class BoardMapperTests {
 	public void getListTests() {
 		BoardVO vo = mapper.read(6L);
 		log.info(vo);
-		vo.getColor();
+		vo.getColorList();
 	}
 }

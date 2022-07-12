@@ -51,12 +51,15 @@
 	
 	
 	<insert id="insertBoard">
-		INSERT INTO boardTBL(boardNum, , name, content, image, kind, useyn, hit, bdate, price, amount)
+		INSERT INTO boardTbl(boardNum, name, content, image, kind, hit, price, amount)
 			VALUES
-		(boardNum.nextval, #{name}, #{content}, null, #{kind}, y, 0, sysdate, #{price}, #{amount})
+		(boardNum.nextval, #{name}, #{content}, null, #{kind}, 0, #{price}, #{amount})
 	</insert>
 	
 	<update id="insertBoardColor">
+		<selectKey keyProperty="boardNum" resultType="java.lang.Long" order="BEFORE">
+			SELECT MAX(boardNum) FROM boardTbl
+		</selectKey>
 		INSERT ALL
 		<foreach collection="colorList" item="item" separator=" ">
 			INTO colorTbl(boardNum, color) VALUES (#{item.boardNum}, #{item.color})
@@ -65,9 +68,12 @@
 	</update>
 	
 	<update id="insertBoardSize">
+		<selectKey keyProperty="boardNum" resultType="java.lang.Long" order="BEFORE">
+			SELECT MAX(boardNum) FROM boardTbl
+		</selectKey>
 	 	INSERT ALL
-		<foreach collection="sizeList" item="item" separator=" ">
-			INTO sizeTbl(boardNum, sizeName) VALUES (#{item.boardNum), #{item.sizeName})
+		<foreach collection="sizeList" item="items" separator=" ">
+			INTO sizeTbl(boardNum, sizeName) VALUES (#{items.boardNum), #{items.sizeName})
 		</foreach>
 		SELECT * FROM DUAL
 	</update>
