@@ -53,6 +53,8 @@ public class BoardController {
 	@Autowired
 	private CartService service4;
 	
+	
+	
 	// 상품 디테일 화면 연결
 	@GetMapping(value="/detail")
 	public String getProductDetail(Long boardNum, Model model) {

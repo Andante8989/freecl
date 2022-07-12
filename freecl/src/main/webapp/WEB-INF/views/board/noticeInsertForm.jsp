@@ -19,6 +19,7 @@
 	<textarea cols="50" rows="12" name="nt_content" placeholder="내용을 입력하세요" required></textarea><br/>
 	<input type="text" name="nt_writer" placeholder="글쓰는 사람" required><br/>
 	<input type="submit" value="글쓰기">
+	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 </form>
 <a class="re" href="/board/notice"><button>돌아가기</button></a>
 </body>

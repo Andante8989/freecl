@@ -13,9 +13,7 @@
 var csrfHeaderName = "${_csrf.headerName}";
 var csrfTokenValue = "${_csrf.token}";
 
-beforeSend : function(xhr) { 
-	xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-},
+
    let webSocket = {
 		   init: function(param){
 			   this._url = param.url;

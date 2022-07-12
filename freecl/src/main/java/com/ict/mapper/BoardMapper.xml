@@ -3,7 +3,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ict.mapper.BoardMapper">
-	<resultMap type="com.ict.persistent.BoardVO" id="memberMap">
+	<resultMap type="com.ict.persistent.BoardVO" id="boardMap">
 	<id property="BoardNum" column="BoardNum" />
 	<result property="name" column="name" />
 	<result property="content" column="content" />
@@ -15,6 +15,7 @@
 	<result property="price" column="price" />
 	<result property="amount" column="amount" />
 	<collection property="colorList" resultMap="colorMap"></collection>
+	<collection property="sizeList" resultMap="sizeMap"></collection>
 	</resultMap>
 	
 	<resultMap type="com.ict.persistent.ColorVO" id="colorMap">
@@ -41,34 +42,36 @@
 	
 	<select id="read" resultMap="boardMap">
 		SELECT
-			m.boardNum, name, content, image, kind, useyn, hit, bdate, price, amount , a.color
+			m.boardNum, name, content, image, kind, useyn, hit, bdate, price, amount , a.color, b.sizeName
 			 FROM
 			boardTbl m LEFT OUTER JOIN colorTbl a on m.boardNum = a.boardNum
+			LEFT OUTER JOIN sizeTbl b on m.boardNum = b.boardNum
 			WHERE m.boardNum = #{boardNum}
 	</select>
 	
 	
-	<insert id="insertUserTbl">
-		INSERT INTO userTBL(userId, upw, uname, email, p_num, addr)
+	<insert id="insertBoard">
+		INSERT INTO boardTBL(boardNum, , name, content, image, kind, useyn, hit, bdate, price, amount)
 			VALUES
-		(#{userId}, #{upw}, #{uname}, #{email}, #{p_num}, #{addr})
+		(boardNum.nextval, #{name}, #{content}, null, #{kind}, y, 0, sysdate, #{price}, #{amount})
 	</insert>
 	
-	<update id="insertUserAuth">
+	<update id="insertBoardColor">
 		INSERT ALL
-		<foreach collection="authList" item="item" separator=" ">
-			INTO userAUTH(userId, auth)
-				VALUES
-			(#{item.userId}, #{item.auth})
+		<foreach collection="colorList" item="item" separator=" ">
+			INTO colorTbl(boardNum, color) VALUES (#{item.boardNum}, #{item.color})
 		</foreach>
 		SELECT * FROM DUAL	
 	</update>
 	
-		
-	<insert id="insertBoard">
-		INSERT INTO boardTbl (boardNum, name, content, image, kind, hit, price, amount)
-			VALUES (boardNum.nextval, #{name}, #{content}, null, #{kind}, 0, #{price}, #{amount})
-	</insert>
+	<update id="insertBoardSize">
+	 	INSERT ALL
+		<foreach collection="sizeList" item="item" separator=" ">
+			INTO sizeTbl(boardNum, sizeName) VALUES (#{item.boardNum), #{item.sizeName})
+		</foreach>
+		SELECT * FROM DUAL
+	</update>
+	
 	
 	
 	

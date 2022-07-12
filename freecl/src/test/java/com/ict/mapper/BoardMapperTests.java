@@ -28,6 +28,7 @@ public class BoardMapperTests {
 		log.info(mapper.getListDetail(3L));
 	}
 	
+	// boardTbl , colorTbl, sizeTbl left OUTER JOIN해서 전체 조회하는 테스트구문
 	@Test
 	public void getListTests() {
 		BoardVO vo = mapper.read(6L);

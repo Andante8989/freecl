@@ -27,6 +27,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void insertBoard(BoardVO vo) {
 		mapper.insertBoard(vo);
+		mapper.insertBoardColor(vo);
+		mapper.insertBoardSize(vo);
 	}
 
 }
