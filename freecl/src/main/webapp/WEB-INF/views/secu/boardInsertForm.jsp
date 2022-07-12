@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>상품 등록하기</h1>
-<form action="/secu/boardInsert" method="get">
+<form action="/secu/boardInsert" method="post">
 상품이름 : <input type="text" name="name" placeholder="30자 이내입니다" required><br/>
 상품내용 : <input type="text" name="content" placeholder="50자 이내입니다" required><br/>
 상품이미지 : 일단없음<br/>
@@ -23,7 +23,8 @@
 상품가격 : <input type="text" name="price" required><br/>
 상품수량 : <input type="text" name="amount" required><br/>
 색상 : <input type="text" name="color" required><br/>
-사이즈 : <input type="text" name="size" required><br/>
+사이즈 : <input type="text" name="sizeName" required><br/>
+<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 <input type="submit" value="상품등록하기">
 </form>
 </body>

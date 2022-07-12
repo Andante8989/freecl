@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="getListDetail" resultType="com.ict.persistent.ColorVO">
-		SELECT * FROM colorTbl WHERE colorNum=#{boardNum}
+		SELECT * FROM colorTbl WHERE boardNum=#{boardNum}
 	</select>
 	
 	<insert id="insertColor">

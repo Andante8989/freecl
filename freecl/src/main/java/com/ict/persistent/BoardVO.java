@@ -19,6 +19,7 @@ public class BoardVO {
 	private int price;
 	private int amount;
 	private List<ColorVO> color;
+	private List<SizeVO> size;
 	
 
 	
