@@ -11,4 +11,8 @@ public interface BoardService {
 	public BoardVO getListDetail(Long boardNum);
 	
 	public void insertBoard(BoardVO vo);
+	
+	public int getBoardNum();
+	
+	public void deleteBoard(Long boardNum);
 }

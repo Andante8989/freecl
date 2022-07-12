@@ -29,10 +29,21 @@ public class BoardMapperTests {
 	}
 	
 	// boardTbl , colorTbl, sizeTbl left OUTER JOIN해서 전체 조회하는 테스트구문
-	@Test
+	//@Test
 	public void getListTests() {
 		BoardVO vo = mapper.read(6L);
 		log.info(vo);
 		vo.getColorList();
+	}
+	
+	//@Test
+	public void getBoardNum() {
+		log.info(mapper.getBoardNum());
+	}
+	
+	@Test
+	public void deleteBoard() {
+		mapper.deleteBoard(69L);
+
 	}
 }

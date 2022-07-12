@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>상품 등록하기</h1>
-<form action="/secu/boardInsert" method="post">
+<form action="/secu/boardInsert" method="post" accept-charset="utf-8">
 상품이름 : <input type="text" name="name" placeholder="30자 이내입니다" required><br/>
 상품내용 : <input type="text" name="content" placeholder="50자 이내입니다" required><br/>
 상품이미지 : 일단없음<br/>
@@ -22,8 +22,19 @@
 
 상품가격 : <input type="text" name="price" required><br/>
 상품수량 : <input type="text" name="amount" required><br/>
-색상 : <input type="text" name="color" required><br/>
-사이즈 : <input type="text" name="sizeName" required><br/>
+색상 : <input type="checkbox" name="color" value="red">red&nbsp;&nbsp;&nbsp;
+	<input type="checkbox" name="color" value="blue">blue&nbsp;&nbsp;&nbsp;
+	<input type="checkbox" name="color" value="black">black&nbsp;&nbsp;&nbsp;
+	<input type="checkbox" name="color" value="brown">brown&nbsp;&nbsp;&nbsp;
+	<input type="checkbox" name="color" value="white">white&nbsp;&nbsp;&nbsp;
+	<input type="checkbox" name="color" value="ivory">ivory&nbsp;&nbsp;&nbsp;
+	<input type="checkbox" name="color" value="green">green<br>
+	
+
+사이즈 : <input type="checkbox" name="sizeName" value="s" >s&nbsp;&nbsp;&nbsp;
+		<input type="checkbox" name="sizeName" value="m">m&nbsp;&nbsp;&nbsp;
+		<input type="checkbox" name="sizeName" value="L">L&nbsp;&nbsp;&nbsp;
+		<input type="checkbox" name="sizeName" value="XL">XL<br/>
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 <input type="submit" value="상품등록하기">
 </form>
