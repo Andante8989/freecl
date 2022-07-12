@@ -9,62 +9,18 @@
 <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>웹소켓 채팅</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
     
-    <style>
-    body {
-    font-family: Arial;
-    font-size: 18px;
-    color: #ffffff;
-    background: #202020 url(../../img/body_back.jpg) no-repeat top center fixed;
-    background-size: cover;
+    <style>	
+   .chat_wrap{width:800px; padding:5px; font-size:18px;}
+   .chat_wrap .inner{background-color:#acc2d2; border-radius:5px; padding:10px; overflow-y:scroll; height:400px}
+   
+   input[type="text"]{border:0;; width:100%; background:#ddd; border-radius:5px; height:30px; padding-left:5px; box-sizing:border-box; margin-top:5px}
+   input[type="text"]::placeholder{color:#999}
+		
+		#message{
+		width:800px;
 		}
-		
-		#icons {
-		    position: absolute;
-		    bottom: 22%;
-		    right: 8%;
-		    width: 400px;
-		    height: 80px;
-		    z-index: 8;
-		    transform: rotate(-57deg); 
-		    -ms-transform: rotate(-57deg); 
-		    -webkit-transform: rotate(-57deg); 
-		    -moz-transform: rotate(-57deg);
-		}
-		
-		#contact { 
-		    float: left; 
-		    cursor: pointer; 
-		}
-		
-		
-		img { 
-		    max-width: 100%; 
-		    height: auto; 
-		}
-		
-		.chat{
-		
-		width: 100%;  
-		height: 10%; 
-		padding: 10px;
-		margin-top:-250px;
-		margin-left:30px;
-		
-		}
-		
-		#divChatData{
-		  position: fixed;
-		  left: 30px;
-		  height: 55px;
-		  padding: 1rem;
-		  color: white;
-		  font-weight: bold;
-		  justify-content: space-between;
-		  align-items: center;
-		}
-		
-		
 
     </style>
         
@@ -76,6 +32,7 @@ var csrfHeaderName = "${_csrf.headerName}";
 var csrfTokenValue = "${_csrf.token}";
 
    let webSocket = {
+		   
 		   init: function(param){
 			   this._url = param.url;
 			   this._initSocket();
@@ -130,8 +87,13 @@ var csrfTokenValue = "${_csrf.token}";
 			   };
 			   let jsonData = JSON.stringify(msgData);
 			   this._socket.send(jsonData);
+			   $(".chat_wrap .inner").stop().animate({scrollTop:$(".chat_wrap .inner").height()},500);
 		   }
    };
+   
+			 
+	 
+
 </script>
 <script type="text/javascript">
     $(window).on('load',function(){
@@ -141,22 +103,23 @@ var csrfTokenValue = "${_csrf.token}";
 
 </head>
 <body>
-
-	<div style="width: 500px; height: 700px; padding: 10px; border: solid 1px #ele3e9;">
+<div class="chat_wrap">
+    <div class="inner">
+    
+         
+	<div style="width: 500px; height: 200px; padding: 10px;">
 	     <div id="divChatData"></div>
 	</div>   
 
-<div class="chat">
-    <input type="text" id="message" size="110" onkeypress="if(event.keyCode==13){webSocket.sendChat();}"/>
-    <input type="button" id="btnSend" value="채팅 전송" onclick="webSocket.sendChat()"/>
-</div>
+  </div><!-- inner -->
+</div><!-- chat_wrap -->
 
-<div id="icons">
-            <div id="contact">
-                <img src="img/icon_contact.png" alt="" />
-            </div>
-            <img src="img/icon_links.png" alt="" />
-        </div>
+<div class="chat">
+	    <input type="text" id="message" size="110" onkeypress="if(event.keyCode==13){webSocket.sendChat();}"/>
+	    <input type="button" id="btnSend" value="채팅 전송" onclick="webSocket.sendChat()"/>
+	</div>
+
+
     
 </body>
 </html>

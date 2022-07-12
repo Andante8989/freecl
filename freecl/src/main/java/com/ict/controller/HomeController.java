@@ -54,4 +54,8 @@ public class HomeController {
 		return "chat";
 	}
 	
+	@GetMapping("/kakao")
+	public String kakao() {
+		return "/kakao";
+	}
 }
