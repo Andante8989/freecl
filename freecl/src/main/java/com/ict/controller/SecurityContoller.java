@@ -34,30 +34,39 @@ public class SecurityContoller {
 	}
 	
 	@PostMapping("/boardInsert")
-	public String boardInsert(BoardVO vo, String[] color, String[] size) {
-		vo.setColor(new ArrayList<ColorVO>());
-		vo.setSize(new ArrayList<SizeVO>());
+	public String boardInsert(BoardVO vo, String[] color, String[] sizeName) {
 		log.info("-------------------");
-		for(String sizeItem : size) {
+		log.info(color);
+		log.info(sizeName);
+		vo.setColorList(new ArrayList<ColorVO>());
+		vo.setSizeList(new ArrayList<SizeVO>());
+		
+		for(String sizeItem : sizeName) {
 			SizeVO sizeVO = new SizeVO();
 			sizeVO.setSizeName(sizeItem);
 			sizeVO.setBoardNum(vo.getBoardNum());
-			vo.getSize().add(sizeVO);
+			vo.getSizeList().add(sizeVO);
 		}
-		service.insertBoard(vo);
+	
 		log.info("---- 칼라 시작-----");
-		log.info(vo.getColor());
+		log.info(vo.getColorList());
 		
 		for(String colorItem : color) {
 			ColorVO colorVO = new ColorVO();
 			colorVO.setColor(colorItem);
 			colorVO.setBoardNum(vo.getBoardNum());
-			vo.getColor().add(colorVO);
+			vo.getColorList().add(colorVO);
 		}
 		service.insertBoard(vo);
-		log.info(vo.getSize());
+		log.info(vo.getSizeList());
 		
-		return "/main";
-	}
+		return "redirect:/main";
+	} 
+	
+	/*@PostMapping("/boardInsert")
+	public void boardInsert(String[] color, String[] sizeName) {
+		log.info(color);
+		log.info(sizeName);
+	}*/
 
 }

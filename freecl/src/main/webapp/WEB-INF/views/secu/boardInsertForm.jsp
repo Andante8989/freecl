@@ -19,7 +19,7 @@
 		  <option value="상의">상의</option>
 		  <option value="모자">모자</option>
 		</select>
-판매상태 : <input type="text" value="y" readonly><br/>
+
 상품가격 : <input type="text" name="price" required><br/>
 상품수량 : <input type="text" name="amount" required><br/>
 색상 : <input type="text" name="color" required><br/>

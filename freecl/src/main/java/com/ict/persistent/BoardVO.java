@@ -18,8 +18,8 @@ public class BoardVO {
 	private Date bdate;
 	private int price;
 	private int amount;
-	private List<ColorVO> color;
-	private List<SizeVO> size;
+	private List<ColorVO> colorList;
+	private List<SizeVO> sizeList;
 	
 
 	
