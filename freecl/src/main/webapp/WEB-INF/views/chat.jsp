@@ -79,11 +79,12 @@ var csrfTokenValue = "${_csrf.token}";
 				   webSocket.closeMessage(JSON.parse(evt.data));
 			   }
 		   },
-		   _sendMessage: function(room_id, cmd, msg){
+		   _sendMessage: function(room_id, cmd, msg,userId){
 			   let msgData = {
 					   room_id : room_id,
 					   cmd : cmd,
-					   msg : msg
+					   msg : msg,
+					   userId : userId
 			   };
 			   let jsonData = JSON.stringify(msgData);
 			   this._socket.send(jsonData);
@@ -114,7 +115,7 @@ var csrfTokenValue = "${_csrf.token}";
   </div><!-- inner -->
 </div><!-- chat_wrap -->
 
-<div class="chat">
+    <div class="chat">
 	    <input type="text" id="message" size="110" onkeypress="if(event.keyCode==13){webSocket.sendChat();}"/>
 	    <input type="button" id="btnSend" value="채팅 전송" onclick="webSocket.sendChat()"/>
 	</div>

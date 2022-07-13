@@ -35,6 +35,7 @@ public class HandlerChat extends TextWebSocketHandler {
 			// 세션 리스트에 저장
 			Map<String,Object> map = new HashMap<String, Object>();
 			map.put("room_id", mapReceive.get("room_id"));
+			map.put("userId", mapReceive.get("userId"));
 			map.put("session", session);
 			sessionList.add(map);
 			
@@ -48,7 +49,8 @@ public class HandlerChat extends TextWebSocketHandler {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					mapToSend.put("room_id", room_id);
 					mapToSend.put("cmd", "CMD_ENTER");
-					mapToSend.put("msg", session.getId() + "님이 입장 했습니다.");
+					mapToSend.put("msg", "userId" + "님이 입장 했습니다.");
+					//mapToSend.put("msg", session.getId() + "님이 입장 했습니다.");
 					
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr));
@@ -67,6 +69,7 @@ public class HandlerChat extends TextWebSocketHandler {
 				
 				if(room_id.equals(mapReceive.get("room_id"))) {
 					Map<String, String> mapToSend = new HashMap<String, String>();
+					//mapToSend.put("room_id", room_id);
 					mapToSend.put("room_id", room_id);
 					mapToSend.put("cmd", "CMD_MSG_SEND");
 					mapToSend.put("msg", session.getId() + " : " + mapReceive.get("msg"));
