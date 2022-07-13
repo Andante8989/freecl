@@ -43,7 +43,7 @@
 	strong { color : black;}
 	.bi-coin > p{ margin: 20px;}
 	
-	  /* -------상단 hr 태그 부분 ----------- */
+  /* -------상단 hr 태그 부분 ----------- */
 		.welcome {
 		    border: none;
 		    border-top: 1px solid #E3E7EB;
@@ -51,6 +51,8 @@
 		    text-align: center;
 		    height: 17px;
 		    z-index : 3;
+		    position : relative;
+		    top : 40px;
 		}
 		
 		.welcome:after {
@@ -62,12 +64,17 @@
 		    color: #868E96;
 		    font-size: 0.8em;
 		}
+		.container {
+			position : relative;
+			top : 40px;
+		}
+		
 	  /* ----------------------------- */
 	
 	 /* -------상단 버튼 색상, 위치 부분 ----------- */
 		.top{
-		    left:70%;
-		    position:relative;
+		    left:1100px;
+		    position:absolute;
 		    top:10px;
    		 }
   		.w-btn-pink-outline:hover {
