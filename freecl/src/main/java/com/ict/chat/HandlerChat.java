@@ -23,6 +23,7 @@ public class HandlerChat extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
 		
+
 		super.handleTextMessage(session, message);
 		
 		// JSON-->Map으로 변환
@@ -43,11 +44,13 @@ public class HandlerChat extends TextWebSocketHandler {
 			for(int i = 0; i < sessionList.size(); i++) {
 				Map<String, Object> mapSessionList = sessionList.get(i);
 				String room_id = (String)mapSessionList.get("room_id");
+				String userId = (String)mapSessionList.get("userId");
 				WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 				
 				if(room_id.equals(mapReceive.get("room_id"))) {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					mapToSend.put("room_id", room_id);
+					mapToSend.put("userId", userId);
 					mapToSend.put("cmd", "CMD_ENTER");
 					mapToSend.put("msg", "userId" + "님이 입장 했습니다.");
 					//mapToSend.put("msg", session.getId() + "님이 입장 했습니다.");
@@ -65,14 +68,17 @@ public class HandlerChat extends TextWebSocketHandler {
 			for(int i = 0; i <sessionList.size(); i++) {
 				Map<String,Object> mapSessionList = sessionList.get(i);
 				String room_id = (String) mapSessionList.get("room_id");
+				String userId = (String)mapSessionList.get("userId");
 				WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 				
 				if(room_id.equals(mapReceive.get("room_id"))) {
 					Map<String, String> mapToSend = new HashMap<String, String>();
 					//mapToSend.put("room_id", room_id);
 					mapToSend.put("room_id", room_id);
+					mapToSend.put("userId", userId);
 					mapToSend.put("cmd", "CMD_MSG_SEND");
-					mapToSend.put("msg", session.getId() + " : " + mapReceive.get("msg"));
+					mapToSend.put("msg", "userId" + ":" + mapReceive.get("msg"));
+					//mapToSend.put("msg", session.getId() + " : " + mapReceive.get("msg"));
 					
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr));
