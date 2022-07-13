@@ -45,7 +45,9 @@
 		SELECT * FROM DUAL	
 	</update>
 	
-	
+	<select id="idCheck" resultType="int" parameterType="String">
+		SELECT count(userId) FROM userTbl WHERE userId=#{userId}
+	</select>
 	
 </mapper>
 
