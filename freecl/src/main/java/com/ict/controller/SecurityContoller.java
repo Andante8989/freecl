@@ -35,9 +35,10 @@ public class SecurityContoller {
 	
 	@PostMapping("/boardInsert")
 	public String boardInsert(BoardVO vo, String[] color, String[] sizeName) {
-		log.info("-------------------");
-		log.info(color);
-		log.info(sizeName);
+		log.info("----boardInsert 접속 시작--");
+		int start = service.getBoardNum();
+		vo.setBoardNum(start);
+
 		vo.setColorList(new ArrayList<ColorVO>());
 		vo.setSizeList(new ArrayList<SizeVO>());
 		
@@ -46,27 +47,31 @@ public class SecurityContoller {
 			sizeVO.setSizeName(sizeItem);
 			sizeVO.setBoardNum(vo.getBoardNum());
 			vo.getSizeList().add(sizeVO);
+		
 		}
-	
-		log.info("---- 칼라 시작-----");
-		log.info(vo.getColorList());
 		
 		for(String colorItem : color) {
 			ColorVO colorVO = new ColorVO();
 			colorVO.setColor(colorItem);
 			colorVO.setBoardNum(vo.getBoardNum());
 			vo.getColorList().add(colorVO);
+			
 		}
 		service.insertBoard(vo);
-		log.info(vo.getSizeList());
 		
 		return "redirect:/main";
 	} 
+	@GetMapping("/boardDeleteForm")
+	public void boardDeleteForm() {
+		
+	}
 	
-	/*@PostMapping("/boardInsert")
-	public void boardInsert(String[] color, String[] sizeName) {
-		log.info(color);
-		log.info(sizeName);
-	}*/
+	
+	@PostMapping("/boardDelete")
+	public String boardDelete(String boardNum) {
+		Long bNum = Long.parseLong(boardNum);
+		service.deleteBoard(bNum);
+		return "/secu/admin";
+	}
 
 }

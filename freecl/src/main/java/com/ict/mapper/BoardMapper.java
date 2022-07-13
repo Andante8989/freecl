@@ -17,4 +17,13 @@ public interface BoardMapper {
 	public void insertBoardSize(BoardVO vo);
 	
 	public BoardVO read(Long boardNum);
+	
+	public int getBoardNum();
+	
+	public void deleteBoard(Long boardNum);
+	
+	public void deleteColor(Long boardNum);
+	
+	public void deleteSize(Long boardNum);
+
 }

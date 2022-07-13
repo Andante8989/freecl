@@ -38,7 +38,9 @@
 		SELECT * FROM boardTbl WHERE boardNum=#{boardNum}
 	</select>
 
-	
+	<select id="getBoardNum" resultType="int">
+		SELECT boardNum.nextval as boardNum FROM DUAL
+	</select>
 	
 	<select id="read" resultMap="boardMap">
 		SELECT
@@ -53,13 +55,10 @@
 	<insert id="insertBoard">
 		INSERT INTO boardTbl(boardNum, name, content, image, kind, hit, price, amount)
 			VALUES
-		(boardNum.nextval, #{name}, #{content}, null, #{kind}, 0, #{price}, #{amount})
+		(#{boardNum}, #{name}, #{content}, null, #{kind}, 0, #{price}, #{amount})
 	</insert>
 	
 	<update id="insertBoardColor">
-		<selectKey keyProperty="boardNum" resultType="java.lang.Long" order="BEFORE">
-			SELECT MAX(boardNum) FROM boardTbl
-		</selectKey>
 		INSERT ALL
 		<foreach collection="colorList" item="item" separator=" ">
 			INTO colorTbl(boardNum, color) VALUES (#{item.boardNum}, #{item.color})
@@ -68,17 +67,24 @@
 	</update>
 	
 	<update id="insertBoardSize">
-		<selectKey keyProperty="boardNum" resultType="java.lang.Long" order="BEFORE">
-			SELECT MAX(boardNum) FROM boardTbl
-		</selectKey>
 	 	INSERT ALL
 		<foreach collection="sizeList" item="items" separator=" ">
-			INTO sizeTbl(boardNum, sizeName) VALUES (#{items.boardNum), #{items.sizeName})
+			INTO sizeTbl(boardNum, sizeName) VALUES (#{items.boardNum}, #{items.sizeName})
 		</foreach>
 		SELECT * FROM DUAL
 	</update>
 	
+	<delete id="deleteBoard">
+		DELETE FROM boardTbl WHERE boardNum=#{boardNum}
+	</delete>
 	
+	<delete id="deleteColor">
+		DELETE FROM colorTbl WHERE boardNum=#{boardNum}
+	</delete>
+	
+	<delete id="deleteSize">
+		DELETE FROM sizeTbl WHERE boardNum=#{boardNum}
+	</delete>
 	
 	
 	
