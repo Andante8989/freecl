@@ -6,6 +6,19 @@
 <html>
 <head>
 <style>
+	.pay { 
+		border : none;
+		color : white;
+		background-color : #ff7d9e;
+		border-radius : 10px;
+	}
+	
+	.choice {
+		border : grey;
+		color : grey;
+		background-color : none;
+		border-radius : 10px;
+	}
 	.XX {
 		border : none;
 		background-color : white;
@@ -101,10 +114,6 @@
 	  <!-- 여기까지 상단의 버튼 부분 --> 
 	  <hr class="welcome">
 	  <h1>장바구니 페이지입니다.</h1>
-${size }
-${color }
-${cartList }
-${board }
 </div>
 <div class="container">
 	<div class="row">
@@ -120,7 +129,7 @@ ${board }
 			</div>
 		</div>
 		<div class="col-md-4 offset-md-1">
-			<div class="sub">
+			<div class="row sub">
 				<div class="tit">
 				<strong>결제금액</strong>
 				</div>
@@ -144,10 +153,11 @@ ${board }
 					</li>
 				</ul>
 			</div>
-			<button>전체상품 주문하기</button>	
-		
 			<div class="row">
-				<button>선택상품 주문하기</button>	
+				<button class="pay">전체상품 주문하기</button>	
+			</div>
+			<div class="row">
+				<button class="choice">선택상품 주문하기</button>	
 			</div>
 		</div>
 	</div>

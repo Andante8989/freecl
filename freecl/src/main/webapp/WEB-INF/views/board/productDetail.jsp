@@ -8,7 +8,14 @@
 <head>
 <link rel="stylesheet" href="/resources/resttest/modal.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<style>		
+<style>	
+	.one { font-size : 40px;}
+	.two { font-size : 23px;}
+	.four .five { height : 20px;}
+
+
+
+	
 		  /* -------상단 hr 태그 부분 ----------- */
 		.welcome {
 		    border: none;
@@ -60,7 +67,7 @@
 		background-color: white;
 		display : flex;
 		justify-content : center;
-		
+		padding: 50px;
 		border-radius: 10px;
 		width: 400px;
 		height: 200px;
@@ -171,11 +178,20 @@
 	 <!-- 상단의 버튼 부분 -->
 	 
 			 <ul class="top">
-			 		<a href="/join">
-			        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
-				        회원가입
-				    </button>
-				    </a>
+			 		<sec:authorize access="isAnonymous()">
+				 		<a href="/join">
+				        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+					        회원가입
+					    </button>
+					    </a>
+			 		</sec:authorize>
+			 		<sec:authorize access="isAuthenticated()">
+			 			<a href="/myPage">
+			 			<button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+					        마이페이지
+					    </button>
+					    </a>
+			 		</sec:authorize>
 			         <a href="/board/customerCenter"><button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
 				        고객센터
 				     </button></a>
@@ -201,39 +217,59 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 photo">
-		상품 사진 자리
-		<img src="/resources/image/jean.png" >
+			<img src="/resources/image/jean.png" >
 		</div>
 		<div class="col-md-5 detail offset-md-1">
-		상품 상세 정보 자리
-		${board }
-		${color }
-			<div class="row">
-				${board.name }
+			<div class="row one">
+				<div class="col-md-12">
+					${board.name }
+				</div>
 			</div>
-			<div class="row">
-				${board.price }
-			</div>
-			<hr/>
-			<div class="row">
-			    배송정보
+			<div class="row two">
+				<div class="col-md-12">
+					${board.price }원
+				</div>
 			</div>
 			<hr/>
-			<div class="row">
-				<p>color</p>
+			<div class="row three">
+				<div class="col-md-12">
+					배송정보
+				</div>
+			</div>
+			<hr/>
+			<div class="row four">
+				<div class="col-md-2">
+					<p>색상</p>
+				</div>
+				<div class="col-md-10">
 					<c:forEach var="item" items="${color }">
-					<label><input type="radio" name="color" value="${item.color }">${item.color }</label>
+					<label><input type="radio" name="color" class="co" value="${item.color }">${item.color }</label>
       				</c:forEach>
+      			</div>
 			</div>
-			<div class="row">
-				<p>size</p>
+			<div class="row five">
+				<div class="col-md-2">
+					<p>사이즈</p>
+				</div>
+				<div class="col-md-10">
 					<c:forEach var="size" items="${size }">
-					<label><input type="radio" name="size" value="${size.sizeName }">${size.sizeName }</label>
+					<label><input type="radio" name="size" class="si" value="${size.sizeName }">${size.sizeName }</label>
 					</c:forEach>
+				</div>
 			</div>
 			<hr/>
+			<div class="row" id="info" style="display:none;">
+				<div class="col-md-5"><span id="showColor"></span></div>
+				<div class="col-md-5"><span id="showSize"></span></div>
+				<div class="col-md-2"></div>
+			</div>
 			<div class="row">
-				total price
+				<div class="col-md-4">
+				총 결제금액
+				</div>
+				<div class="col-md-8">
+				
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6">
@@ -362,7 +398,6 @@
 <!-- --------------장바구니 모달창 --------------- -->
 <div id="popBox" style="display:none;">
 	<div class="cartTitle">장바구니 미리보기</div>
-		<div class="inner">
 			<div class="popUp">
 				<form action="/board/basket" id="form" method="get">
 					<input type="hidden" name="cart_proNum" value="${board.boardNum }">
@@ -370,8 +405,8 @@
 					<input type="hidden" name="cart_price" value="${board.price }">
 					<input type="hidden" name="cart_name" value="${board.name }">
 					<button type="submit" id="moveCart">장바구니로 이동</button>
+					<button type="button" id="continue" onclick="clo();">장바구니 취소</button>
 				</form>
-				<button type="button" id="continue" onclick="clo();">장바구니 취소</button>
 		</div>
 	</div>
 </div>	
@@ -385,9 +420,9 @@
 var csrfHeaderName = "${_csrf.headerName}";
 var csrfTokenValue = "${_csrf.token}";
 
+	
 	//색상, 사이즈 선택하지 않으면 장바구니 담을 수 없게 하는 기능
 	function bas( ) {
-		
 		if($(':radio[name="color"]:checked').length < 1) {
 			alert("색상을 정해주세요");
 		} else {
@@ -545,8 +580,28 @@ var csrfTokenValue = "${_csrf.token}";
 		 $("#closeBtn").on("click",function(){
 					$("#modDiv").hide("slow");
 			 });// 댓글 창 닫기
-		
+			 
+	     $(".co").on("click", function() {
+	    	 // 색상중 클릭하면 그 내용 콘솔에 띄우기
+	    	 console.log($(this).val());  
+	    	 let clickColor = $(this).val();
+	    	 $("#showColor").html(clickColor + " / ");
+	     })
+	     
+		 $(".si").on("click", function() {
+		     // 사이즈 클릭하면 그 내용 콘솔에 띄우기
+		     console.log($(this).val());  
+		     let clickSize = $(this).val();
+		     $("#showSize").html(clickSize);
+		 })
 		 
+		 function show() {
+				 console.log("색상값 : " + $("#showColor").val() );
+				 if ($("#showColor").val() != null && $("#showSize").val() != null) {
+					 $("#info").css("display", "block");
+				 }
+			 }
+		show();
 
 </script>
       <!-- <script src="/resources/resttest/delete.js"></script>

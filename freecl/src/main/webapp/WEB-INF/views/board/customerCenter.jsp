@@ -27,7 +27,7 @@
 		color : #d6d6d6;
 	}
 	
-  /* -------상단 hr 태그 부분 ----------- */
+	  /* -------상단 hr 태그 부분 ----------- */
 		.welcome {
 		    border: none;
 		    border-top: 1px solid #E3E7EB;
@@ -75,11 +75,20 @@
 		<!-- 상단의 버튼 부분 -->
 	 
 			 <ul class="top">
-			 		<a href="/join">
-			        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
-				        회원가입
-				    </button>
-				    </a>
+			 		<sec:authorize access="isAnonymous()">
+				 		<a href="/join">
+				        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+					        회원가입
+					    </button>
+					    </a>
+			 		</sec:authorize>
+			 		<sec:authorize access="isAuthenticated()">
+			 			<a href="/myPage">
+			 			<button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+					        마이페이지
+					    </button>
+					    </a>
+			 		</sec:authorize>
 			         <a href="/board/customerCenter"><button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
 				        고객센터
 				     </button></a>
@@ -101,9 +110,10 @@
 	  <!-- 여기까지 상단의 버튼 부분 --> 
 <hr class="welcome">
 <div class="header">
-<h1>고객센터</h1>
+
 </div>
 <div class="container">
+<h1>고객센터</h1>
 	<div class="row">
 		<table class="table">
 			<thead>

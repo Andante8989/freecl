@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
 <head>
 <style>
-	.join_tit {
+.join_tit {
 		text-align : center;
 		font-size : 60px;
 		color : #ff7d9e;
@@ -149,23 +149,15 @@
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 	
-			<h1 class="join_tit">JOIN US</h1>
+			<h1 class="join_tit">나의 정보 수정</h1>
 			<hr>
-			<form action="/join" method="post">
+			<form action="/userUpdate" method="post">
 				<div class="row">
 					<div class="col-md-2 offset-md-1 first">
 					아이디 
 					</div>
 					<div class="col-md-9">
-						<input type="text" name="userId" required><button type="button" id="idCh">아이디 중복확인</button><br/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2 offset-md-1 second">
-					비밀번호  
-					</div>
-					<div class="col-md-9">
-						<input type="text" name="upw" required><br/>
+						<input type="text" name="userId" value="<sec:authentication property="principal.user.userId" />" readonly>
 					</div>
 				</div>
 				<div class="row">
@@ -173,7 +165,7 @@
 					이름 
 					</div>
 					<div class="col-md-9">
-						<input type="text" name="uname" required><br/>
+						<input type="text" name="uname" value="<sec:authentication property="principal.user.uname" />"><br/>
 					</div>
 				</div>
 				<div class="row">
@@ -181,7 +173,7 @@
 					이메일 
 					</div>
 					<div class="col-md-9">
-						<input type="text" name="email" required><br/>
+						<input type="text" name="email" value="<sec:authentication property="principal.user.email" />"><br/>
 					</div>
 				</div>
 				<div class="row">
@@ -189,7 +181,7 @@
 					휴대전화 
 					</div>
 					<div class="col-md-9">
-						<input type="text" name="p_num" required><br/>
+						<input type="text" name="p_num" value="<sec:authentication property="principal.user.p_num" />"><br/>
 					</div>
 				</div>
 				<div class="row">
@@ -197,16 +189,14 @@
 					주소 
 					</div>
 					<div class="col-md-9">
-						<input type="text" name="addr" required><br/>
+						<input type="text" name="addr" value="<sec:authentication property="principal.user.addr" />"><br/>
 					</div>
 				</div>
 
-				<input type="checkbox" name="role" value="ROLE_ADMIN" >어드민 권한&nbsp;&nbsp;&nbsp;
-				<input type="checkbox" name="role" value="ROLE_MEMBER">정회원 권한&nbsp;&nbsp;&nbsp;
-				<input type="checkbox" name="role" value="ROLE_USER">준회원 권한<br/>
+				
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 				<div class="but">
-				<button id="joinTry" type="submit">가입하기</button><a href="/main"><button id="back" type="button">취소</button></a>
+				<button id="joinTry" type="submit">정보수정하기</button><a href="/main"><button id="back" type="button">메인페이지</button></a>
 				</div>
 			</form>
 		</div>
@@ -214,53 +204,5 @@
 		</div>
 	</div>
 <div class="footer"></div>	
-	
-	
-	
-	
-	
-	
-	
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script type="text/javascript">
-	var csrfHeaderName = "${_csrf.headerName}";
-	var csrfTokenValue = "${_csrf.token}";
-	
-	$("#idCh").on("click", function() {
-		let id = $(this).prev().val();
-		console.log(id);
-		
-		$.ajax({
-			beforeSend : function(xhr) { 
-				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-			},
-			type : 'post',
-			url : '/joinIdCheck',
-			data : {id:id},
-			success:function(check) {
-				console.log("join.jsp에서 결과값 체크");
-				console.log(check);
-				if(check != 1) {
-					alert("사용 가능한 아이디 입니다.");
-				} else {
-					alert("이미 사용중인 아이디 입니다.");
-				}
-			}
-		});
-	});
-	
-	
-	
-	
-	
-	
-	
-	</script>
-	
-	
-	
-	
-	
 </body>
 </html>
