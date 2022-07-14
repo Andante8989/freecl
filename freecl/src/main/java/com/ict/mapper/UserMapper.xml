@@ -49,5 +49,9 @@
 		SELECT count(userId) FROM userTbl WHERE userId=#{userId}
 	</select>
 	
+	<update id="updateUserTbl">
+		UPDATE userTbl SET  uname=#{uname}, p_num=#{p_num}, email=#{email}, addr=#{addr} WHERE userId=#{userId	}
+	</update>
+	
 </mapper>
 

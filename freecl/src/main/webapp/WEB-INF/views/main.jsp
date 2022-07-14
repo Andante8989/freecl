@@ -319,11 +319,20 @@
 		<!-- 상단의 버튼 부분 -->
 	 
 			 <ul class="top">
-			 		<a href="/join">
-			        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
-				        회원가입
-				    </button>
-				    </a>
+			 	<sec:authorize access="isAnonymous()">
+				 		<a href="/join">
+				        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+					        회원가입
+					    </button>
+					    </a>
+			 		</sec:authorize>
+			 		<sec:authorize access="isAuthenticated()">
+			 			<a href="/myPage">
+			 			<button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+					        마이페이지
+					    </button>
+					    </a>
+			 		</sec:authorize>
 			         <a href="/board/customerCenter"><button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
 				        고객센터
 				     </button></a>
@@ -519,7 +528,7 @@
 				</c:forEach> 
 		  	</tbody>
 		  </table>
-		 ${boardList }
+
 		 
 		 <a href="http://localhost:52000/chatting">채팅방 입장</a>
 		 <hr/>

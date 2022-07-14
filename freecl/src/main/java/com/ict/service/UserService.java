@@ -7,4 +7,6 @@ public interface UserService {
 	public void insertUser(UserVO vo);
 	
 	public int idCheck(String userId);
+	
+	public void updateUser(UserVO vo);
 }

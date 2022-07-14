@@ -69,7 +69,6 @@ public class CommonController {
 	public String insertUser(UserVO vo, String[] role) {
 		String beforeCrPw = vo.getUpw();
 		vo.setUpw(pwen.encode(beforeCrPw));
-		
 		vo.setAuthList(new ArrayList<AuthVO>());
 		
 		for(String roleItem : role) {
@@ -91,6 +90,27 @@ public class CommonController {
 		log.info("처리결과 : " + check);
 		String che = Integer.toString(check);
 		return che;
+	}
+	
+	@GetMapping("/idPwSearch")
+	public void idPwSearch() {
+		
+	}
+	
+	@GetMapping("/myPage")
+	public void myPage() {
+		
+	}
+	
+	@PostMapping("/userUpdateForm")
+	public void userUpdateForm() {
+
+	}
+	
+	@PostMapping("/userUpdate")
+	public String userUpdate(UserVO vo) {
+		service.updateUser(vo);
+		return "/customLogout";
 	}
 	
 	

@@ -11,4 +11,6 @@ public interface UserMapper {
 	public void insertUserAuth(UserVO vo);
 	
 	public int idCheck(String userId);
+	
+	public void updateUserTbl(UserVO vo);
 }

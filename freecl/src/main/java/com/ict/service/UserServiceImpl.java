@@ -25,4 +25,9 @@ public class UserServiceImpl implements UserService {
 		return check;
 	}
 
+	@Override
+	public void updateUser(UserVO vo) {
+		mapper.updateUserTbl(vo);
+	}
+
 }
