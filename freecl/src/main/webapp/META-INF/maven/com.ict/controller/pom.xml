@@ -222,6 +222,21 @@
 		    <version>2.13.0</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-messaging -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-messaging</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20160810</version>
+		</dependency>
+
+
 		
 	</dependencies>
     <build>

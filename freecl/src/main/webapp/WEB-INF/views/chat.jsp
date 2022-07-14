@@ -38,17 +38,21 @@ var csrfTokenValue = "${_csrf.token}";
 			   this._initSocket();
 		   },
 		   sendChat: function(){
-			   this._sendMessage('${param.room_id}','CMD_MSG_SEND',$('#message').val());
+			   this._sendMessage('${param.room_id}','CMD_MSG_SEND',$('#message').val(), '<sec:authentication property="principal.user.userId"/>');
 			   $('#message').val('');
 		   },
 		   sendEnter: function(){
-			   this._sendMessage('${param.room_id}','CMD_ENTER', $('#message').val());
+			   this._sendMessage('${param.room_id}','CMD_ENTER', $('#message').val(), '<sec:authentication property="principal.user.userId"/>');
 			   $('#message').val('');
 		   },
 		   receiveMessage: function(msgData){
 			   
 			   // 정의된 CMD 코드에 따라서 분기 처리
 			   if(msgData.cmd == 'CMD_MSG_SEND'){
+				   console.log("param : " + ${param});
+				   console.log("방 번호 : " + '${param.room_id}');
+
+				   
 			   $('#divChatData').append('<div>' + msgData.msg + '</div>');
 			   }
 			   // 입장
@@ -79,7 +83,8 @@ var csrfTokenValue = "${_csrf.token}";
 				   webSocket.closeMessage(JSON.parse(evt.data));
 			   }
 		   },
-		   _sendMessage: function(room_id, cmd, msg,userId){
+		   _sendMessage: function(room_id, cmd, msg, userId){
+			   
 			   let msgData = {
 					   room_id : room_id,
 					   cmd : cmd,

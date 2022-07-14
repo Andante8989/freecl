@@ -29,4 +29,6 @@
 	
 	<resources mapping="/image/**" location="/WEB-INF/image/" />
 	
+	
+	
 </beans:beans>

@@ -51,7 +51,10 @@ public class HomeController {
 	
 	@GetMapping("/chatting")
 	public String chat(HttpServletRequest request, HttpServletResponse reponse,Model model)throws Exception {
+		
+		
 		return "chat";
 	}
+	
 	
 }

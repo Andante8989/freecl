@@ -15,4 +15,5 @@ public interface CartService {
 	public void cartDelete(Long cartNum);
 	
 	public List<CartVO> getList2(Long num);
+
 }
