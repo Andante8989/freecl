@@ -276,7 +276,7 @@
 					<button type="button" id="basket" onclick="bas();" class="basket">장바구니담기</button>
 				</div>
 				<div class="col-md-6">
-					<a href="/pay"><button class="payment">결제하기</button></a>
+					<a href="/kakaoPay"><button class="payment">결제하기</button></a>
 				</div>
 			</div>	
 		</div>
