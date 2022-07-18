@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!DOCTYPE html>
 <html>
@@ -99,16 +100,37 @@
 
  	 <!-- 상단의 버튼 부분 -->
 	 
-			 <ul class="top">
-			        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
-				        회원가입
-				    </button>
+			  <ul class="top">
+			 		<sec:authorize access="isAnonymous()">
+				 		<a href="/join">
+				        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+					        회원가입
+					    </button>
+					    </a>
+			 		</sec:authorize>
+			 		<sec:authorize access="isAuthenticated()">
+			 			<a href="/myPage">
+			 			<button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+					        마이페이지
+					    </button>
+					    </a>
+			 		</sec:authorize>
 			         <a href="/board/customerCenter"><button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
 				        고객센터
 				     </button></a>
-				     <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
-				        로그인
-				 </button>
+				    <sec:authorize access="isAnonymous()">
+				    	<a href="/customLogin">
+				     	<button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
+				     	로그인</button>
+				     	</a>
+				    </sec:authorize>
+				    <sec:authorize access="isAuthenticated()">
+				    	<a href="/customLogout" >
+				    	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+				    	<button class="btn btn-light w-btn-pink-outline" type="submit" style="background-color: white;">
+				     	로그아웃</button>
+				     	</a>
+				    </sec:authorize>
 			  </ul>
 		
 	  <!-- 여기까지 상단의 버튼 부분 --> 
@@ -171,11 +193,13 @@
 	<script type="text/javascript">
 		var csrfHeaderName = "${_csrf.headerName}";
 		var csrfTokenValue = "${_csrf.token}";
+
 	
 		var str = "";
 		// get json으로 현재 장바구니 데이터 모두 가져오기
 	    function getAllList() {
-			$.getJSON("/board/all/", function(data) {
+			let userId = "${userId}";
+			$.getJSON("/board/all/" + userId, function(data) {
 				console.log(data.length);
 				str = "";
 				var sum = 0;
@@ -200,7 +224,7 @@
 					$("#pri").html(result + "원");
 					$("#total_price").html(sumResult);
 				}); 
-		    }
+		    };
 		getAllList();
 		
 		
@@ -233,7 +257,7 @@
 					}
 				}
 			});
-		})
+		});
 	
 </script>
 </body>

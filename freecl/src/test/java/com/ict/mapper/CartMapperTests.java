@@ -20,7 +20,7 @@ public class CartMapperTests {
 	
 	@Test
 	public void getListTest() {
-		log.info(mapper.getList());
+		log.info(mapper.getList("tree"));
 	}
 	
 	//@Test

@@ -18,8 +18,8 @@ public class CartServiceImpl implements CartService{
 	private CartMapper mapper;
 
 	@Override
-	public List<CartVO> getList() {
-		return mapper.getList();
+	public List<CartVO> getList(String userId) {
+		return mapper.getList(userId);
 	}
 
 	@Override

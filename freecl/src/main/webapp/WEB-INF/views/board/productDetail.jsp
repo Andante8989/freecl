@@ -276,7 +276,7 @@
 					<button type="button" id="basket" onclick="bas();" class="basket">장바구니담기</button>
 				</div>
 				<div class="col-md-6">
-					<button class="payment">결제하기</button>
+					<a href="/kakaoPay"><button class="payment">결제하기</button></a>
 				</div>
 			</div>	
 		</div>
@@ -404,13 +404,14 @@
 					<input type="hidden" name="cart_amount" value="${board.amount }">
 					<input type="hidden" name="cart_price" value="${board.price }">
 					<input type="hidden" name="cart_name" value="${board.name }">
+					<input type="hidden" name="userId" value="<sec:authentication property="principal.user.userId" />" >
 					<button type="submit" id="moveCart">장바구니로 이동</button>
 					<button type="button" id="continue" onclick="clo();">장바구니 취소</button>
 				</form>
 		</div>
 	</div>
 </div>	
-
+<p>UserVO : <sec:authentication property="principal.user" /></p>
 
 
 

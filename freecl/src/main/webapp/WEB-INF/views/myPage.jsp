@@ -156,7 +156,7 @@
 					아이디 
 					</div>
 					<div class="col-md-9">
-						<input type="text" name="userId" value="<sec:authentication property="principal.user.userId" />" readonly><button type="button" id="idCh">아이디 중복확인</button><br/>
+						<input type="text" name="userId" value="<sec:authentication property="principal.user.userId" />" readonly>
 					</div>
 				</div>
 				<div class="row">

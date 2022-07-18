@@ -6,7 +6,7 @@ import com.ict.persistent.CartVO;
 
 public interface CartMapper {
 	
-	public List<CartVO> getList();
+	public List<CartVO> getList(String userId);
 	
 	public List<CartVO> getList2(Long num);
 	
