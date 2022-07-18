@@ -53,5 +53,10 @@
 		UPDATE userTbl SET  uname=#{uname}, p_num=#{p_num}, email=#{email}, addr=#{addr} WHERE userId=#{userId	}
 	</update>
 	
+	<!-- 유저 정보 가져오기 -->
+	<select id="getUserInfo" resultType="com.ict.persistent.UserVO">
+	     SELECT * FROM userTBL WHERE userId = #{userId}
+	</select>
+	
 </mapper>
 

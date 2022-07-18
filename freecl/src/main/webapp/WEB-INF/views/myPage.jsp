@@ -142,7 +142,6 @@
 	<hr class="welcome">
 
 
-
 </div>
 <div class="container">
 	<div class="row">

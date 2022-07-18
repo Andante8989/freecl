@@ -13,4 +13,6 @@ public interface UserMapper {
 	public int idCheck(String userId);
 	
 	public void updateUserTbl(UserVO vo);
+	
+	public UserVO getUserInfo(String u_id);
 }

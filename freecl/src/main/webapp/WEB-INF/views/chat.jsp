@@ -38,19 +38,17 @@ var csrfTokenValue = "${_csrf.token}";
 			   this._initSocket();
 		   },
 		   sendChat: function(){
-			   this._sendMessage('${param.room_id}','CMD_MSG_SEND',$('#message').val(), '<sec:authentication property="principal.user.userId"/>');
+			   this._sendMessage('${param.room_id}','CMD_MSG_SEND',$('#message').val(), '${param.userId}');
 			   $('#message').val('');
 		   },
 		   sendEnter: function(){
-			   this._sendMessage('${param.room_id}','CMD_ENTER', $('#message').val(), '<sec:authentication property="principal.user.userId"/>');
+			   this._sendMessage('${param.room_id}','CMD_ENTER', $('#message').val(), '${param.userId}');
 			   $('#message').val('');
 		   },
 		   receiveMessage: function(msgData){
 			   
 			   // 정의된 CMD 코드에 따라서 분기 처리
 			   if(msgData.cmd == 'CMD_MSG_SEND'){
-				   console.log("param : " + ${param});
-				   console.log("방 번호 : " + '${param.room_id}');
 
 				   
 			   $('#divChatData').append('<div>' + msgData.msg + '</div>');
@@ -124,6 +122,8 @@ var csrfTokenValue = "${_csrf.token}";
 	    <input type="text" id="message" size="110" onkeypress="if(event.keyCode==13){webSocket.sendChat();}"/>
 	    <input type="button" id="btnSend" value="채팅 전송" onclick="webSocket.sendChat()"/>
 	</div>
+	
+	<span class="main-header">${param.userId }님,환영합니다.</span>
 
 
     

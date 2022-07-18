@@ -41,14 +41,15 @@ public class HandlerChat extends TextWebSocketHandler {
 			map.put("session", session);
 			map.put("userId", mapReceive.get("userId"));
 			sessionList.add(map);
-			String userId = (String) mapReceive.get("userId");
 			
 			// 같은 채팅방에 입장 메세지 전송
 			for(int i = 0; i < sessionList.size(); i++) {
 				Map<String, Object> mapSessionList = sessionList.get(i);
 				// room_id, session 추출
 				String room_id = (String)mapSessionList.get("room_id");
+				String userId = (String) mapReceive.get("userId");
 				WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
+				System.out.println("userId : " + userId);
 				
 				// 메세지를 보내야 하는 방만 얻어옴
 				if(room_id.equals(mapReceive.get("room_id"))) {
@@ -57,8 +58,8 @@ public class HandlerChat extends TextWebSocketHandler {
 					// room_id(몇 번방), cmd(입장시 처리) , msg(메세지를 담아서)
 					mapToSend.put("room_id", room_id);
 					mapToSend.put("cmd", "CMD_ENTER");
+					mapToSend.put("userId", userId);
 					mapToSend.put("msg", userId + "님이 입장 했습니다.");
-					//mapToSend.put("msg", session.getId() + "님이 입장 했습니다.");
 					
 					
 					// JSON으로 바꾼 후
@@ -78,19 +79,21 @@ public class HandlerChat extends TextWebSocketHandler {
 				Map<String,Object> mapSessionList = sessionList.get(i);
 				// 방번호 추출
 				String room_id = (String) mapSessionList.get("room_id");
+				String userId = (String) mapReceive.get("userId");
 				// 세션 추출
 				WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 				
 				// 접속자 중 요청받은 방에 접속해 있는 사람만
 				if(room_id.equals(mapReceive.get("room_id"))) {
 					Map<String, String> mapToSend = new HashMap<String, String>();
-					//mapToSend.put("room_id", room_id);
 					mapToSend.put("room_id", room_id);
+					mapToSend.put("userId", userId);
 					mapToSend.put("cmd", "CMD_MSG_SEND");
-					mapToSend.put("msg", "userId" + ":" + mapReceive.get("msg"));
-					//mapToSend.put("msg", session.getId() + " : " + mapReceive.get("msg"));
+					// 메세지를 실어서
+					mapToSend.put("msg", mapReceive.get("userId") + " : " + mapReceive.get("msg"));
 					
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
+					// 데이터 전송
 					sess.sendMessage(new TextMessage(jsonStr));
 				}
 			}
@@ -108,11 +111,15 @@ public class HandlerChat extends TextWebSocketHandler {
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String current_room_id = "";
+		String userId = "";
 		
 		// 사용자 세션을 리스트에서 제거
 		for(int i = 0; i < sessionList.size(); i++) {
 			Map<String, Object>map = sessionList.get(i);
 			String room_id = (String)map.get("room_id");
+			System.out.println("사용자 연결 해제 : " + map);
+			userId = (String) map.get("userId");
+			System.out.println(userId);
 			WebSocketSession sess = (WebSocketSession)map.get("session");
 			
 			if(session.equals(sess)) {
@@ -126,20 +133,21 @@ public class HandlerChat extends TextWebSocketHandler {
 		for(int i = 0; i < sessionList.size(); i++) {
 			Map<String,Object> mapSessionList = sessionList.get(i);
 			String room_id = (String) mapSessionList.get("room_id");
-			String userId = (String) mapSessionList.get("userId");
+			
 			WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 			
 			if(room_id.equals(current_room_id)) {
 				Map<String, String> mapToSend = new HashMap<String, String>();
 				mapToSend.put("room_id", room_id);
-				mapToSend.put("userId", userId);
 				mapToSend.put("cmd", "CMD_EXIT");
-				mapToSend.put("msg", "userId" + "님이 퇴장 했습니다.");
+				mapToSend.put("msg", userId + "님이 퇴장 했습니다.");
+				
 				
 				String jsonStr = objectMapper.writeValueAsString(mapToSend);
 				sess.sendMessage(new TextMessage(jsonStr));
 			}
 		}
+		userId = "";
 	}
 
 	

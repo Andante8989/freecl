@@ -30,4 +30,10 @@ public class UserServiceImpl implements UserService {
 		mapper.updateUserTbl(vo);
 	}
 
+	@Override
+	public UserVO get(String u_id) {
+		UserVO user = mapper.getUserInfo(u_id);
+		return user;
+	}
+
 }

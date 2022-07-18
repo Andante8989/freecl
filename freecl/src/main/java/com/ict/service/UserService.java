@@ -9,4 +9,6 @@ public interface UserService {
 	public int idCheck(String userId);
 	
 	public void updateUser(UserVO vo);
+	
+	public UserVO get(String u_id);
 }
