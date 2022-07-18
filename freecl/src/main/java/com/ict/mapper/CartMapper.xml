@@ -6,7 +6,7 @@
 
 	<select id="getList" resultType="com.ict.persistent.CartVO">
 		<![CDATA[
-			SELECT * FROM cartTbl ORDER BY cartNum desc
+			SELECT * FROM cartTbl WHERE userId=#{userId} ORDER BY cartNum desc
 		]]>
 	</select>
 	
@@ -17,7 +17,7 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO cartTbl (cartNum, cart_proNum, cart_amount, cart_price, cart_name) values (cartNum.nextval, #{cart_proNum}, #{cart_amount}, #{cart_price}, #{cart_name})
+		INSERT INTO cartTbl (cartNum, userId, cart_proNum, cart_amount, cart_price, cart_name) values (cartNum.nextval, #{userId}, #{cart_proNum}, #{cart_amount}, #{cart_price}, #{cart_name})
 	</insert>
 	
 	<delete id="delete">

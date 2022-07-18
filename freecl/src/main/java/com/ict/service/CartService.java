@@ -6,7 +6,7 @@ import com.ict.persistent.CartVO;
 
 public interface CartService {
 
-	public List<CartVO> getList();
+	public List<CartVO> getList(String userId);
 	
 	public void cartInsert(CartVO vo);
 	

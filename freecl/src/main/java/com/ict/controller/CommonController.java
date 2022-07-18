@@ -113,6 +113,11 @@ public class CommonController {
 		return "/customLogout";
 	}
 	
+	@GetMapping("/pay")
+	public void pay() {
+		log.info("pay 컨트롤러 진입");
+	}
+	
 	
 	
 	

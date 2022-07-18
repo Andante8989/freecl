@@ -17,13 +17,21 @@ public class BoardServiceTests {
 	@Autowired
 	private BoardService service;
 	
+	@Autowired
+	private CartService service2;
+	
 	//@Test
 	public void getBoardNum() {
 		log.info(service.getBoardNum());
 	}
 	
-	@Test
+	//@Test
 	public void deleteBoard() {
 		service.deleteBoard(70L);
+	}
+	
+	@Test
+	public void getCartList() {
+		service2.getList("tree");
 	}
 }
