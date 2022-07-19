@@ -530,7 +530,7 @@
 		  </table>
 		  
 		   <sec:authorize access="isAuthenticated()">
-		   	<form action="/chatting" method="post">
+		   	<form action="/chatting" method="get">
 		    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 		    <input type="hidden" name="userId" value="<sec:authentication property="principal.user.userId" />"/>
 		    <input type="submit" value="채팅방 입장"/>

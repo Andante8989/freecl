@@ -23,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class ChatController {
 	
-	@PostMapping("/chatting")
+	@GetMapping("/chatting")
 	public String chat(String userId,HttpServletRequest request, HttpServletResponse reponse,Model model, HttpSession session)throws Exception {
 		
 		session.getAttribute(userId);

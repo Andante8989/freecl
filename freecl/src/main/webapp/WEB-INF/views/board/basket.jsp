@@ -210,7 +210,7 @@
 						function() {
 							str += `<div class='row' data-pnum='\${this.cartNum}' class='Li'>
 										<div class='col-md-2'>\${this.cartNum}</div>
-										<div class='col-md-4 offset-md-1'>\${this.cart_name}</div>
+										<div class='col-md-4 offset-md-1'>\${this.cart_name}\${this.color}\${this.size}</div>
 										<div class='col-md-1 offset-md-1'>\${this.cart_amount}</div>
 										<div class='col-md-1 offset-md-1'>\${this.cart_price}</div>
 										<div class='col-md-1'><button type='button' class='btn-close' aria-label='close'></button></div>
