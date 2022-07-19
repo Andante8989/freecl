@@ -40,6 +40,7 @@ var csrfTokenValue = "${_csrf.token}";
 		   sendChat: function(){
 			   this._sendMessage('${param.room_id}','CMD_MSG_SEND',$('#message').val(), '${param.userId}');
 			   $('#message').val('');
+
 		   },
 		   sendEnter: function(){
 			   this._sendMessage('${param.room_id}','CMD_ENTER', $('#message').val(), '${param.userId}');
@@ -89,6 +90,7 @@ var csrfTokenValue = "${_csrf.token}";
 					   msg : msg,
 					   userId : userId
 			   };
+			   console.log("jsp부분 room_id : " + room_id);
 			   let jsonData = JSON.stringify(msgData);
 			   this._socket.send(jsonData);
 			   $(".chat_wrap .inner").stop().animate({scrollTop:$(".chat_wrap .inner").height()},500);
@@ -124,6 +126,7 @@ var csrfTokenValue = "${_csrf.token}";
 	</div>
 	
 	<span class="main-header">${param.userId }님,환영합니다.</span>
+	<span class="main-header">${param.room_id }방으로 환영합니다.</span>
 
 
     

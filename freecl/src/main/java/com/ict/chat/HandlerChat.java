@@ -37,19 +37,20 @@ public class HandlerChat extends TextWebSocketHandler {
 		case "CMD_ENTER":
 			// 세션 리스트에 저장
 			Map<String,Object> map = new HashMap<String, Object>();
-			map.put("room_id", mapReceive.get("room_id"));
+			map.put("room_id", mapReceive.get("userId"));
 			map.put("session", session);
 			map.put("userId", mapReceive.get("userId"));
 			sessionList.add(map);
+			System.out.println("sessionList.add후 : " + map);
 			
 			// 같은 채팅방에 입장 메세지 전송
 			for(int i = 0; i < sessionList.size(); i++) {
 				Map<String, Object> mapSessionList = sessionList.get(i);
 				// room_id, session 추출
 				String room_id = (String)mapSessionList.get("room_id");
+				System.out.println("room_id: " + room_id);
 				String userId = (String) mapReceive.get("userId");
 				WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
-				System.out.println("userId : " + userId);
 				
 				// 메세지를 보내야 하는 방만 얻어옴
 				if(room_id.equals(mapReceive.get("room_id"))) {
@@ -60,6 +61,7 @@ public class HandlerChat extends TextWebSocketHandler {
 					mapToSend.put("cmd", "CMD_ENTER");
 					mapToSend.put("userId", userId);
 					mapToSend.put("msg", userId + "님이 입장 했습니다.");
+					System.out.println("핸들러 부분 room_id : " + room_id);
 					
 					
 					// JSON으로 바꾼 후
@@ -79,6 +81,7 @@ public class HandlerChat extends TextWebSocketHandler {
 				Map<String,Object> mapSessionList = sessionList.get(i);
 				// 방번호 추출
 				String room_id = (String) mapSessionList.get("room_id");
+				System.out.println("메세지 보낼 떄 room_id: " + room_id);
 				String userId = (String) mapReceive.get("userId");
 				// 세션 추출
 				WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
