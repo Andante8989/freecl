@@ -276,7 +276,11 @@
 					<button type="button" id="basket" onclick="bas();" class="basket">장바구니담기</button>
 				</div>
 				<div class="col-md-6">
-					<a href="/kakaoPay"><button class="payment">결제하기</button></a>
+					<form action="/board/buy" method="post">
+						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+						<button type="submit" class="payment">결제하기</button>
+					</form>
+					
 				</div>
 			</div>	
 		</div>
@@ -404,6 +408,8 @@
 					<input type="hidden" name="cart_amount" value="${board.amount }">
 					<input type="hidden" name="cart_price" value="${board.price }">
 					<input type="hidden" name="cart_name" value="${board.name }">
+					<input type="hidden" name="color" id="buyColor">
+					<input type="hidden" name="sizeName" id="buySize">
 					<input type="hidden" name="userId" value="<sec:authentication property="principal.user.userId" />" >
 					<button type="submit" id="moveCart">장바구니로 이동</button>
 					<button type="button" id="continue" onclick="clo();">장바구니 취소</button>
@@ -420,6 +426,7 @@
 
 var csrfHeaderName = "${_csrf.headerName}";
 var csrfTokenValue = "${_csrf.token}";
+	
 
 	
 	//색상, 사이즈 선택하지 않으면 장바구니 담을 수 없게 하는 기능
@@ -431,6 +438,11 @@ var csrfTokenValue = "${_csrf.token}";
 				alert("사이즈를 정해주세요");
 			} else {
 				$("#popBox").show();
+				// 사이즈와 색상값을 모달창으로 값 넘겨주기
+				let selectColor = $(':radio[name="color"]:checked').val();
+				let selectSize = $(':radio[name="size"]:checked').val();
+				$('input[id=buyColor]').attr('value', selectColor);
+				$('input[id=buySize]').attr('value', selectSize);
 	        	}
 			}
 		}
@@ -587,6 +599,7 @@ var csrfTokenValue = "${_csrf.token}";
 	    	 console.log($(this).val());  
 	    	 let clickColor = $(this).val();
 	    	 $("#showColor").html(clickColor + " / ");
+	    	 $("#buyColor").html(clickColor);
 	     })
 	     
 		 $(".si").on("click", function() {
@@ -594,6 +607,7 @@ var csrfTokenValue = "${_csrf.token}";
 		     console.log($(this).val());  
 		     let clickSize = $(this).val();
 		     $("#showSize").html(clickSize);
+		     $("#buySize").html(clickSize);
 		 })
 		 
 		 function show() {

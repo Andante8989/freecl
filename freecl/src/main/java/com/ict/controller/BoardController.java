@@ -127,6 +127,8 @@ public class BoardController {
 		//상품의 색상과 사이즈 데이터
 		model.addAttribute("color", color);
 		model.addAttribute("size", size); 
+		log.info("선택한 색상 : " + color);
+		log.info("선택한 사이즈 : " + size);
 		log.info("insert전 cart 조회 : " + cart);
 		// 장바구니테이블에 insert 후 데이터 뿌리기
 		service4.cartInsert(cart);
@@ -189,6 +191,20 @@ public class BoardController {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return entity;
+	}
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////////////////
+	////////////////////////  상품 결제 관련 /////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+	
+	@PostMapping("/buy")
+	public String insertBuy(String size, String color) {
+		log.info("사이즈 : " + size);
+		log.info("색상 : " + color);
+		
+		return "/buy";
 	}
 	
 }

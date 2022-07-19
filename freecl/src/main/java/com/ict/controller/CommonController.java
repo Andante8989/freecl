@@ -118,30 +118,10 @@ public class CommonController {
 	public void pay() {
 		log.info("pay 컨트롤러 진입");
 	}
+
+
 	
-	@Setter
-	private KakaoPay kakaopay;
-	
-	@GetMapping("/kakaoPay")
-	public void kakaoPayGet() {
-		
-	}
-	
-	@PostMapping("/kakaoPay") 
-	public String kakaoPay() {
-		log.info("kakaopay---------post");
-		return "redirect:" + kakaopay.kakaoPayReady(); 
-	}
-	
-    @GetMapping("/kakaoPaySuccess")
-    public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
-        log.info("kakaoPaySuccess get............................................");
-        log.info("kakaoPaySuccess pg_token : " + pg_token);
-        
-        model.addAttribute("info", kakaopay.kakaoPayInfo(pg_token));
-        
-    }
-	
+
 	
 	
 	
