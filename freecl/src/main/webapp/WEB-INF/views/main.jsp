@@ -26,6 +26,7 @@
 		   main{
 		   background: white;
 		   min-height:700px;
+		   margin-top:50px;
 		   }
 		   footer{
 		     background: white;
@@ -35,27 +36,28 @@
 		/* 상단의 베스트 신상 등등 버튼들 */
 			.dropdown{
 			  display : inline-block;
-	            top:-15px;
+	            top:2px;
 	            left:50px;
 	            z-index:10;
+	       
 			}
 			
 	    /* 상단의 베스트 신상 등등 버튼 */
 			.dropbtn{
 			  border : none;
 			  background-color: #white;
-			  font-weight: 400;
-			  color : rgb(37, 37, 37);
+			  font-weight: 550;
 			  padding : 12px;
 			  width :300px;
 			  text-align: left;
 			  cursor : pointer;
-			  font-size : 15px;
+			  font-size : 17.5px;
 			}
+			
 			
 			/* 상단의 버튼 위에 마우스 올렸을때 배경색*/
 			.dropbtn:hover{
-			  background-color : #dda0dd
+			  background-color : #ff7d9e;
             
 			}
 			
@@ -64,9 +66,10 @@
 			  display : none;
 			  position : absolute;
 			  z-index : 1; /*다른 요소들보다 앞에 배치*/
-			  font-weight: 400;
-			  background-color: #dda0dd;
+			  font-weight: 500;
+			  background-color: #ff7d9e;
 			  min-width : 200px;
+			  
 			 
 			}
 			
@@ -81,7 +84,7 @@
 			
 			/* 내용위에 올렸을때 배경색*/
 			.dropdown-content a:hover{
-			  background-color : #F5BFF9
+			  background-color : #ffb6c1
 		
 			}
 			
@@ -94,10 +97,15 @@
 			  bold:10px;
 			}
 			
+			#btn-modal{
+			font-size:30px;
+			font-weight: 600;
+			}
+			
 			/* =모달창 안의 투명창*/
 			#modal.modal-overlay {
             width: 100%;
-            height: 100%;
+            height: 1000%;
             position: absolute;
             left: 0;
             top: 150;
@@ -110,7 +118,7 @@
             -webkit-backdrop-filter: blur(1.5px);
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.18);
-            z-index:10;
+            z-index:100;
             
         }
         
@@ -121,7 +129,7 @@
             width: 1000px;
             height: 10000px;
             position: relative;
-            top: 0px;
+            top: 100px;
             padding: 10px;
             background-color:pink;
             box-shadow: 0 px 0px 0 rgba( 31, 38, 135, 0.37 );
@@ -148,6 +156,7 @@
 		margin : 0px;
 		width : 130px;
 		position: relative;
+		margin-left: 50px;
 		top:-15px;
 		left:100px;
 
@@ -167,25 +176,28 @@
 	border-radius: 15px;
 	width : 300px;
 	height: 50px;
+	margin-left: 50px;
 	
 	
 	}
 	
     /* 캘린더 아이콘 */
     #calendar{
-    margin-left: 50px;
+    margin-left: 100px;
 	width : 45px;
     }
     
     /* 하트 아이콘 */
      #heart{
     margin: 0px;
+    margin-left: 10px;
 	width : 45px;
     }
     
     /* 쇼핑 아이콘 */
     #shopping{
     margin-bottom: 3px;
+    margin-left: 10px;
 	width : 45px;
     }
     
@@ -309,6 +321,7 @@
 		
 
 
+
 </style>
 </head>
 		
@@ -319,6 +332,7 @@
 		<!-- 상단의 버튼 부분 -->
 	 
 			 <ul class="top">
+			   <!-- 배너 <img src="https://img.sonyunara.com/files/new_banner/1657856272_0.gif" style="margin-right : 5100px;">-->
 			 	<sec:authorize access="isAnonymous()">
 				 		<a href="/join">
 				        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
@@ -382,7 +396,9 @@
 			 <button type="button" class="btn btn-right" id="btn-modal">〓</button>
 			</div>
 		    <div class="dropdown">
-		      <span class="dropbtn">베스트</span>
+		      <span class="dropbtn">
+		         베스트  
+		      </span>
 		    </div> 
 		    <div class="dropdown">
 		       <span class="dropbtn">신상</span>
@@ -533,6 +549,7 @@
 		   	<form action="/chatting" method="get">
 		    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 		    <input type="hidden" name="userId" value="<sec:authentication property="principal.user.userId" />"/>
+		    <input type="hidden" name="room_id" value="<sec:authentication property="principal.user.userId" />"/>
 		    <input type="submit" value="채팅방 입장"/>
 		    <p>UserVO : <sec:authentication property="principal.user" /></p>
 			 </form>

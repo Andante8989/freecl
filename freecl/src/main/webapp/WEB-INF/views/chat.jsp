@@ -90,7 +90,7 @@ var csrfTokenValue = "${_csrf.token}";
 					   msg : msg,
 					   userId : userId
 			   };
-			   console.log("jsp부분 room_id : " + room_id);
+
 			   let jsonData = JSON.stringify(msgData);
 			   this._socket.send(jsonData);
 			   $(".chat_wrap .inner").stop().animate({scrollTop:$(".chat_wrap .inner").height()},500);
@@ -109,6 +109,7 @@ var csrfTokenValue = "${_csrf.token}";
 
 </head>
 <body>
+
 <div class="chat_wrap">
     <div class="inner">
     

@@ -18,13 +18,17 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Component
 public class HandlerChat extends TextWebSocketHandler {
+	
+
 	// {"room_id":방ID, "session":세션}을 연달아서 저장하는 형태
 	private List<Map<String,Object>> sessionList = new ArrayList<Map<String, Object>>();
 	
+	private static int i;
 	
 	// 메세지를 맞는 방에만 뿌려주는 메서드.
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
+		
 
 		super.handleTextMessage(session, message);
 		
@@ -37,7 +41,7 @@ public class HandlerChat extends TextWebSocketHandler {
 		case "CMD_ENTER":
 			// 세션 리스트에 저장
 			Map<String,Object> map = new HashMap<String, Object>();
-			map.put("room_id", mapReceive.get("userId"));
+			map.put("room_id", mapReceive.get("room_id"));
 			map.put("session", session);
 			map.put("userId", mapReceive.get("userId"));
 			sessionList.add(map);
@@ -106,9 +110,25 @@ public class HandlerChat extends TextWebSocketHandler {
 			
 		
 	}
+	
+	// 연결 성공 시
+	@Override
+	public void afterConnectionEstablished(WebSocketSession session)throws Exception{
+		i++;
+		System.out.println(session.getId() + "연결 성공 => 총 접속 인원 : " + i + "명");
+		
+		
+		if (i > 3) {
+			
+		}
+		
+		
+	}
 	// 클라이언트가 연결을 끊음 처리
 	@Override
 	public void afterConnectionClosed(WebSocketSession session,CloseStatus status)throws Exception{
+		i--;
+		System.out.println(session.getId() + "연결 종료 => 총 접속 인원 : " + i + "명");
 		
 		super.afterConnectionClosed(session, status);
 		
