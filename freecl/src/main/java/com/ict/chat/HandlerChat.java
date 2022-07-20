@@ -37,7 +37,7 @@ public class HandlerChat extends TextWebSocketHandler {
 		case "CMD_ENTER":
 			// 세션 리스트에 저장
 			Map<String,Object> map = new HashMap<String, Object>();
-			map.put("room_id", mapReceive.get("userId"));
+			map.put("room_id", mapReceive.get("room_id"));
 			map.put("session", session);
 			map.put("userId", mapReceive.get("userId"));
 			sessionList.add(map);

@@ -17,7 +17,7 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO cartTbl (cartNum, userId, cart_proNum, cart_amount, cart_price, cart_name) values (cartNum.nextval, #{userId}, #{cart_proNum}, #{cart_amount}, #{cart_price}, #{cart_name})
+		INSERT INTO cartTbl (cartNum, userId, cart_proNum, cart_amount, cart_price, cart_name, cart_color, cart_size) values (cartNum.nextval, #{userId}, #{cart_proNum}, #{cart_amount}, #{cart_price}, #{cart_name}, #{cart_color}, #{cart_size})
 	</insert>
 	
 	<delete id="delete">

@@ -533,6 +533,7 @@
 		   	<form action="/chatting" method="get">
 		    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 		    <input type="hidden" name="userId" value="<sec:authentication property="principal.user.userId" />"/>
+		    <input type="hidden" name="room_id" value="<sec:authentication property="principal.user.userId" />"/>
 		    <input type="submit" value="채팅방 입장"/>
 		    <p>UserVO : <sec:authentication property="principal.user" /></p>
 			 </form>

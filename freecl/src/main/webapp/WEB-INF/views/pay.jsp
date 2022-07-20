@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,45 +11,78 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>품질 좋은 상품 목록</h1>
 
+userVO : <sec:authentication property="principal.user" />
+
+<input type="hidden" id="mail" value="<sec:authentication property="principal.user.email" />">
 
 <script>
+
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
+	
+	
+	let itemPrice = ${price}-4000;
+	let itemTitle = "";
+	d = new Date(); // 현시간
+	let merchant_uid= "order" + d.getTime();
+	let itemAddr = '<sec:authentication property="principal.user.addr" />';
+	let itemEmail = $("#mail").val();
+	let buyer = '<sec:authentication property="principal.user.userId" />';
+	let itemPnum = '<sec:authentication property="principal.user.p_num" />';
+	let buyColor = '${color}';
+	let buySize =  '${size}';
 	
 	function iamport() {
 		IMP.init('imp23066347');
 		IMP.request_pay({
 			pg : 'html5_inicis', // kg이니시스
 			pay_method : 'card', // 결제수단
-			merchant_uid : "order_no_0099",
-			name : '주문명:결제테스트', // 결제창에 줄 상품명
-			amount : 1,  // 금액
-			buyer_email : 'swetch@naver.com', // 구매자 이메일
-			buyer_name : '구매자이름',
-			buyer_tel : '010-222-1111', // 구매자 번호
-			buyer_addr : '서울시 강남구 삼성동', // 구매자 주소
+			merchant_uid : merchant_uid,
+			name : '옷', // 결제창에 줄 상품명
+			amount : itemPrice,  // 금액
+			buyer_email : itemEmail, // 구매자 이메일
+			buyer_name : buyer,
+			buyer_tel : itemPnum, // 구매자 번호
+			buyer_addr : itemAddr, // 구매자 주소
 			buyer_postcode : '123-456', // 구매자 우편번호
 		}, function(rsp) {
 			console.log(rsp);
 			if (rsp.success) { // 결제 성공시 처리할 내역
-				let msg = "결제가 완료되었습니다.";
-				msg += '고유ID : ' + rsp.imp_uid;
-				msg += '상점거래ID : ' + rsp.merchant_uid;
-				msg += '결제금액 : ' + rsp.paid_amount;
-				msg += '카드 승인번호 : ' + rsp.apply_num;
+				$.ajax({
+					 beforeSend : function(xhr) { 
+							xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+						},
+					type: 'post',
+					url: '/board/order',
+					headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"POST"
+					},
+					dataType:"text",
+					data : JSON.stringify({
+						itemname: '옷',
+						buyer : buyer,
+						buy_price : itemPrice,
+						buyColor : buyColor,
+						buySize : buySize,
+						merchant_uid : merchant_uid
+					}),
+					success: function() {
+						alert(itemTitle + " 결제완료!" );
+						window.location.href = "http://localhost:52000/main";
+					}
+				});
 			} else {  // 결제 실패시 처리할 내역
 				let msg = "결제에 실패하였습니다.";
 				msg += '에러내용 : ' + rsp.error_msg;
+				alert(msg); // 여기서는 alert로 띄우지만 리다이렉트등 다양한 방법이 있음
+				window.location.href = "http://localhost:52000/board/basket";
 			}
-			alert(msg); // 여기서는 alert로 띄우지만 리다이렉트등 다양한 방법이 있음
 		});
 	}
-	
-	iamport(); // 실제로 실행 호출하기
+	iamport();
 
-	
-	
-	
 	
 
 	

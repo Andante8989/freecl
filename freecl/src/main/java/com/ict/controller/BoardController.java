@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ict.persistent.BoardVO;
+import com.ict.persistent.BuyVO;
 import com.ict.persistent.CartVO;
 import com.ict.persistent.ColorVO;
 import com.ict.persistent.NoticeVO;
 import com.ict.persistent.SizeVO;
 import com.ict.service.BoardService;
+import com.ict.service.BuyService;
 import com.ict.service.CartService;
 import com.ict.service.ColorService;
 import com.ict.service.NoticeService;
@@ -52,6 +54,9 @@ public class BoardController {
 	
 	@Autowired
 	private CartService service4;
+	
+	@Autowired
+	private BuyService service5;
 	
 	
 	
@@ -122,13 +127,10 @@ public class BoardController {
 	
 	// 장바구니로 이동
 	@GetMapping(value="basket")
-	public String basket(String userId, String size, String color, CartVO cart, Long cart_proNum, Model model) {
+	public String basket(String userId, CartVO cart, Long cart_proNum, Model model) {
 		log.info("장바구니로 가기전 cartId 조회 : " + userId);
 		//상품의 색상과 사이즈 데이터
-		model.addAttribute("color", color);
-		model.addAttribute("size", size); 
-		log.info("선택한 색상 : " + color);
-		log.info("선택한 사이즈 : " + size);
+
 		log.info("insert전 cart 조회 : " + cart);
 		// 장바구니테이블에 insert 후 데이터 뿌리기
 		service4.cartInsert(cart);
@@ -200,11 +202,23 @@ public class BoardController {
 	///////////////////////////////////////////////////////////////////////////////////
 	
 	@PostMapping("/buy")
-	public String insertBuy(String size, String color) {
-		log.info("사이즈 : " + size);
-		log.info("색상 : " + color);
-		
-		return "/buy";
+	public String insertBuy(String toPrice, Model model, String toColor, String toSize) {
+		log.info("결제할 금액 : " + toPrice);
+		log.info("결제할 옷의 색상 : " + toColor);
+		log.info("결제할 옷의 사이즈 : " + toSize);
+		model.addAttribute("price", toPrice);
+		model.addAttribute("color", toColor);
+		model.addAttribute("size", toSize);
+		return "/pay";
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/order", consumes="application/json",
+								produces= {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> orderInsert(@RequestBody BuyVO vo) {
+		log.info("vo검증 : " + vo);
+		service5.insertBuy(vo);
+		return new ResponseEntity<String> ("success", HttpStatus.OK);
 	}
 	
 }
