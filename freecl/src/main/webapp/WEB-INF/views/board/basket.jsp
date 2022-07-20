@@ -176,7 +176,13 @@
 				</ul>
 			</div>
 			<div class="row">
-				<button class="pay">전체상품 주문하기</button>	
+				<form action="/board/buy" method="post">
+					<input type="hidden" name="toPrice" id="payPrice">
+					<input type="hidden" name="toColor" id="payColor">
+					<input type="hidden" name="toSize" id="paySize">
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+					<button type="submit" class="pay">전체상품 주문하기</button>	
+				</form>
 			</div>
 			<div class="row">
 				<button class="choice">선택상품 주문하기</button>	
@@ -205,24 +211,34 @@
 				var sum = 0;
 				var delivery = 4000;
 				var total = 0;
+				var col = "";
+				var siz = "";
 				
 				$(data).each(
 						function() {
 							str += `<div class='row' data-pnum='\${this.cartNum}' class='Li'>
 										<div class='col-md-2'>\${this.cartNum}</div>
-										<div class='col-md-4 offset-md-1'>\${this.cart_name}\${this.color}\${this.size}</div>
+										<div class='col-md-4 offset-md-1'>\${this.cart_name}\${this.cart_color}/\${this.cart_size}</div>
 										<div class='col-md-1 offset-md-1'>\${this.cart_amount}</div>
 										<div class='col-md-1 offset-md-1'>\${this.cart_price}</div>
 										<div class='col-md-1'><button type='button' class='btn-close' aria-label='close'></button></div>
 									</div><hr>`;
 								sum += this.cart_price;
 								total = delivery + sum;
+								col += this.cart_color;
+								siz += this.cart_size;
+
 						});
 					var result = total.toLocaleString();
 					var sumResult = sum.toLocaleString();
+					console.log(col);
+					console.log(siz);
 					$("#cc").html(str);
 					$("#pri").html(result + "원");
 					$("#total_price").html(sumResult);
+					$('input[id=payPrice]').attr('value', total);
+					$('input[id=payColor]').attr('value', col);
+					$('input[id=paySize]').attr('value', siz);
 				}); 
 		    };
 		getAllList();

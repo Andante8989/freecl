@@ -22,12 +22,7 @@ public class BuyMapperTests {
 	@Test
 	public void testInsert() {
 		BuyVO vo = new BuyVO();
-		vo.setProductNum(81);
-		vo.setBuyer("tree");
-		vo.setBuy_price(8000);
-		vo.setBuy_color("blue");
-		vo.setBuy_size("s");
-		vo.setBuy_amount(1);
+
 		mapper.insertBuy(vo);
 		
 	}

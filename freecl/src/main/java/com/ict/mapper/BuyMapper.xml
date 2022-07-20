@@ -5,8 +5,8 @@
 <mapper namespace="com.ict.mapper.BuyMapper">
 
 	<insert id="insertBuy">
-		INSERT INTO buyTbl (buyNum, productNum, buyer, buy_price, buy_amount, buy_color, buy_size) 
-			values (buyNum.nextval, #{productNum}, #{buyer}, #{buy_price}, #{buy_amout}, #{buy_color}, #{buy_size} )
+		INSERT INTO buyTbl (merchant_uid, buyer, buydate, buy_price, buyColor, buySize) 
+			values (#{merchant_uid}, #{buyer}, sysdate, #{buy_price}, #{buyColor}, #{buySize})
 	</insert>
 
 

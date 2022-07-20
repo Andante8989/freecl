@@ -11,7 +11,8 @@ public class CartVO {
 	private Long cart_amount;
 	private Long cart_price;
 	private String cart_name;
-	
+	private String cart_color;
+	private String cart_size;
 }
 
 
