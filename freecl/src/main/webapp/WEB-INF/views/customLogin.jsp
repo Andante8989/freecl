@@ -27,6 +27,7 @@
 		color :white;
 	}
 	.ti {
+		color : #ff7d9e;
 		text-align : center;
 	}
 	  /* -------상단 hr 태그 부분 ----------- */
@@ -111,7 +112,7 @@
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
-			<h1 class="ti">로그인 화면입니다.</h1>
+			<h1 class="ti">Login</h1>
 			<hr/>
 			<form action="/login" method="post">
 				<input class="form-control" type="text" name="username" placeholder="아이디를 입력하세요. 대소문자 구별해주세요."><br/>

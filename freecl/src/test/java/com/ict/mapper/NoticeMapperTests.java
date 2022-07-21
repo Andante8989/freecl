@@ -23,7 +23,7 @@ public class NoticeMapperTests {
 		log.info(mapper.getList());
 	}
 	
-	//@Test
+	@Test
 	public void testGetListDetail() {
 		log.info(mapper.getListDetail(2L));
 	}

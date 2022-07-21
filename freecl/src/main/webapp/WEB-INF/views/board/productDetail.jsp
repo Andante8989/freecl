@@ -417,7 +417,6 @@
 		</div>
 	</div>
 </div>	
-<p>UserVO : <sec:authentication property="principal.user" /></p>
 
 
 

@@ -11,4 +11,8 @@ public interface UserService {
 	public void updateUser(UserVO vo);
 	
 	public UserVO get(String u_id);
+	
+	public void deleteUser(String userId);
+	
+	
 }

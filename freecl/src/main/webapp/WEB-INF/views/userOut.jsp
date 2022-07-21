@@ -11,15 +11,6 @@
 		font-size : 60px;
 		color : #ff7d9e;
 	}
-	#nemo {
-		width : 200px;
-		height : 60px;
-		color : white;
-		background-color : black;
-		border-radius : 10px;
-		left : 550px;
-		position:absolute;
-	}
 	
 	#idch {
 		border : none;
@@ -151,21 +142,22 @@
 	<hr class="welcome">
 
 
+
 </div>
 <div class="container">
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-6">
 	
-			<h1 class="join_tit">My Page</h1>
+			<h1 class="join_tit">회원 정보 확인</h1>
 			<hr>
-			<form action="/userUpdateForm" method="post">
+				
 				<div class="row">
 					<div class="col-md-2 offset-md-1 first">
 					아이디 
 					</div>
 					<div class="col-md-9">
-						<input type="text" name="userId" value="<sec:authentication property="principal.user.userId" />" readonly>
+						<input type="text" id="uu" name="userId" value="<sec:authentication property="principal.user.userId" />" readonly>
 					</div>
 				</div>
 				<div class="row">
@@ -173,49 +165,89 @@
 					이름 
 					</div>
 					<div class="col-md-9">
-						<input type="text" name="uname" value="<sec:authentication property="principal.user.uname" />" readonly><br/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2 offset-md-1 fourth">
-					이메일 
-					</div>
-					<div class="col-md-9">
-						<input type="text" name="email" value="<sec:authentication property="principal.user.email" />" readonly><br/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2 offset-md-1 fifth">
-					휴대전화 
-					</div>
-					<div class="col-md-9">
-						<input type="text" name="p_num" value="<sec:authentication property="principal.user.p_num" />" readonly><br/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2 offset-md-1 sixth">
-					주소 
-					</div>
-					<div class="col-md-9">
-						<input type="text" name="addr" value="<sec:authentication property="principal.user.addr" />" readonly><br/>
+						<input type="text" id="nn" name="uname" value="<sec:authentication property="principal.user.uname" />" readonly><br/>
 					</div>
 				</div>
 
-				
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 				<div class="but">
-				<button id="joinTry" type="submit">정보수정하기</button><a href="/main"><button id="back" type="button">메인페이지</button></a>
+				<button id="joinTry" type="button">회원탈퇴</button><a href="/main"><button id="back" type="button">메인페이지</button></a>
 				</div>
-			</form>
-				<div class="row">
-					<div class="col-md-12">
-						<a href="/userOut"><button id="nemo">회원탈퇴</button></a>
-					</div>
-				</div>
+			
 		</div>
 		<div class="col-md-3"></div>
 		</div>
 	</div>
 <div class="footer"></div>	
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
+	
+
+/*
+$("#joinTry").on("click", function(e){
+	 e.preventDefault();
+     let userId = $("#uu").val();
+     let uname = $("#nn").val();
+     if(uname.length < 1) {
+    	 alert("이름을 입력해주세요.");
+     } else {
+    	 if(confirm("정말 탈퇴하시겠습니까?")) {
+        	 $("#del").submit();
+         } else {
+        	 
+         }
+     }
+     console.log(userId);
+     console.log(uname);
+    
+
+});*/
+
+$("#joinTry").on("click", function(){
+	 var id = $("#uu").val();
+	  if(confirm("정말 탈퇴하시겠습니까?")) {
+        	
+         
+	$.ajax({
+		url : "/userDelete",
+		type : 'delete',
+	    contentType : 'text/html; charset=utf-8;',//내가 서버로 보내는 데이터의 타입
+	    data: id ,
+		beforeSend : function(xhr){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		},
+		header : {
+			"Content-Type" : "application/json",
+			"X-HTTP-Method-Override" : "DELETE"
+		},
+		success: function(result){
+			if(result == 'SUCCESS'){
+				alert("회원 탈퇴가 완료되었습니다."); 
+				window.location.href = "/main"
+		    }else{
+		         alert("다시한번 시도해주세요.");
+		    }
+		},
+	    error: function (request,status,errorData){   
+	    	alert('error code: '+request.status+"\n"
+	    			+'message:' +request.reponseText+'\n'
+	    			+ 'error :'+  errorData);
+	    }
+	
+	});
+	  }
+}); 
+
+
+
+
+
+
+
+</script>
 </body>
 </html>

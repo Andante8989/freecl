@@ -58,7 +58,7 @@
 			/* 상단의 버튼 위에 마우스 올렸을때 배경색*/
 			.dropbtn:hover{
 			  background-color : #ff7d9e;
-            
+              color : white;
 			}
 			
 			/* 버튼 위에 마우스 올렸을때 나오는 내용들 ex)자켓 패딩 등*/
@@ -71,6 +71,9 @@
 			  min-width : 200px;
 			  
 			 
+			}
+			.first {
+				color : white;
 			}
 			
 			
@@ -406,9 +409,9 @@
 		    <div class="dropdown">
 		       <span class="dropbtn">아우터</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		        <a href="#" style="color: red">자켓</a>
+		        <a href="#" style="color: white">조끼</a>
+		        <a href="#" style="color: white">패딩</a>
 		      </div>
 		    </div>
 		    <div class="dropdown">
