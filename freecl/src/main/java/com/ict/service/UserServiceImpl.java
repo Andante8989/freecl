@@ -2,6 +2,7 @@ package com.ict.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ict.mapper.UserMapper;
 import com.ict.persistent.UserVO;
@@ -35,5 +36,11 @@ public class UserServiceImpl implements UserService {
 		UserVO user = mapper.getUserInfo(u_id);
 		return user;
 	}
+	
 
+	@Override
+	public void deleteUser(String userId) {
+		mapper.deleteAuth(userId);
+		mapper.deleteUser(userId);
+	}
 }

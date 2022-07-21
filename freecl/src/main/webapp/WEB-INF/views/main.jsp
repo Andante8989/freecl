@@ -60,6 +60,7 @@
 			/* 상단의 버튼 위에 마우스 올렸을때 배경색*/
 			.dropbtn:hover{
 			  background-color : #ff7d9e;
+
 			  color : white;
 			  transition: 0.25s;
             
@@ -76,6 +77,9 @@
 			  transition: 0.25s;
 			  
 			 
+			}
+			.first {
+				color : white;
 			}
 			
 			
@@ -423,11 +427,17 @@
 		    <div class="dropdown">
 		       <span class="dropbtn">아우터</span>
 		       <div class="dropdown-content">
+<<<<<<< HEAD
 		        <a href="#">가디건/조끼</a>
 		        <a href="#">야상/점퍼</a>
 		        <a href="#">자켓/코트</a>
 		        <a href="#">패딩</a>
 		        <a href="#">플리스</a>
+=======
+		        <a href="#" style="color: red">자켓</a>
+		        <a href="#" style="color: white">조끼</a>
+		        <a href="#" style="color: white">패딩</a>
+>>>>>>> Aantante
 		      </div>
 		    </div>
 		    <div class="dropdown">

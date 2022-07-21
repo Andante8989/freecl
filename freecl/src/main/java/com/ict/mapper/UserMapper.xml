@@ -58,5 +58,16 @@
 	     SELECT * FROM userTBL WHERE userId = #{userId}
 	</select>
 	
+
+	<delete id="deleteUser">
+		DELETE FROM userTbl WHERE userId=#{userId}
+	</delete>
+	
+	<delete id="deleteAuth">
+		DELETE FROM userAuth WHERE userId=#{userId}
+	</delete>
+
+
+	
 </mapper>
 

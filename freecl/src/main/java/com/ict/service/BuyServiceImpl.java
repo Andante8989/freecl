@@ -1,5 +1,7 @@
 package com.ict.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,12 @@ public class BuyServiceImpl implements BuyService{
 	@Override
 	public void insertBuy(BuyVO vo) {
 		mapper.insertBuy(vo);
+	}
+
+	@Override
+	public List<BuyVO> buyList(String buyer) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

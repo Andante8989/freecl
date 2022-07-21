@@ -8,8 +8,12 @@
 		INSERT INTO buyTbl (merchant_uid, buyer, buydate, buy_price, buyColor, buySize) 
 			values (#{merchant_uid}, #{buyer}, sysdate, #{buy_price}, #{buyColor}, #{buySize})
 	</insert>
-
-
+	
+	<select id="getList" resultType="com.ict.persistent.BuyVO">
+		<![CDATA[
+			SELECT * FROM buyTbl ORDER BY buydate desc
+		]]>
+	</select>
 
 
 
