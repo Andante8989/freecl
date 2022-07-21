@@ -1,9 +1,13 @@
 package com.ict.chat;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -116,14 +120,12 @@ public class HandlerChat extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session)throws Exception{
 		i++;
 		System.out.println(session.getId() + "연결 성공 => 총 접속 인원 : " + i + "명");
-		
-		
-		if (i > 3) {
-			
-		}
+
 		
 		
 	}
+	
+
 	// 클라이언트가 연결을 끊음 처리
 	@Override
 	public void afterConnectionClosed(WebSocketSession session,CloseStatus status)throws Exception{

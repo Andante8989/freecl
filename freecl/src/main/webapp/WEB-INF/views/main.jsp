@@ -14,6 +14,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
     
+         body{
+		   background:url(/resources/image/Pink Flowers Linktree Background.png);
+		 }
 		form {
 		 	display: inline-block;
 		 }
@@ -26,7 +29,7 @@
 		   main{
 		   background: white;
 		   min-height:700px;
-		   margin-top:50px;
+		   margin-top:230px;
 		   }
 		   footer{
 		     background: white;
@@ -36,7 +39,7 @@
 		/* 상단의 베스트 신상 등등 버튼들 */
 			.dropdown{
 			  display : inline-block;
-	            top:2px;
+	            top:20px;
 	            left:50px;
 	            z-index:10;
 	       
@@ -45,7 +48,6 @@
 	    /* 상단의 베스트 신상 등등 버튼 */
 			.dropbtn{
 			  border : none;
-			  background-color: #white;
 			  font-weight: 550;
 			  padding : 12px;
 			  width :300px;
@@ -58,6 +60,8 @@
 			/* 상단의 버튼 위에 마우스 올렸을때 배경색*/
 			.dropbtn:hover{
 			  background-color : #ff7d9e;
+			  color : white;
+			  transition: 0.25s;
             
 			}
 			
@@ -69,6 +73,7 @@
 			  font-weight: 500;
 			  background-color: #ff7d9e;
 			  min-width : 200px;
+			  transition: 0.25s;
 			  
 			 
 			}
@@ -77,20 +82,25 @@
 			.dropdown-content a{
 			  display : block;
 			  text-decoration : none;
-			  color : rgb(37, 37, 37);
-			  font-size: 12px;
+			  font-size: 14.5px;
 			  padding : 12px 20px;
+			  color : white;
+			  transition: 0.25s;
 			}
+			
 			
 			/* 내용위에 올렸을때 배경색*/
 			.dropdown-content a:hover{
-			  background-color : #ffb6c1
+			  background-color : #ffb6c1;
+			  transition: 0.25s;
 		
 			}
 			
 			/* 버튼위에 올렸을때 내용이 나오게끔 해주는*/
 			.dropdown:hover .dropdown-content {
 			  display: block;
+			  color : white;
+			  transition: 1s;
 			}
 			
 			h1{
@@ -131,9 +141,9 @@
             position: relative;
             top: 100px;
             padding: 10px;
-            background-color:pink;
+            background-color:#ff7d9e;
             box-shadow: 0 px 0px 0 rgba( 31, 38, 135, 0.37 );
-            background: rgba( 205, 136, 175, 0.70 );
+            background: rgba( 205, 150, 180, 0.80 );
             backdrop-filter: blur( 13.5px );
             -webkit-backdrop-filter: blur( 13.5px );
             z-index:10;
@@ -154,10 +164,10 @@
         /* freecl 로고*/
         #logo {
 		margin : 0px;
-		width : 130px;
+		width : 160px;
 		position: relative;
-		margin-left: 50px;
-		top:-15px;
+		margin-left: 30px;
+		top:10px;
 		left:100px;
 
 	  }
@@ -165,7 +175,7 @@
 	.inform{
 	   position: absolute;
 	   left:30%;
-	   top:20%;
+	   top:230px;
 	   
 	   
 	}
@@ -184,28 +194,28 @@
     /* 캘린더 아이콘 */
     #calendar{
     margin-left: 100px;
-	width : 45px;
+	width : 50px;
     }
     
     /* 하트 아이콘 */
      #heart{
     margin: 0px;
     margin-left: 10px;
-	width : 45px;
+	width : 50px;
     }
     
     /* 쇼핑 아이콘 */
     #shopping{
     margin-bottom: 3px;
     margin-left: 10px;
-	width : 45px;
+	width :50px;
     }
     
     /* 회원가입 고객센터 로그인 버튼 위치 */
     .top{
     left:70%;
     position:relative;
-    top:-30px;
+    top:20px;
     }
     
     /* 충현님이 한거*/
@@ -252,7 +262,7 @@
 		    border-top: 1px solid #E3E7EB;
 		    overflow: visible;
 		    text-align: center;
-		    margin-top: -40px;
+		    margin-top: 40px;
 		    height: 17px;
 		    z-index : 3;
 		}
@@ -319,6 +329,11 @@
 		.section [id="slide02"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-100%);}
 		.section [id="slide03"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-200%);}
 		
+		.banner{
+		  margin-left:-50px;
+		  margin-top:-50px;
+		}
+
 
 
 
@@ -327,12 +342,14 @@
 		
 <body>
 
+
 		<title>Freecl</title>
+		
 		<header>
 		<!-- 상단의 버튼 부분 -->
-	 
+	      <img class="banner" src="https://img.sonyunara.com/files/new_banner/1657856272_0.gif">
+			
 			 <ul class="top">
-			   <!-- 배너 <img src="https://img.sonyunara.com/files/new_banner/1657856272_0.gif" style="margin-right : 5100px;">-->
 			 	<sec:authorize access="isAnonymous()">
 				 		<a href="/join">
 				        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
@@ -406,89 +423,86 @@
 		    <div class="dropdown">
 		       <span class="dropbtn">아우터</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
+		        <a href="#">가디건/조끼</a>
+		        <a href="#">야상/점퍼</a>
+		        <a href="#">자켓/코트</a>
 		        <a href="#">패딩</a>
+		        <a href="#">플리스</a>
 		      </div>
 		    </div>
 		    <div class="dropdown">
 		       <span class="dropbtn">상의</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		        <a href="#">긴팔티셔츠</a>
+		        <a href="#">맨투맨</a>
+		        <a href="#">후드</a>
+		        <a href="#">반팔/민소매티셔츠</a>
+		        <a href="#">니트</a>
 		      </div>
 		    </div>
 		    <div class="dropdown">
-		       <span class="dropbtn">셔츠</span>
+		       <span class="dropbtn">셔츠/블라우스</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		       
 		      </div>
 		    </div>
 		    <div class="dropdown">
 		       <span class="dropbtn">트레이닝</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		        
 		      </div>
 		    </div>
 		    <div class="dropdown">
 		       <span class="dropbtn">베이직</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		        
 		      </div>
 		    </div>
 		    <div class="dropdown">
 		       <span class="dropbtn">원피스</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		        
 		      </div>
 		    </div>
 		    <div class="dropdown">
 		       <span class="dropbtn">스커트</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		       
 		      </div>
 		    </div>
 		    <div class="dropdown">
 		       <span class="dropbtn">팬츠</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		        <a href="#">청바지</a>
+		        <a href="#">롱팬츠</a>
+		        <a href="#">슬랙스</a>
+		        <a href="#">면바지</a>
+		        <a href="#">레깅스</a>
+		        <a href="#">숏팬츠</a>
 		      </div>
 		    </div>
 		    <div class="dropdown">
 		       <span class="dropbtn">가방</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		        <a href="#">백팩/스쿨팩</a>
+		        <a href="#">크로스백/토트백</a>
+		     
 		      </div>
 		    </div>
 		    <div class="dropdown">
 		       <span class="dropbtn">신발</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		        <a href="#">운동화/단화</a>
+		        <a href="#">구두/워커</a>
+		        <a href="#">샌들/슬리퍼/장화</a>
 		      </div>
 		    </div>
 		    <div class="dropdown">
 		       <span class="dropbtn">악세사리</span>
 		       <div class="dropdown-content">
-		        <a href="#">자켓</a>
-		        <a href="#">조끼</a>
-		        <a href="#">패딩</a>
+		        <a href="#">주얼리</a>
+		        <a href="#">모자/벨트</a>
+		        <a href="#">양말/스타킹</a>
 		      </div>
 		    </div>
 		  </header>
@@ -554,6 +568,18 @@
 		    <p>UserVO : <sec:authentication property="principal.user" /></p>
 			 </form>
 		   </sec:authorize>
+		   
+		   
+		   <sec:authorize access="isAuthenticated()">
+		   	<form action="/chatcreate" method="get">
+		    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+		    <input type="hidden" name="userId" value="<sec:authentication property="principal.user.userId" />"/>
+		    <input type="hidden" name="room_id" value="<sec:authentication property="principal.user.userId" />"/>
+		    <input type="submit" value="채팅방 만들기"/>
+		    <p>UserVO : <sec:authentication property="principal.user" /></p>
+			 </form>
+		   </sec:authorize>
+		 
 
 
 

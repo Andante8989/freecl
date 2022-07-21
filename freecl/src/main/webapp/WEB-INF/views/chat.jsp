@@ -40,6 +40,7 @@ var csrfTokenValue = "${_csrf.token}";
 		   sendChat: function(){
 			   this._sendMessage('${param.room_id}','CMD_MSG_SEND',$('#message').val(), '${param.userId}');
 			   $('#message').val('');
+			   
 
 		   },
 		   sendEnter: function(){
@@ -47,6 +48,7 @@ var csrfTokenValue = "${_csrf.token}";
 			   $('#message').val('');
 		   },
 		   receiveMessage: function(msgData){
+			   
 			   
 			   // 정의된 CMD 코드에 따라서 분기 처리
 			   if(msgData.cmd == 'CMD_MSG_SEND'){
@@ -126,9 +128,15 @@ var csrfTokenValue = "${_csrf.token}";
 	    <input type="button" id="btnSend" value="채팅 전송" onclick="webSocket.sendChat()"/>
 	</div>
 	
-	<span class="main-header">${param.userId }님,환영합니다.</span>
-	<span class="main-header">${param.room_id }방으로 환영합니다.</span>
-
+	<h3>${param.userId }님,환영합니다.</h3>
+	<h3>${param.room_id }방으로 환영합니다.</h3>
+	
+    <form action="/chatlist" method="get">
+	    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+		<input type="hidden" name="userId" value="${param.userId }" />
+	 	<input type="hidden" name="room_id" value="${param.userId }" />
+       <input type="submit" value="채팅방 목록"/>
+    </form>
 
     
 </body>

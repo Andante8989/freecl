@@ -1,119 +1,63 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="/resources/resttest/modal.css">
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css">
 </head>
 <body>
-  <h2>Ajax Test</h2>
-  
-  <div>
-      <div>
-         REPLYER <input type="text" name="replyer" id="newReplyWriter">
-      </div>
-      <div>
-         REPLY TEXT <input type="text" name="reply" id="newReplyText">
-      </div>
-      <button id="replyAddBtn">ADD REPLY</button>
-   </div>
-   
-   
-   
-   <!-- 댓글달리는 영역 -->
-   <ul id="replies">
-   
-   </ul>
-   
-   <div id="modDiv" style="display:none;">
-       <div class="modal-title"></div>
-       <div>
-          <input type="text" id="replytext">
-       </div>
-       <div>
-           <button type="button" id="replyModBtn">수정하기</button>
-           <button type="button" id="replyDelBtn">삭제하기</button>
-           <button type="button" id="closeBtn">닫기</button>
-       </div>
-   </div>
-   
-   <!-- jquery는 이곳에 -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-     <script>
-		let bno = 3;
-		
-		function getAllList(){
-			let str = "";
-			// json 데이터를 얻어오는 로직 실행
-			$.getJSON("/replies/all/" + bno, function(data){
-				$(data).each(
-					function(){
-						console.log(this);
-						// 백틱 문자열 사이에 변수를 넣고 싶다면 \${변수명} 을 적습니다.
-						// 원래는 \를 왼쪽에 붙일 필요는 없지만
-						// jsp에서는 el표기문법이랑 겹치기 때문에 el이 아님을 보여주기 위해
-						// 추가로 왼쪽에 \를 붙입니다.
-	str+=
-	`<li data-rno='\${this.rno}' class='replyLi'>\${this.rno}:\${this.reply} <button>수정/삭제</button></li>`;
-				});
-				console.log(str);
-				$("#replies").html(str);
-			});			
-		}
-		getAllList();
-		
-		////////////////////////////
-		//////글 등록로직
-		////////////////////////////
-	
-      $("#replyAddBtn").on("click", function(){
-    	 let replyer = $("#newReplyWriter").val();  // 받아오기
-    	 let reply = $("#newReplyText").val();  
-    	 
-    	 $.ajax({
-    		 type : 'post',
-    		 url : '/replies',
-    		 headers : {
-    			 "Content-Type" : "application/json",
-    			 "X-HTTP-Method-Override" : "POST"
-    		 },
-    		 dataType : 'text',
-    		 data : JSON.stringify({
-    			 bno : bno,
-    			 replyer : replyer,
-    			 reply : reply
-    		 }),
-    		 success : function(result){
-    			 if(result == 'SUCCESS'){
-    				 
-    				 alert("등록 되었습니다.");
-    				 getAllList();
-    			 }
-    		 }
-    		 
-    	 });
-    	 
-      });// 글 등록로직 종료
-      
-      // 이벤트 위임 댓글수정하기
-      
-      $("#replies").on("click",".replyLi button", function(){
-    	  let reply = $(this).parent();
-    	  
-    	  let rno = reply.attr("data-rno");
-    	  let replytext=reply.text();
-    	  
-    	  $(".modal-title").html(rno);
-    	  $("#replytext").val(replytext);
-    	  $("#modDib").show("slow");
-      });
-      
-      
-</script>
+    <div id="banner">
+        <ul class="banner1">
+            <li class="fadein"><img src="./images/image1.png" alt=""></li>
+            <li class="fadein"><img src="./images/image2.png" alt=""></li>
+            <li class="fadein"><img src="./images/image3.png" alt=""></li>
+            <li class="fadein"><img src="./images/image4.png" alt=""></li>
+            <li class="fadein"><img src="./images/image5.png" alt=""></li>
+        </ul>
+    </div>
+    <div id="bannerBtn">
+        <ul>
+            <li> <input type="button" value="버튼1" onclick="bannerBtn(0)"></li>
+            <li> <input type="button" value="버튼2" onclick="bannerBtn(1)"></li>
+            <li> <input type="button" value="버튼3" onclick="bannerBtn(2)"></li>
+            <li> <input type="button" value="버튼4" onclick="bannerBtn(3)"></li>
+            <li> <input type="button" value="버튼5" onclick="bannerBtn(4)"></li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var index = 0;
+        banner();
+        function banner(n){
+            console.log(n);
+            bannerImg = document.querySelectorAll('.banner1>li');
+            if (index >= bannerImg.length){
+                index = 0;
+            }
 
-      <script src="/resources/resttest/delete.js"></script>
-      <script src="/resources/resttest/modify.js"></script>
+            if (n != undefined){ //인자값없이 banner() 실행될 때
+                index = n;
+            }
+
+            for(i=0; i<bannerImg.length; i++){
+                if (i==index){
+                    bannerImg.item(i).setAttribute('class','show on');
+                } else {
+
+                    bannerImg.item(i).setAttribute('class','show');
+                }
+            }
+            index++;
+        }
+
+        function bannerBtn(n){
+            clearInterval(rolling);
+            banner(n);
+            rolling = setInterval(banner,3000);
+        }
+
+        rolling = setInterval(banner,3000);
+    </script>
 </body>
 </html>

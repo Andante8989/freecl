@@ -91,6 +91,8 @@
 	
 	 <!-- 상단의 버튼 부분 -->
 	 
+	  <img src="https://img.sonyunara.com/files/new_banner/1657856272_0.gif" style="margin-right : 5100px;">
+	 
 			 <ul class="top">
 			 		<sec:authorize access="isAnonymous()">
 				 		<a href="/join">
