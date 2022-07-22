@@ -66,6 +66,10 @@
 	<delete id="deleteAuth">
 		DELETE FROM userAuth WHERE userId=#{userId}
 	</delete>
+	
+	<update id="giveCoupon">
+		UPDATE userTbl SET enabled=#{enabled} WHERE userId=#{userId}
+	</update>
 
 
 	

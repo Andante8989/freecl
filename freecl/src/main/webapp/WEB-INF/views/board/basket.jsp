@@ -180,8 +180,9 @@
 					<input type="hidden" name="toPrice" id="payPrice">
 					<input type="hidden" name="toColor" id="payColor">
 					<input type="hidden" name="toSize" id="paySize">
+					<input type="hidden" name="proName" id="payName">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
-					<button type="submit" class="pay">전체상품 주문하기</button>	
+					<button type="submit" class="pay">전체상품 주문하기</button>	<button type="button" id="coupon">쿠폰 적용하기</button>
 				</form>
 			</div>
 			<div class="row">
@@ -213,6 +214,7 @@
 				var total = 0;
 				var col = "";
 				var siz = "";
+				var na = "";
 				
 				$(data).each(
 						function() {
@@ -227,6 +229,7 @@
 								total = delivery + sum;
 								col += this.cart_color;
 								siz += this.cart_size;
+								na += this.cart_name;
 
 						});
 					var result = total.toLocaleString();
@@ -239,9 +242,15 @@
 					$('input[id=payPrice]').attr('value', total);
 					$('input[id=payColor]').attr('value', col);
 					$('input[id=paySize]').attr('value', siz);
+					$('input[id=payName]').attr('value', na);
+					$("#coupon").on("click", function() {
+						if()
+					})
 				}); 
 		    };
 		getAllList();
+		
+		
 		
 		
 		// 장바구니 삭제 기능

@@ -14,5 +14,7 @@ public interface UserService {
 	
 	public void deleteUser(String userId);
 	
+	public void giveCoupon(UserVO vo);
+	
 	
 }

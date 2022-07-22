@@ -13,6 +13,6 @@ public class UserVO {
 	private String email;
 	private String p_num;
 	private String addr;
-	private boolean enabled;
+	private String enabled;
 	private List<AuthVO> authList;
 }

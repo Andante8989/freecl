@@ -217,9 +217,9 @@
     
     /* 회원가입 고객센터 로그인 버튼 위치 */
     .top{
-    left:70%;
-    position:relative;
-    top:20px;
+  		 	left:1100px;
+		    position:absolute;
+    		top:100px;
     }
     
     /* 충현님이 한거*/
@@ -351,7 +351,9 @@
 		
 		<header>
 		<!-- 상단의 버튼 부분 -->
-	      <img class="banner" src="https://img.sonyunara.com/files/new_banner/1657856272_0.gif">
+	     <a href="/event">
+	     <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+	     <img class="banner" src="https://img.sonyunara.com/files/new_banner/1657856272_0.gif"></a> 
 			
 			 <ul class="top">
 			 	<sec:authorize access="isAnonymous()">
@@ -427,11 +429,13 @@
 		    <div class="dropdown">
 		       <span class="dropbtn">아우터</span>
 		       <div class="dropdown-content">
+
 		        <a href="#">가디건/조끼</a>
 		        <a href="#">야상/점퍼</a>
 		        <a href="#">자켓/코트</a>
 		        <a href="#">패딩</a>
 		        <a href="#">플리스</a>
+
 		      </div>
 		    </div>
 		    <div class="dropdown">

@@ -202,13 +202,14 @@ public class BoardController {
 	///////////////////////////////////////////////////////////////////////////////////
 	
 	@PostMapping("/buy")
-	public String insertBuy(String toPrice, Model model, String toColor, String toSize) {
+	public String insertBuy(String toPrice, Model model, String toColor, String toSize, String proName) {
 		log.info("결제할 금액 : " + toPrice);
 		log.info("결제할 옷의 색상 : " + toColor);
 		log.info("결제할 옷의 사이즈 : " + toSize);
 		model.addAttribute("price", toPrice);
 		model.addAttribute("color", toColor);
 		model.addAttribute("size", toSize);
+		model.addAttribute("product", proName);
 		return "/pay";
 	}
 	

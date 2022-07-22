@@ -19,4 +19,6 @@ public interface UserMapper {
 	public void deleteUser(String userId);
 	
 	public void deleteAuth(String userId);
+	
+	public void giveCoupon(UserVO vo);
 }
