@@ -5,8 +5,12 @@
 <mapper namespace="com.ict.mapper.ChatMapper">
    
    
-   <insert id="isertRoom">
+   <insert id="insertRoom">
        INSERT INTO chattbl values (#{roomname})
    </insert>
+   
+   <select id="getList" resultType="com.ict.persistent.ChatVO">
+       SELECT * FROM chattbl
+   </select>
    
 </mapper>

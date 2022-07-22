@@ -1,5 +1,7 @@
 package com.ict.mapper;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +20,19 @@ public class ChatMapperTests {
 	@Autowired
 	private ChatMapper mapper;
 	
-	@Test
+	//@Test
 	public void insertRoom() {
 		ChatVO vo = new ChatVO();
 		log.info("vo : " +vo);
-		vo.setRoomname("room");
+		vo.setRoomname("ddd");
 		mapper.insertRoom(vo);
 		log.info("vo : " + vo);
+		
+	}
+	
+	@Test
+	public void getList(){
+		log.info(mapper.getList());
 		
 	}
 

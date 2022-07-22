@@ -10,7 +10,7 @@
 <h1>${param.userId }님,환영합니다.</h1>
 <h1>${param.room_id }방으로.</h1>
 
-    <form action="/chatlist">
+    <form action="/chatlist" method="get">
            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 				방 이름 : <input type="text" name="room_id"><br>
 				<input type="hidden" name="userId" value="${param.userId }" />

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,22 @@
 	 	<input type="hidden" name="room_id" value="${param.room_id }" />
         <input type="submit" value="${param.room_id }방 으로 들어가기"/>
     </form>
+    
+    <table class="table table-hover">
+         <thead>
+             <tr>
+                <td>방 이름</td>
+      
+             </tr>
+         </thead>
+          <tbody>
+              <tr>
+                 
+                 <td><span class="badge text-bg-dark">${param.room_id}</span></td>
+                 
+              </tr>
+          </tbody>
+     </table>
 
 
 

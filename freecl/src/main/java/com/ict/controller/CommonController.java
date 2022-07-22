@@ -1,6 +1,7 @@
 package com.ict.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ict.persistent.AuthVO;
+import com.ict.persistent.ChatVO;
+import com.ict.persistent.ReplyVO;
 import com.ict.persistent.UserVO;
+import com.ict.service.ChatService;
 import com.ict.service.UserService;
 
 import lombok.Setter;
@@ -34,6 +38,9 @@ public class CommonController {
 	
 	@Autowired
 	private UserService service;
+	
+	@Autowired
+	private ChatService service2;
 	
 	@Autowired
 	private PasswordEncoder pwen;
@@ -161,6 +168,24 @@ public class CommonController {
 		} catch (Exception e) {
 			entity = new ResponseEntity<String>(
 					e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	
+	@GetMapping(value="/all",
+
+			produces = {MediaType.APPLICATION_XML_VALUE,
+			   MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<ChatVO>> list() {
+		// 깡통 Entity를 먼저 생성
+		ResponseEntity<List<ChatVO>> entity = null;
+		
+		try {
+			entity = new ResponseEntity<>(
+					service2.getList(), HttpStatus.OK);
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}

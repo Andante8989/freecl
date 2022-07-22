@@ -138,7 +138,7 @@
 		color : black;
 	}
 	#replies{
-	margin:50px;
+	margin:30px;
 	}
 	.form-control{
 	width:800px;
@@ -153,29 +153,121 @@
 	}
 	
 	
+	        
+	 .replytext{
+	 font-size: 20px;
+	 }
+	 
+	 .replyLi{
+	 font-size:22.5px;
+	 margin:15px;
+	 }
+	
 #modDiv{
     width: 500px;
-    height: 100px;
-    background-color: black;
+    height: 200px;
+
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top:150px;
     margin-top: 1550px;
-    margin-left: -150px;
     padding: 10px;
+    margin-left: 300px;
     z-index: 1000;
+    
+    background: -moz-linear-gradient(top, #FF7D9E 0%, #FFD9E3 100%);
+    background: -webkit-linear-gradient(top, #FF7D9E 0%, #FFD9E3 100%);
+    background: linear-gradient(to bottom, #FF7D9E 0%, #FFD9E3 100%);
 }
+
 
 .modal-title{
+color:white;
 
 }
-	
+
+ #replytext{
+  width: 440px;
+  height: 32px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: white;
+}
+
+#replyModBtn{
+background-color: white;
+margin-top: 10px;
+
+}
+
+#replyDelBtn{
+background-color: white;
+
+}
+
+#closeBtn{
+background-color: white;
+
+}
+
+#replybutton{
+background-color: #ff7d9e; 
+color: white;
+width: 100px;
+  height: 32px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+}
+
+#replyAddBtn{
+
+	background-color: #ff7d9e; 
+	color: white;
+	width: 150px;
+	  height: 40px;
+	  font-size: 20px;
+	  border: 0;
+	  border-radius: 5px;
+	  outline: none;
+	  padding-left: 10px;
+	  margin: 15px;
+	  margin-left: 800px;
+
+}
+
+#newReplyText{
+ width: 800px;
+  height: 35px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+  margin:10px;
+}
+
+#newReplyer{
+border:0;
+font-size:30px;
+}
+
+
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	 <!-- 상단의 버튼 부분 -->
+	 
 	 
 			 <ul class="top">
 			 		<sec:authorize access="isAnonymous()">
@@ -301,13 +393,13 @@
     <!-- 댓글쓰기 -->
 <div class="row">
      <div class="box-body">
-         <strong>글쓴이</strong>
-         <input type="text" id="newReplyer" class="form-control">
-         <strong>댓글</strong>
-         <input type="text" id="newReplyText" class="form-control"><br>
+         <div class="col-md-9">
+			<input type="text" id="newReplyer" name="userId" value="<sec:authentication property="principal.user.userId" />" readonly>
+		 </div>
+         <input type="text" id="newReplyText"><br>
      </div><!-- body -->
      <div class="box-footer">
-         <button type="button" class="btn btn-primary" id="replyAddBtn">댓글 작성</button>
+         <button type="button"  id="replyAddBtn">댓글 작성</button>
      </div><!-- footer -->
 </div><!-- row -->
    
@@ -451,7 +543,7 @@ var csrfTokenValue = "${_csrf.token}";
 
 	
 	
-	 // 댓글 등록
+	 // 댓글리스트
 	 function getAllList(){
 		    let bno = ${board.boardNum};
 			let str = "";
@@ -465,14 +557,14 @@ var csrfTokenValue = "${_csrf.token}";
 						
 						let date = new Date(timestamp);
 						
-						let formattedTime = `게시일 : \${date.getFullYear()}년
+						let formattedTime = ` \${date.getFullYear()}년
 						                            \${(date.getMonth()+1)}월
 						                            \${date.getDate()}일`;
 	str += 
 		`<div class='replyLi' data-rno='\${this.rno}'>
 	        <strong>\${this.replyer}</strong>-\${formattedTime}<br/>
 	        <div class='replytext'>\${this.reply}</div>
-	        <button type='button' class='btn btn-info'>수정/삭제</button>
+	        <button type='button' id='replybutton'>수정/삭제</button>
 	        </div>`;
 				});
 				console.log(str);
