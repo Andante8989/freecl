@@ -173,7 +173,7 @@ public class CommonController {
 		return entity;
 	}
 	
-<<<<<<< HEAD
+
 	@GetMapping(value="/all",
 
 			produces = {MediaType.APPLICATION_XML_VALUE,
@@ -192,7 +192,7 @@ public class CommonController {
 		return entity;
 	}
 	
-=======
+
 	@GetMapping(value="/event")
 	public void event() {
 		
@@ -219,5 +219,5 @@ public class CommonController {
 		}
 		return entity;
 	}
->>>>>>> Aantante
+
 }	
