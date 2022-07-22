@@ -32,14 +32,15 @@ var csrfTokenValue = "${_csrf.token}";
 	let itemPnum = '<sec:authentication property="principal.user.p_num" />';
 	let buyColor = '${color}';
 	let buySize =  '${size}';
-	
+	let name = '${product}';
+	console.log(name);
 	function iamport() {
 		IMP.init('imp23066347');
 		IMP.request_pay({
 			pg : 'html5_inicis', // kg이니시스
 			pay_method : 'card', // 결제수단
 			merchant_uid : merchant_uid,
-			name : '옷', // 결제창에 줄 상품명
+			name : name, // 결제창에 줄 상품명
 			amount : itemPrice,  // 금액
 			buyer_email : itemEmail, // 구매자 이메일
 			buyer_name : buyer,
@@ -70,6 +71,7 @@ var csrfTokenValue = "${_csrf.token}";
 					}),
 					success: function() {
 						alert(itemTitle + " 결제완료!" );
+						// 결제완료시 메인페이지로 리다이렉트	
 						window.location.href = "http://localhost:52000/main";
 					}
 				});

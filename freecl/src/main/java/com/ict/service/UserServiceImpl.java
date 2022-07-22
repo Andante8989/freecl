@@ -43,4 +43,10 @@ public class UserServiceImpl implements UserService {
 		mapper.deleteAuth(userId);
 		mapper.deleteUser(userId);
 	}
+
+	@Override
+	public void giveCoupon(UserVO vo) {
+		mapper.giveCoupon(vo);
+		
+	}
 }

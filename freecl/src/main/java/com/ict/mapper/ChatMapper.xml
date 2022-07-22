@@ -5,7 +5,7 @@
 <mapper namespace="com.ict.mapper.ChatMapper">
    
    
-   <insert id="isertRoom">
+   <insert id="insertRoom">
        INSERT INTO chattbl values (#{roomname})
    </insert>
    
