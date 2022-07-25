@@ -27,7 +27,7 @@ public class UserMapperTests {
 		log.info("그린님을 삭제했습니다");
 	}
 	
-	@Test
+	//@Test
 	public void giveCouponTest() {
 		UserVO vo = new UserVO();
 		vo.setEnabled("0");
@@ -36,7 +36,7 @@ public class UserMapperTests {
 		log.info("쿠폰받았는지 확인 : " + vo);
 	}
 	
-	//@Test
+	@Test
 	public void userDetailTest() {
 		log.info(mapper.read("Andante"));
 	}

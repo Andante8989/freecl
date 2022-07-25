@@ -55,6 +55,8 @@
     		background: linear-gradient(to bottom, #7AE9FF 0%, #FFFFFF 100%);
 	  }
 	  #bargen {
+	  	width : 300px;
+	  	height : 100px;
 	  	background-color : black;
 	  	color : white;
 	  }
