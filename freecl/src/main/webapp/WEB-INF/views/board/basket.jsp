@@ -78,7 +78,7 @@
  	  	padding: 40px 44px 48px 44px;
    		background: #f6f6f6;
 	}
-	#pri {
+	#pri, #pri2{
 		color : #ff7d9e;
 		font-size : 28px;
 		}
@@ -158,12 +158,13 @@
 				<div class="price">
 					<br/>
 					<strong id="pri"></strong>
+					<strong id="pri2"></strong>
 				</div>
 				<br/>
 				<ul class="info">
 					<li>
 						<span class="t1">총 상품금액</span>
-						<span class="t2"><span id="total_price"></span>원</span>
+						<span class="t2"><span id="total_price">원</span></span>
 					</li>
 					<li>
 						<span class="t1">배송비</span>
@@ -200,7 +201,8 @@
 	<script type="text/javascript">
 		var csrfHeaderName = "${_csrf.headerName}";
 		var csrfTokenValue = "${_csrf.token}";
-
+		var ena = '<sec:authentication property="principal.user.enabled" />';
+		console.log(ena);
 	
 		var str = "";
 		// get json으로 현재 장바구니 데이터 모두 가져오기
@@ -232,23 +234,36 @@
 								na += this.cart_name;
 
 						});
-					var result = total.toLocaleString();
-					var sumResult = sum.toLocaleString();
+					var result = total.toLocaleString(); // 천단위, 붙이기
+					var sumResult = sum.toLocaleString(); // 천단위, 붙이기
 					console.log(col);
 					console.log(siz);
 					$("#cc").html(str);
-					$("#pri").html(result + "원");
-					$("#total_price").html(sumResult);
-					$('input[id=payPrice]').attr('value', total);
+					$("#pri").html(result + "원"); // 총 결제금액(배송비포함)
+					$("#total_price").html(sumResult);  // 총 상품에 대한 금액
+					$('input[id=payPrice]').attr('value', total + delivery);
 					$('input[id=payColor]').attr('value', col);
 					$('input[id=paySize]').attr('value', siz);
 					$('input[id=payName]').attr('value', na);
 					$("#coupon").on("click", function() {
-						if()
-					})
+						if(ena == 1) {
+							alert("쿠폰이 없습니다.");
+						} else if(confirm("쿠폰을 적용하시겠습니까?")) {
+							console.log("쿠폰적용시작");
+							console.log(total-10000);
+							var total2 = total-10000;
+							var strTotal = total2.toLocaleString();
+							$("#pri2").html(strTotal + "원");
+							$("#pri").css("display", "none");
+							$('input[id=payPrice]').attr('value', total2 + delivery);
+						}
+					});
+					
 				}); 
 		    };
 		getAllList();
+
+
 		
 		
 		
