@@ -65,7 +65,7 @@
 
 
 	
-	  /* -------상단 hr 태그 부분 ----------- */
+	    /* -------상단 hr 태그 부분 ----------- */
 		.welcome {
 		    border: none;
 		    border-top: 1px solid #E3E7EB;
@@ -73,8 +73,7 @@
 		    text-align: center;
 		    height: 17px;
 		    z-index : 3;
-		    position : relative;
-		    top : 40px;
+		   margin-top: 60px;
 		}
 		
 		.welcome:after {
@@ -86,19 +85,159 @@
 		    color: #868E96;
 		    font-size: 0.8em;
 		}
-		.container {
-			position : relative;
-			top : 40px;
-		}
-		
 	  /* ----------------------------- */
 	
 	 /* -------상단 버튼 색상, 위치 부분 ----------- */
-		.top{
-		    left:1100px;
+		 /* freecl 로고*/
+        #logo {
+		margin : 0px;
+		width : 160px;
+		position: relative;
+		margin-left: 30px;
+		top:10px;
+		left:100px;
+
+	  }
+	/* 검색창*/
+	.inform{
+	   position: absolute;
+	   left:30%;
+	   top:230px;
+	   
+	   
+	}
+	
+	/* 검색창 */
+	.ui-autocomplete-input{
+	
+	border-radius: 15px;
+	width : 300px;
+	height: 50px;
+	margin-left: 50px;
+	
+	
+	}
+	
+	header{
+		   background: white;
+		   height: 215px;
+		   padding:50px;
+		   margin:0px;
+		   }
+		   main{
+		   background: white;
+		   min-height:700px;
+		   margin-top:150px;
+		   }
+		   footer{
+		     background: white;
+		     height: 310px;
+		   }
+		
+		
+    /*---------------------------------*/
+    /* 상단의 베스트 신상 등등 버튼들 */
+			.dropdown{
+			  display : inline-block;
+	            top:10px;
+	            left:50px;
+	            z-index:10;
+	       		
+			}
+			
+	    /* 상단의 베스트 신상 등등 버튼 */
+			.dropbtn{
+			  border : none;
+			  font-weight: 550;
+			  padding : 12px;
+			  width :300px;
+			  text-align: left;
+			  cursor : pointer;
+			  font-size : 17.5px;
+			}
+			
+			
+			/* 상단의 버튼 위에 마우스 올렸을때 배경색*/
+			.dropbtn:hover{
+			  background-color : #ff7d9e;
+
+			  color : white;
+			  transition: 0.25s;
+            
+			}
+			
+			/* 버튼 위에 마우스 올렸을때 나오는 내용들 ex)자켓 패딩 등*/
+			.dropdown-content{
+			  display : none;
+			  position : absolute;
+			  z-index : 1; /*다른 요소들보다 앞에 배치*/
+			  font-weight: 500;
+			  background-color: #ff7d9e;
+			  min-width : 200px;
+			  transition: 0.25s;
+			  
+			 
+			}
+			.first {
+				color : white;
+			}
+			
+			
+			.dropdown-content a{
+			  display : block;
+			  text-decoration : none;
+			  font-size: 14.5px;
+			  padding : 12px 20px;
+			  color : white;
+			  transition: 0.25s;
+			}
+			
+			
+			/* 내용위에 올렸을때 배경색*/
+			.dropdown-content a:hover{
+			  background-color : #ffb6c1;
+			  transition: 0.25s;
+		
+			}
+			
+			/* 버튼위에 올렸을때 내용이 나오게끔 해주는*/
+			.dropdown:hover .dropdown-content {
+			  display: block;
+			  color : white;
+			  transition: 1s;
+			}
+			
+			.banner{
+		  margin-left:-50px;
+		  margin-top:-50px;
+		}
+	
+    /* 캘린더 아이콘 */
+    #calendar{
+    margin-left: 100px;
+	width : 50px;
+    }
+    
+    /* 하트 아이콘 */
+     #heart{
+    margin: 0px;
+    margin-left: 10px;
+	width : 50px;
+    }
+    
+    /* 쇼핑 아이콘 */
+    #shopping{
+    margin-bottom: 3px;
+    margin-left: 10px;
+	width :50px;
+    }
+    
+    /* 회원가입 고객센터 로그인 버튼 위치 */
+    .top{
+  		 	left:900px;
 		    position:absolute;
-		    top:10px;
-   		 }
+    		top:110px;
+    }
   		.w-btn-pink-outline:hover {
 			background-color: #f199bc;
 		    color: #d4dfe6;
@@ -109,11 +248,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="header">
+<header>
 	 <!-- 상단의 버튼 부분 -->
+	     <a href="/event">
+	     <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+	     <img class="banner" src="https://img.sonyunara.com/files/new_banner/1657856272_0.gif"></a> 
+	 
 	 
 			 <ul class="top">
-			 		<sec:authorize access="isAnonymous()">
+			 	<sec:authorize access="isAnonymous()">
 				 		<a href="/join">
 				        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
 					        회원가입
@@ -146,12 +289,115 @@
 			  </ul>
 		
 	  <!-- 여기까지 상단의 버튼 부분 --> 
-	  
+	         <hr class="welcome">
+		
+<br>  
+			    
+			
+			<div class="dropdown">
+			 <button type="button" class="btn btn-right" id="btn-modal">〓</button>
+			</div>
+		    <div class="dropdown">
+		      <span class="dropbtn">
+		         베스트  
+		      </span>
+		    </div> 
+		    <div class="dropdown">
+		       <span class="dropbtn">신상</span>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">아우터</span>
+		       <div class="dropdown-content">
 
-	<hr class="welcome">
+		        <a href="#">가디건/조끼</a>
+		        <a href="#">야상/점퍼</a>
+		        <a href="#">자켓/코트</a>
+		        <a href="#">패딩</a>
+		        <a href="#">플리스</a>
+
+		      </div>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">상의</span>
+		       <div class="dropdown-content">
+		        <a href="#">긴팔티셔츠</a>
+		        <a href="#">맨투맨</a>
+		        <a href="#">후드</a>
+		        <a href="#">반팔/민소매티셔츠</a>
+		        <a href="#">니트</a>
+		      </div>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">셔츠/블라우스</span>
+		       <div class="dropdown-content">
+		       
+		      </div>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">트레이닝</span>
+		       <div class="dropdown-content">
+		        
+		      </div>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">베이직</span>
+		       <div class="dropdown-content">
+		        
+		      </div>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">원피스</span>
+		       <div class="dropdown-content">
+		        
+		      </div>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">스커트</span>
+		       <div class="dropdown-content">
+		       
+		      </div>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">팬츠</span>
+		       <div class="dropdown-content">
+		        <a href="#">청바지</a>
+		        <a href="#">롱팬츠</a>
+		        <a href="#">슬랙스</a>
+		        <a href="#">면바지</a>
+		        <a href="#">레깅스</a>
+		        <a href="#">숏팬츠</a>
+		      </div>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">가방</span>
+		       <div class="dropdown-content">
+		        <a href="#">백팩/스쿨팩</a>
+		        <a href="#">크로스백/토트백</a>
+		     
+		      </div>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">신발</span>
+		       <div class="dropdown-content">
+		        <a href="#">운동화/단화</a>
+		        <a href="#">구두/워커</a>
+		        <a href="#">샌들/슬리퍼/장화</a>
+		      </div>
+		    </div>
+		    <div class="dropdown">
+		       <span class="dropbtn">악세사리</span>
+		       <div class="dropdown-content">
+		        <a href="#">주얼리</a>
+		        <a href="#">모자/벨트</a>
+		        <a href="#">양말/스타킹</a>
+		      </div>
+		    </div>
+		  </header>
 
 
 </div>
+
+<main>
 <div class="container">
 	<div class="row">
 		<div class="col-md-3"></div>
@@ -216,6 +462,8 @@
 		<div class="col-md-3"></div>
 		</div>
 	</div>
+	
+	</main>
 <div class="footer"></div>	
 </body>
 </html>

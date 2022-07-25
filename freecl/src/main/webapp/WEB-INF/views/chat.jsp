@@ -131,11 +131,12 @@ var csrfTokenValue = "${_csrf.token}";
 	<h3>${param.userId }님,환영합니다.</h3>
 	<h3>${param.room_id }방으로 환영합니다.</h3>
 	
-    <form action="/chatlist" method="get">
+    <form action="/main" method="get">
 	    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 		<input type="hidden" name="userId" value="${param.userId }" />
 	 	<input type="hidden" name="room_id" value="${param.userId }" />
-       <input type="submit" value="채팅방 목록"/>
+	 	<input type="hidden" name="roomname" value="${param.roomname }" />
+       <input type="submit" value="메인으로"/>
     </form>
 
     

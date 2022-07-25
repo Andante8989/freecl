@@ -37,7 +37,7 @@
 	
 	 /* -------상단 버튼 색상, 위치 부분 ----------- */
 		.top{
-		    left:1100px;
+		    left:900px;
 		    position:absolute;
 		    top:10px;
    		 }

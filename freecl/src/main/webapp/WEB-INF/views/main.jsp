@@ -14,9 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
     
-         body{
-		   background:url(/resources/image/Pink Flowers Linktree Background.png);
-		 }
+        
 		form {
 		 	display: inline-block;
 		 }
@@ -217,7 +215,7 @@
     
     /* 회원가입 고객센터 로그인 버튼 위치 */
     .top{
-  		 	left:1100px;
+  		 	left:900px;
 		    position:absolute;
     		top:100px;
     }
@@ -514,6 +512,7 @@
 		      </div>
 		    </div>
 		  </header>
+		  
 		  <main>
 		  
 		  <div class="section">
@@ -689,7 +688,10 @@
 		</div>
 		
 		<div class="chat">
+		   <ul class="chatlist">
 		   
+		   </ul>
+		
 		</div>
 </footer>
 
@@ -739,7 +741,7 @@
 						console.log(this);
 						
 				str += 
-				`<div>\${this.roomname}</div>`;
+				`<div><a href="/chatting?userId=${param.userId }&room_id=${param.roomname}">\${this.roomname}</a></div>`;
 				});
 				console.log(str);
 				$(".chat").html(str);

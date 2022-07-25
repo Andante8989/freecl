@@ -19,22 +19,6 @@
         <input type="submit" value="${param.room_id }방 으로 들어가기"/>
     </form>
     
-    <table class="table table-hover">
-         <thead>
-             <tr>
-                <td>방 이름</td>
-      
-             </tr>
-         </thead>
-          <tbody>
-              <tr>
-                 
-                 <td><span class="badge text-bg-dark">${param.room_id}</span></td>
-                 
-              </tr>
-          </tbody>
-     </table>
-
 
 
 

@@ -10,11 +10,29 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>	
 
+
+         header{
+		   background: white;
+		   height: 215px;
+		   padding:50px;
+		   margin:0px;
+		   }
+		   main{
+		   background: white;
+		   min-height:700px;
+		   margin-top:230px;
+		   }
+		   footer{
+		     background: white;
+		     height: 310px;
+		   }
+		
+		
     /*---------------------------------*/
     /* 상단의 베스트 신상 등등 버튼들 */
 			.dropdown{
 			  display : inline-block;
-	            top:200px;
+	            top:10px;
 	            left:50px;
 	            z-index:10;
 	       		
@@ -100,6 +118,7 @@
 		    text-align: center;
 		    height: 17px;
 		    z-index : 3;
+		   margin-top: 60px;
 		}
 		
 		.welcome:after {
@@ -114,11 +133,62 @@
 	  /* ----------------------------- */
 	
 	 /* -------상단 버튼 색상, 위치 부분 ----------- */
-		.top{
-		  	left:1100px;
+		 /* freecl 로고*/
+        #logo {
+		margin : 0px;
+		width : 160px;
+		position: relative;
+		margin-left: 30px;
+		top:10px;
+		left:100px;
+
+	  }
+	/* 검색창*/
+	.inform{
+	   position: absolute;
+	   left:30%;
+	   top:230px;
+	   
+	   
+	}
+	
+	/* 검색창 */
+	.ui-autocomplete-input{
+	
+	border-radius: 15px;
+	width : 300px;
+	height: 50px;
+	margin-left: 50px;
+	
+	
+	}
+	
+    /* 캘린더 아이콘 */
+    #calendar{
+    margin-left: 100px;
+	width : 50px;
+    }
+    
+    /* 하트 아이콘 */
+     #heart{
+    margin: 0px;
+    margin-left: 10px;
+	width : 50px;
+    }
+    
+    /* 쇼핑 아이콘 */
+    #shopping{
+    margin-bottom: 3px;
+    margin-left: 10px;
+	width :50px;
+    }
+    
+    /* 회원가입 고객센터 로그인 버튼 위치 */
+    .top{
+  		 	left:900px;
 		    position:absolute;
-		    top:10px;
-   		 }
+    		top:110px;
+    }
   		.w-btn-pink-outline:hover {
 			background-color: #f199bc;
 		    color: #d4dfe6;
@@ -201,10 +271,6 @@
 		background-color : black;
 		color : #fff;
 		font-size : 25px;
-	}
-	#logo {
-		margin : 200px;
-		width : 200px;
 	}
 	.photo {
 		height : 800px;
@@ -314,7 +380,7 @@ width: 100px;
 	  outline: none;
 	  padding-left: 10px;
 	  margin: 15px;
-	  margin-left: 800px;
+	  margin-left: 650px;
 
 }
 
@@ -335,6 +401,10 @@ border:0;
 font-size:30px;
 }
 
+.banner{
+		  margin-left:-50px;
+		  margin-top:-50px;
+		}
 
 
 </style>
@@ -342,11 +412,15 @@ font-size:30px;
 <title>Insert title here</title>
 </head>
 <body>
+<header>
 	 <!-- 상단의 버튼 부분 -->
+	     <a href="/event">
+	     <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+	     <img class="banner" src="https://img.sonyunara.com/files/new_banner/1657856272_0.gif"></a> 
 	 
 	 
 			 <ul class="top">
-			 		<sec:authorize access="isAnonymous()">
+			 	<sec:authorize access="isAnonymous()">
 				 		<a href="/join">
 				        <button class="btn btn-light w-btn-pink-outline" type="button" style="background-color: white;">
 					        회원가입
@@ -379,8 +453,24 @@ font-size:30px;
 			  </ul>
 		
 	  <!-- 여기까지 상단의 버튼 부분 --> 
-	  
-	  	<div class="dropdown">
+	         <hr class="welcome">
+		<div class="inform">
+			   <input type="hidden" name="searchOrder" value>
+			   <input type="text" title="검색어를 입력하세요" id="keyword" name="keyword" value autocomplete="off" class="ui-autocomplete-input">
+		<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+		  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+		</svg>
+        <img id="calendar" src="/resources/image/calendar.png">
+        <img id="heart" src="/resources/image/heart.png">
+        <img id="shopping" src="/resources/image/shopping.png">
+		
+		   </div>
+		   <a href="/main"><img id="logo" src="/resources/image/Freecl.png"></a>
+		   <span class="material-symbols-outlined"></span>
+<br>  
+			    
+			
+			<div class="dropdown">
 			 <button type="button" class="btn btn-right" id="btn-modal">〓</button>
 			</div>
 		    <div class="dropdown">
@@ -478,13 +568,11 @@ font-size:30px;
 		        <a href="#">양말/스타킹</a>
 		      </div>
 		    </div>
-	  
-	  
-	  
-<hr class="welcome">
- <img id="logo" src="/resources/image/Freecl.png">
-</div>
-<div class="container">
+		  </header>
+		  
+		  
+<main>
+  <div class="container">
 	<div class="row">
 		<div class="col-md-6 photo">
 			<img src="/resources/image/jean.png" >
@@ -559,6 +647,8 @@ font-size:30px;
 	 상품정보    관련상품  리뷰 qna 쇼핑가이드
 	</div>
 </div>
+
+</main>
 <!-- 댓글 시작-->
 <div class="row">
 	    <div id="replies">
@@ -599,7 +689,6 @@ font-size:30px;
 
 <!-- 여기서부터 화면 하단 기본 셋팅 -->
 <hr/>
-
 <div class="row">
 	<div class="col-md-3 offset-md-1">	
 		<p>customer center</p>
