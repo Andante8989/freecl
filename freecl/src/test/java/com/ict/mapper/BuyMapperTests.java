@@ -19,11 +19,16 @@ public class BuyMapperTests {
 	private BuyMapper mapper;
 	
 	
-	@Test
+	//@Test
 	public void testInsert() {
 		BuyVO vo = new BuyVO();
 
 		mapper.insertBuy(vo);
 		
+	}
+	
+	@Test
+	public void getBuyDetail() {
+		log.info(mapper.getBuyDetail("Andante"));
 	}
 }

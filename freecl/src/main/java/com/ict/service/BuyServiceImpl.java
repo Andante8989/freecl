@@ -20,9 +20,8 @@ public class BuyServiceImpl implements BuyService{
 	}
 
 	@Override
-	public List<BuyVO> buyList(String buyer) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BuyVO> getBuyDetail(String buyer) {
+		return mapper.getBuyDetail(buyer);
 	}
 
 }

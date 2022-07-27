@@ -456,6 +456,11 @@
 				<div class="row">
 					<div class="col-md-12">
 						<a href="/userOut"><button id="nemo">회원탈퇴</button></a>
+						<form action="buyList" method="post">
+							<input type="hidden" name="buyer" value="<sec:authentication property="principal.user.userId" />">
+							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
+							<button type="submit">주문내역보기</button>
+						</form>
 					</div>
 				</div>
 		</div>

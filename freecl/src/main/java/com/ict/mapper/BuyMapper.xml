@@ -9,9 +9,9 @@
 			values (#{merchant_uid}, #{buyer}, sysdate, #{buy_price}, #{buyColor}, #{buySize})
 	</insert>
 	
-	<select id="getList" resultType="com.ict.persistent.BuyVO">
+	<select id="getBuyDetail" resultType="com.ict.persistent.BuyVO">
 		<![CDATA[
-			SELECT * FROM buyTbl ORDER BY buydate desc
+			SELECT * FROM buyTbl where buyer=#{buyer}
 		]]>
 	</select>
 

@@ -24,9 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ict.persistent.AuthVO;
+import com.ict.persistent.BuyVO;
 import com.ict.persistent.ChatVO;
 import com.ict.persistent.ReplyVO;
 import com.ict.persistent.UserVO;
+import com.ict.service.BuyService;
 import com.ict.service.ChatService;
 import com.ict.service.UserService;
 
@@ -42,6 +44,9 @@ public class CommonController {
 	
 	@Autowired
 	private ChatService service2;
+	
+	@Autowired
+	private BuyService service3;
 	
 	@Autowired
 	private PasswordEncoder pwen;
@@ -218,6 +223,14 @@ public class CommonController {
 					e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return entity;
+	}
+	
+	
+	@PostMapping(value="/buyList")
+	public void buyList(String buyer, Model model) {
+		log.info("buyList들어갈 id : " + buyer);
+		List<BuyVO> buy = service3.getBuyDetail(buyer);
+		model.addAttribute("buy", buy);
 	}
 
 }	

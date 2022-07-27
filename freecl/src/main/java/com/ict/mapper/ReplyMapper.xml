@@ -20,7 +20,7 @@
 	 <!-- 리플같은 경우 제목이 없고 본문만 있기 때문에 이렇게 처리 -->
 	    UPDATE replytbl
 	        SET
-	    reply = #{reply}, updateDate = SYSDATE
+	    reply = #{reply}, updatDate = SYSDATE
 	    WHERE rno = #{rno}
 	 </update>
 	 

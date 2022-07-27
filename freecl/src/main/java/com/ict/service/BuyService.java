@@ -8,5 +8,5 @@ public interface BuyService {
 
 	public void insertBuy(BuyVO vo);
 	
-	public List<BuyVO> buyList(String buyer);
+	public List<BuyVO> getBuyDetail(String buyer);
 }
