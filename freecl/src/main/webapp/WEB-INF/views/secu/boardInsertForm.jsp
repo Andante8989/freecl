@@ -9,10 +9,12 @@
 </head>
 <body>
 <h1>상품 등록하기</h1>
-<form action="/secu/boardInsert" method="post" accept-charset="utf-8">
+<form action="/secu/boardInsert" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 상품이름 : <input type="text" name="name" placeholder="30자 이내입니다" required><br/>
 상품내용 : <input type="text" name="content" placeholder="50자 이내입니다" required><br/>
-상품이미지 : 일단없음<br/>
+	<div class="uploadDiv">
+상품이미지 : <input type="file" name="uploadFile" multiple><button type="button" id="uploadBtn">Upload</button><br/>
+	</div>
 상품종류 : <select class="form-select" name="kind" aria-label="Default select example">
 		  <option selected>카테고리를 설정해주세요</option>
 		  <option value="바지">바지</option>
@@ -38,5 +40,75 @@
 <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
 <input type="submit" value="상품등록하기">
 </form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue = "${_csrf.token}";
+
+$(document).ready(function(){
+	
+	
+	// 파일 사이즈와 확장자명 필터기능
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	var maxSize = 5242880; // 5MB
+	
+	function checkExtension(fileName, fileSize) {
+		if(fileSize >= maxSize){
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		if(regex.test(fileName)) {
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	
+	
+	
+	
+	$('#uploadBtn').on("click", function(e){
+		var formData = new FormData();
+		
+		var inputFile = $("input[name='uploadFile']");
+		
+		var files = inputFile[0].files;
+		
+		console.log(files);
+		
+		// 파일 데이터를 폼에 넣기
+		for (var i = 0; i < files.length; i++) {
+			if(!checkExtension(files[i].name, files[i].size)) {
+				return false;
+			}
+			formData.append("uploadFile", files[i]);
+		}
+		
+		$.ajax({
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
+			url: '/secu/boardInsert',
+			processData: false,
+			contentType: false,
+			data: formData,
+			dataType: 'json',
+			type: 'POST',
+			success: function(result) {
+				alert("Uploaded");
+			}
+		}); // ajax 끝
+	});
+	
+});
+
+
+
+
+
+</script>
 </body>
 </html>
