@@ -748,6 +748,28 @@
 			});			
 		}
 		getAllList();
+		
+		(function() {
+			$.getJSON("/board/getAttachList", {boardNum : boardNum}, function(arr) {
+				console.log(arr);
+				
+				let str = "";
+				
+				$(arr).each(function(i, attach) {
+						let fileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + "_" + attach.fileName);
+						console.log(fileCallPath);
+						str += `<li data-path='\${attach.uploadPath}'data-filename='\${attach.fileName}'>
+									<div>
+										<img src='/board/display?fileName=\${fileCallPath}'>
+									</div>
+								</li>`;
+				});
+				//위에서 str변수에 작성된 태그 형식을 화면에 끼워넣기
+				$("#uploadResult ul").html(str);
+			});
+		})(); // 익명함수 종료
+		
+	
     
 
     </script>

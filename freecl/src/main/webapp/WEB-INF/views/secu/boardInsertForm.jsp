@@ -67,7 +67,7 @@ $(document).ready(function(){
 	}
 	
 	
-	
+	var cloneObj = $(".uploadDiv").clone();
 	
 	
 	$('#uploadBtn').on("click", function(e){
@@ -91,7 +91,7 @@ $(document).ready(function(){
 			beforeSend : function(xhr){
 				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 			},
-			url: '/secu/boardInsert',
+			url: '/secu/uploadAction',
 			processData: false,
 			contentType: false,
 			data: formData,
@@ -99,6 +99,7 @@ $(document).ready(function(){
 			type: 'POST',
 			success: function(result) {
 				alert("Uploaded");
+				$(".uploadDiv").html(cloneObj.html());
 			}
 		}); // ajax 끝
 	});

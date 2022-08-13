@@ -11,7 +11,7 @@ public class BoardVO {
 	private int boardNum;
 	private String name;
 	private String content;
-	private String image;
+
 	private String kind;
 	private String useyn;
 	private int hit;
@@ -20,6 +20,8 @@ public class BoardVO {
 	private int amount;
 	private List<ColorVO> colorList;
 	private List<SizeVO> sizeList;
+	
+	private List<BoardAttachVO> attachList;
 	
 
 	

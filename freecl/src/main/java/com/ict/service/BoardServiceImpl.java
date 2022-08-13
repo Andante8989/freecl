@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ict.mapper.BoardAttachMapper;
 import com.ict.mapper.BoardMapper;
+import com.ict.persistent.BoardAttachVO;
 import com.ict.persistent.BoardVO;
 
 import lombok.extern.log4j.Log4j;
@@ -16,6 +18,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardMapper mapper;
+	
+	@Autowired
+	private BoardAttachMapper attachMapper;
 	
 	@Override
 	public List<BoardVO> getList() {
@@ -47,5 +52,10 @@ public class BoardServiceImpl implements BoardService {
 		mapper.deleteSize(boardNum);
 		mapper.deleteBoard(boardNum);
 		
+	}
+
+	@Override
+	public List<BoardAttachVO> getAttachList(int boardNum) {
+		return attachMapper.findByBno(boardNum);
 	}
 }
