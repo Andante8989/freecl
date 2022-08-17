@@ -5,7 +5,7 @@
 
 <mapper namespace="com.ict.mapper.BoardAttachMapper">
 	<insert id="insert">
-		INSERT INTO clothesImage (uploadPath, fileName, boardNum) values (#{uploadPath), #{fileName}, #{boardNum})	
+		INSERT INTO clothesImage (uploadPath, fileName, boardNum) values (#{uploadPath}, #{fileName}, #{boardNum})	
 	</insert>
 	
 	<select id="findByBno" resultType="com.ict.persistent.BoardAttachVO">

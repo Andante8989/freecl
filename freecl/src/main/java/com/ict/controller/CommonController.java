@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ict.persistent.AuthVO;
 import com.ict.persistent.BuyVO;
+import com.ict.persistent.ChartVO;
 import com.ict.persistent.ChatVO;
 import com.ict.persistent.ReplyVO;
 import com.ict.persistent.UserVO;
 import com.ict.service.BuyService;
+import com.ict.service.ChartService;
 import com.ict.service.ChatService;
 import com.ict.service.UserService;
 
@@ -47,6 +49,9 @@ public class CommonController {
 	
 	@Autowired
 	private BuyService service3;
+	
+	@Autowired
+	private ChartService service4;
 	
 	@Autowired
 	private PasswordEncoder pwen;
@@ -231,6 +236,12 @@ public class CommonController {
 		log.info("buyList들어갈 id : " + buyer);
 		List<BuyVO> buy = service3.getBuyDetail(buyer);
 		model.addAttribute("buy", buy);
+	}
+	
+	@GetMapping(value="/chart")
+	public void chart(Model model) {
+		ChartVO vo = service4.getList();
+		model.addAttribute("list", vo);
 	}
 
 }	

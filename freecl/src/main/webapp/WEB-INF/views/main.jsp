@@ -586,6 +586,8 @@
 		    <p>UserVO : <sec:authentication property="principal.user" /></p>
 			 </form>
 		   </sec:authorize>
+		   
+		   <a href="chart"><button>차트 확인</button></a>
 		 
 
 
