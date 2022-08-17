@@ -45,3 +45,8 @@
   + 장바구니 기능
   + 상품 결제시 이니시스로 연동
   + 마이페이지에서 주문내역 조회
+
++ 데이터 시각화
+  + open api crawling
+  + python으로 dataFrame화
+  + oracle과 연동하여 amcharts로 시각화
