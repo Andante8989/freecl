@@ -51,3 +51,5 @@
   + open api crawling
   + python으로 dataFrame화
   + oracle과 연동하여 amcharts로 시각화
+  
+![데이터시각화](https://user-images.githubusercontent.com/98159122/185538486-2b08eb12-621f-458c-9b63-3fdfd60771e7.png)
