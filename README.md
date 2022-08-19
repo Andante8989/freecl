@@ -25,7 +25,8 @@
 <br/>
 
 ## ERD 설계
-![freeclERD](https://user-images.githubusercontent.com/98159122/183849285-4784e448-e326-4c29-be96-f24dd40edea7.png)
+![freecl다이어그램](https://user-images.githubusercontent.com/98159122/185538268-b99b63b0-c88e-40ca-9297-3b86d7371b23.png)
+
 
 
 ## 핵심기능   
