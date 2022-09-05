@@ -13,7 +13,7 @@
 상품이름 : <input type="text" name="name" placeholder="30자 이내입니다" required><br/>
 상품내용 : <input type="text" name="content" placeholder="50자 이내입니다" required><br/>
 	<div class="uploadDiv">
-상품이미지 : <input type="file" name="uploadFile" multiple><button type="button" id="uploadBtn">Upload</button><br/>
+상품이미지 : <input type="file" id ="fileItem" name='uploadFile' style="height:30px;"><br/>
 	</div>
 상품종류 : <select class="form-select" name="kind" aria-label="Default select example">
 		  <option selected>카테고리를 설정해주세요</option>
@@ -47,65 +47,53 @@
 var csrfHeaderName = "${_csrf.headerName}";
 var csrfTokenValue = "${_csrf.token}";
 
-$(document).ready(function(){
+let regex = new RegExp("(.*?)\.(jpg|png)$");
+let maxSize = 1048576; //1MB
+
+
+	function fileCheck(fileName, fileSize){
 	
-	
-	// 파일 사이즈와 확장자명 필터기능
-	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-	var maxSize = 5242880; // 5MB
-	
-	function checkExtension(fileName, fileSize) {
 		if(fileSize >= maxSize){
 			alert("파일 사이즈 초과");
 			return false;
 		}
-		if(regex.test(fileName)) {
+			  
+		if(!regex.test(fileName)){
 			alert("해당 종류의 파일은 업로드할 수 없습니다.");
 			return false;
 		}
-		return true;
+		
+		return true;		
+		
 	}
-	
-	
-	var cloneObj = $(".uploadDiv").clone();
-	
-	
-	$('#uploadBtn').on("click", function(e){
-		var formData = new FormData();
+
+	$("input[type='file']").on("change", function(e){
 		
-		var inputFile = $("input[name='uploadFile']");
+		let formData = new FormData();
+		let fileInput = $('input[name="uploadFile"]');
+		let fileList = fileInput[0].files;
+		let fileObj = fileList[0];
 		
-		var files = inputFile[0].files;
-		
-		console.log(files);
-		
-		// 파일 데이터를 폼에 넣기
-		for (var i = 0; i < files.length; i++) {
-			if(!checkExtension(files[i].name, files[i].size)) {
-				return false;
-			}
-			formData.append("uploadFile", files[i]);
+		if(!fileCheck(fileObj.name, fileObj.size)){
+			return false;
 		}
 		
+		formData.append("uploadFile", fileObj);
+		
 		$.ajax({
-			beforeSend : function(xhr){
+			beforeSend : function(xhr) { 
 				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 			},
-			url: '/secu/uploadAction',
-			processData: false,
-			contentType: false,
-			data: formData,
-			dataType: 'json',
-			type: 'POST',
-			success: function(result) {
-				alert("Uploaded");
-				$(".uploadDiv").html(cloneObj.html());
-			}
-		}); // ajax 끝
+			url: '/secu/uploadAjaxAction',
+	    	processData : false,
+	    	contentType : false,
+	    	data : formData,
+	    	type : 'POST',
+	    	dataType : 'json'
+		});	
+	
 	});
 	
-});
-
 
 
 

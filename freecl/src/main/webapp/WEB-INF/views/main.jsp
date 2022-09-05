@@ -13,6 +13,29 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <style>
+
+	#uploadResult {
+		width : 100%;
+		background-color : gray;
+	}
+	
+	#uploadResult ul {
+		display : flex;
+		flex-flow : row;
+		justify-content : center;
+		align-items : center;
+	}
+	
+	#uploadResult ul li {
+		list-style : none;
+		padding: 10px;
+		align-content : center;
+		text-align : center;
+	}
+	
+	#uploadResult ul li img {
+		width : 100%;
+	}
     
         
 		form {
@@ -566,6 +589,16 @@
 		  	</tbody>
 		  </table>
 		  
+		 	<!-- 첨부파일 영역 -->
+			<div class="row">
+				<h3 class="text-primary">첨부파일</h3>
+				<div id="uploadResult">
+					<ul>
+						<!-- 첨부파일 들어갈 위치 -->
+					</ul>
+				</div>
+			</div><!-- row -->
+		  
 		   <sec:authorize access="isAuthenticated()">
 		   	<form action="/chatting" method="get">
 		    <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" />
@@ -752,7 +785,7 @@
 		getAllList();
 		
 		(function() {
-			$.getJSON("/board/getAttachList", {boardNum : boardNum}, function(arr) {
+			$.getJSON("/getAttachList", {boardNum : boardNum}, function(arr) {
 				console.log(arr);
 				
 				let str = "";
@@ -762,7 +795,7 @@
 						console.log(fileCallPath);
 						str += `<li data-path='\${attach.uploadPath}'data-filename='\${attach.fileName}'>
 									<div>
-										<img src='/board/display?fileName=\${fileCallPath}'>
+										<img src='/secu/display?fileName=\${fileCallPath}'>
 									</div>
 								</li>`;
 				});

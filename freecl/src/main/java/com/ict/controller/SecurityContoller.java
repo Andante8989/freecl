@@ -1,8 +1,11 @@
 package com.ict.controller;
 
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,13 +13,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +39,7 @@ import com.ict.service.BoardService;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
+import net.coobird.thumbnailator.Thumbnails;
 
 @Log4j
 @Controller
@@ -170,44 +179,78 @@ public class SecurityContoller {
 		return "/secu/admin";
 	}
 	
+	// 첨부파일 업로드
 	@PostMapping("/uploadAjaxAction")
-	public String uploadAjaxPost(MultipartFile[] uploadFile) {
+	public void uploadAjaxPost(MultipartFile[] uploadFile) {
 		
-		log.info("ajax post 시작합니다");
+		String uploadFolder = "C:\\upload_data";
 		
-		String uploadFolder = "C:\\upload_data\\temp";
+		// 날짜 폴더 경로
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
-		File uploadPath = new File(uploadFolder, getFolder());
+		Date date = new Date();
 		
+		String str = sdf.format(date);
 		
-		for(MultipartFile multipartFile : uploadFile) {
-			log.info("=======================");
-			log.info("upload file name : " + multipartFile.getOriginalFilename());
-			log.info("upload file size : " + multipartFile.getSize());
-			
-			String uploadFileName = multipartFile.getOriginalFilename();
-			
-			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
-			
-			log.info("last file name : " + uploadFileName);
-			
-			try {
-				File saveFile = new File(uploadFolder, uploadFileName);
-				multipartFile.transferTo(saveFile);
-				
-				// 여기서부터 썸네일 생성 로직
-				if(checkImageType(saveFile)) {
-					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
-					
-					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
-					thumbnail.close();
-				} // 썸네일 생성 끝
-				
-			} catch (Exception e) {
-				log.error(e.getMessage());
-			}
+		String datePath = str.replace("-", File.separator);
+		
+		/* 폴더 생성 */
+		File uploadPath = new File(uploadFolder, datePath);
+		
+		if(uploadPath.exists() == false) {
+			uploadPath.mkdirs();
 		}
-		return "/secu/boardInsertForm";
+		
+		// 향상된 for
+		for(MultipartFile multipartFile : uploadFile) {
+			/* 파일 이름 */
+			String uploadFileName = multipartFile.getOriginalFilename();	
+			
+			/* uuid 적용 파일 이름 */
+			String uuid = UUID.randomUUID().toString();
+			uploadFileName = uuid + "_" + uploadFileName;
+			
+			/* 파일 위치, 파일 이름을 합친 File 객체 */
+			File saveFile = new File(uploadPath, uploadFileName);
+			
+			/* 파일 저장 */
+			try {
+				multipartFile.transferTo(saveFile);
+				/*
+				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);
+				
+				BufferedImage bo_image = ImageIO.read(saveFile);
+					// 비율
+					double ratio = 3;
+					넓이 높이
+					int width = (int) (bo_image.getWidth() / ratio);
+					int height = (int) (bo_image.getHeight() / ratio);	
+				BufferedImage bt_image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+								
+				Graphics2D graphic = bt_image.createGraphics();
+				
+				graphic.drawImage(bo_image, 0, 0, width,height, null);
+					
+				ImageIO.write(bt_image, "jpg", thumbnailFile);
+				*/
+				/* 방법 2 */
+				File thumbnailFile = new File(uploadPath, "s_" + uploadFileName);		
+				
+				BufferedImage bo_image = ImageIO.read(saveFile);
+
+				//비율 
+				double ratio = 3;
+				//넓이 높이
+				int width = (int) (bo_image.getWidth() / ratio);
+				int height = (int) (bo_image.getHeight() / ratio);
+				
+				Thumbnails.of(saveFile)
+		        .size(width, height)
+		        .toFile(thumbnailFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 		
+		}
 	}
 	
 	
@@ -241,5 +284,31 @@ public class SecurityContoller {
 		}); // forEach 끝나는지점
 	}
 	
+	
+	@GetMapping("/display")
+	@ResponseBody
+	// byte 자료형인 이유는 그림정보이므로 2진수를 보내야되서
+	public ResponseEntity<byte[]> getFile(String fileName) {
+		log.info("fileName: " + fileName);
+		
+		File file = new File("c:\\upload_data\\temp\\" + fileName);
+		
+		log.info("file : " + file);
+		
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			// 스프링쪽 HttpHeaders import 하기 // java.net으로 임포트시 생성자가 오류남
+			HttpHeaders header = new HttpHeaders();
+			
+			// 이 메시지를 통해서 헤더부분의 파일정보가 들어감
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),header, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }
