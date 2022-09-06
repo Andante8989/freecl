@@ -11,7 +11,7 @@ public class BoardVO {
 	private int boardNum;
 	private String name;
 	private String content;
-
+	
 	private String kind;
 	private String useyn;
 	private int hit;

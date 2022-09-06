@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -180,8 +181,29 @@ public class SecurityContoller {
 	}
 	
 	// 첨부파일 업로드
-	@PostMapping("/uploadAjaxAction")
-	public void uploadAjaxPost(MultipartFile[] uploadFile) {
+	@PostMapping(value="/uploadAjaxAction", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<BoardAttachVO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+		
+		log.info("uploadAjaxActionPOST..............");
+		/* 이미지 파일 체크 */
+		for(MultipartFile multipartFile: uploadFile) {
+			
+			File checkfile = new File(multipartFile.getOriginalFilename());
+			String type = null;
+			
+			try {
+				type = Files.probeContentType(checkfile.toPath());
+				log.info("MIME TYPE : " + type);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if(!type.startsWith("image")) {
+				List<BoardAttachVO> list = null;
+				return new ResponseEntity<>(list, HttpStatus.BAD_REQUEST);
+			}
+			
+		} // for문 끝
 		
 		String uploadFolder = "C:\\upload_data";
 		
@@ -201,13 +223,22 @@ public class SecurityContoller {
 			uploadPath.mkdirs();
 		}
 		
+		/* 이미저 정보 담는 객체 */
+		List<BoardAttachVO> list = new ArrayList();
+		
 		// 향상된 for
 		for(MultipartFile multipartFile : uploadFile) {
+			
+			BoardAttachVO vo = new BoardAttachVO();
+			
 			/* 파일 이름 */
 			String uploadFileName = multipartFile.getOriginalFilename();	
+			vo.setFileName(uploadFileName);
+			vo.setUploadPath(datePath);
 			
 			/* uuid 적용 파일 이름 */
 			String uuid = UUID.randomUUID().toString();
+			vo.setUuid(uuid);
 			uploadFileName = uuid + "_" + uploadFileName;
 			
 			/* 파일 위치, 파일 이름을 합친 File 객체 */
@@ -250,7 +281,10 @@ public class SecurityContoller {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 		
-		}
+			list.add(vo);
+		} // for
+		ResponseEntity<List<BoardAttachVO>> result = new ResponseEntity<List<BoardAttachVO>>(list, HttpStatus.OK);
+		return result;
 	}
 	
 	
@@ -260,55 +294,36 @@ public class SecurityContoller {
 		return new ResponseEntity<>(service.getAttachList(boardNum), HttpStatus.OK);
 	}
 	
-	private void deleteFiles(List<BoardAttachVO> attachList) {
-		if(attachList == null || attachList.size() == 0) {
-			return;
-		}
+	@PostMapping("/deleteFile")
+	public ResponseEntity<String> deleteFile(String fileName) {
+		log.info("deleteFile........" + fileName);
 		
-		log.info(attachList);
-		
-		attachList.forEach(attach -> {
-			try {
-				Path file = Paths.get("c:\\upload_data\\temp\\" + attach.getUploadPath() + "\\" + "_" + attach.getFileName());
-				
-				Files.deleteIfExists(file);
-				
-				if(Files.probeContentType(file).startsWith("image")) {
-					Path thumbNail = Paths.get("C:\\upload_data\\temp\\" + attach.getUploadPath() + "\\s_" + "_" + attach.getFileName());
-					Files.delete(thumbNail);
- 				}
-			
-			} catch (Exception e) {
-				log.error(e.getMessage());
-			}
-		}); // forEach 끝나는지점
-	}
-	
-	
-	@GetMapping("/display")
-	@ResponseBody
-	// byte 자료형인 이유는 그림정보이므로 2진수를 보내야되서
-	public ResponseEntity<byte[]> getFile(String fileName) {
-		log.info("fileName: " + fileName);
-		
-		File file = new File("c:\\upload_data\\temp\\" + fileName);
-		
-		log.info("file : " + file);
-		
-		ResponseEntity<byte[]> result = null;
+		File file = null;
 		
 		try {
-			// 스프링쪽 HttpHeaders import 하기 // java.net으로 임포트시 생성자가 오류남
-			HttpHeaders header = new HttpHeaders();
+			// 썸네일 파일 삭제
+			file = new File("c:\\upload_data\\" + URLDecoder.decode(fileName, "UTF-8"));
 			
-			// 이 메시지를 통해서 헤더부분의 파일정보가 들어감
-			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			file.delete();
 			
-			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),header, HttpStatus.OK);
-		} catch (IOException e) {
+			/* 원본 파일 삭제 */
+			String originFileName = file.getAbsolutePath().replace("s_", "");
+			
+			log.info("originFileName : " + originFileName);
+			
+			file = new File(originFileName);
+			
+			file.delete();
+			
+		} catch(Exception e) {
+			
 			e.printStackTrace();
+			
+			return new ResponseEntity<String>("fail", HttpStatus.NOT_IMPLEMENTED);
+			
 		}
-		return result;
+		return new ResponseEntity<String>("success", HttpStatus.OK);
 	}
+
 
 }
