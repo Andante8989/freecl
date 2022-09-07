@@ -2,6 +2,7 @@ package com.ict.mapper;
 
 import java.util.List;
 
+import com.ict.persistent.BoardAttachVO;
 import com.ict.persistent.BoardVO;
 
 public interface BoardMapper {
@@ -25,5 +26,7 @@ public interface BoardMapper {
 	public void deleteColor(Long boardNum);
 	
 	public void deleteSize(Long boardNum);
+	
+	public void imageEnroll(BoardAttachVO vo);
 
 }

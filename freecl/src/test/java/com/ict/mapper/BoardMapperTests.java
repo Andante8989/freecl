@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ict.persistent.BoardAttachVO;
 import com.ict.persistent.BoardVO;
 
 import lombok.extern.log4j.Log4j;
@@ -41,9 +42,24 @@ public class BoardMapperTests {
 		log.info(mapper.getBoardNum());
 	}
 	
-	@Test
+	//@Test
 	public void deleteBoard() {
 		mapper.deleteBoard(69L);
 
+	}
+	
+	/* 이미지 등록 */
+	//@Test
+	public void imageEnrollTest() {
+		
+		BoardAttachVO vo = new BoardAttachVO();
+		
+		vo.setBoardNum(93);
+		vo.setFileName("test");
+		vo.setUploadPath("test");
+		vo.setUuid("test2");
+		
+		mapper.imageEnroll(vo);
+		
 	}
 }

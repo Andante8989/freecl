@@ -39,6 +39,18 @@ public class BoardServiceImpl implements BoardService {
 		mapper.insertBoard(vo);
 		mapper.insertBoardColor(vo);
 		mapper.insertBoardSize(vo);
+		
+		// 이미지가 null값이거나 사이즈가 0보다 작으면 상품등록 안되도록 return 
+		if(vo.getAttachList() == null || vo.getAttachList().size() <= 0) {
+			return;
+		}
+		
+		vo.getAttachList().forEach(attach ->{
+			
+			attach.setBoardNum(vo.getBoardNum());
+			mapper.imageEnroll(attach);
+			
+		});
 	}
 
 	@Override
