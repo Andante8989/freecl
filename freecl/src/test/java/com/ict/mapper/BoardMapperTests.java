@@ -19,6 +19,9 @@ public class BoardMapperTests {
 	@Autowired
 	private BoardMapper mapper;
 	
+	@Autowired
+	private BoardAttachMapper mapper2;
+	
 	//@Test
 	public void getListTest() {
 		log.info(mapper.getList());
@@ -61,5 +64,11 @@ public class BoardMapperTests {
 		
 		mapper.imageEnroll(vo);
 		
+	}
+	
+	@Test
+	public void getAttachListTest() {
+		int boardNum = 96;
+		System.out.println("이미지정보 : " + mapper2.getAttachList(boardNum));
 	}
 }

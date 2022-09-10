@@ -87,8 +87,8 @@
 	</delete>
 	
 	<insert id="imageEnroll">
-	  	<selectKey resultType="int" keyProperty="bookId" order="BEFORE">
-  			SELECT MAX(bookId) FROM boardTbl
+	  	<selectKey resultType="int" keyProperty="boardNum" order="AFTER">
+  			SELECT MAX(boardNum) FROM boardTbl
   		</selectKey>
 		insert into vam_image(boardNum, fileName, uploadPath, uuid) values (#{boardNum}, #{fileName}, #{uploadPath}, #{uuid})
 	</insert>

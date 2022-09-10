@@ -11,6 +11,10 @@
 	<select id="findByBno" resultType="com.ict.persistent.BoardAttachVO">
 		SELECT * FROM clothesImage WHERE boardNum = #{boardNum}
 	</select>
+	
+	<select id="getAttachList" resultType="com.ict.persistent.BoardAttachVO">
+		select * from vam_image where boardNum = #{boardNum}
+	</select>
 
 
 </mapper>
